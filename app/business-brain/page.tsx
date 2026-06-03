@@ -4,16 +4,16 @@ import Footer from '@/components/Footer'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Business Brain — Your Custom AI Knowledge Base',
+  title: 'Business Brain — Your Custom Knowledge System',
   description:
-    'Business Brain is your always-on AI assistant trained on your business. Ask questions, get answers, and make smarter decisions faster — powered by Stackd Studios AI.',
+    'Business Brain is your always-on knowledge system trained on your business. Ask questions, get answers, and make smarter decisions faster — built by Stackd Studios.',
   alternates: {
     canonical: 'https://www.stackdstudiosai.com/business-brain',
   },
   openGraph: {
-    title: 'Business Brain — Your Custom AI Knowledge Base',
+    title: 'Business Brain — Your Custom Knowledge System',
     description:
-      'An always-on AI assistant trained on your business. Ask questions, get instant answers.',
+      'An always-on knowledge system trained on your business. Ask questions, get instant answers.',
     url: 'https://www.stackdstudiosai.com/business-brain',
   },
 }
@@ -29,7 +29,7 @@ const bbSteps = [
     number: '02',
     label: 'Build',
     description:
-      "We build your custom private AI assistant, trained only on your business's knowledge.",
+      "We build your custom private knowledge system, trained only on your business's knowledge.",
   },
   {
     number: '03',
@@ -121,7 +121,7 @@ export default function BusinessBrainPage() {
                   Your staff. Smarter. 24/7.
                 </h1>
                 <p className="text-white/60 text-xl leading-relaxed mb-8">
-                  We collect your operational docs and build a custom private AI your team can query around the clock — no training required.
+                  We collect your operational docs and build a custom private knowledge system your team can query around the clock — no training required.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link

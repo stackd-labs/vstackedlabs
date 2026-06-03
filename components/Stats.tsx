@@ -7,13 +7,13 @@ const stats = [
   {
     value: 500,
     suffix: '+',
-    label: 'AI Prompts Built',
-    sub: 'Custom prompts delivered across client libraries',
+    label: 'Automations Built',
+    sub: 'Repetitive tasks wired to run on their own',
   },
   {
     value: 300,
     suffix: '+',
-    label: 'Workflows Automated',
+    label: 'Workflows Shipped',
     sub: 'End-to-end business processes running on autopilot',
   },
   {
@@ -25,8 +25,8 @@ const stats = [
   {
     value: 100,
     suffix: '+',
-    label: 'Tools & Systems Deployed',
-    sub: 'Apps, dashboards, agents, and automations shipped',
+    label: 'Systems & Apps Deployed',
+    sub: 'Apps, dashboards, portals, and automations shipped',
   },
 ]
 

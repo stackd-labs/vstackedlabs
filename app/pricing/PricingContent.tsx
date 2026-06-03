@@ -24,14 +24,14 @@ const services: Service[] = [
   {
     slug: 'audit',
     tierLabel: 'Start Here',
-    name: 'AI Clarity Audit',
+    name: 'Systems Audit',
     price: '$397',
     timing: '48-hour turnaround',
     oneLiner:
-      'A 48-hour written roadmap of the AI moves that would actually move your needle.',
+      'A 48-hour written roadmap of the systems and automations that would actually move your needle.',
     bullets: [
       'Async operations intake form',
-      '3–5 prioritized AI opportunities',
+      '3–5 prioritized systems to build',
       'Written roadmap in 48 hours',
       '30-min walkthrough call',
     ],
@@ -40,14 +40,14 @@ const services: Service[] = [
   {
     slug: 'quick-setup',
     tierLabel: 'Most Popular',
-    name: 'AI Quick Setup',
+    name: 'Build Sprint',
     price: '$997',
     timing: '5 business days',
     oneLiner:
       'One workflow, scoped tight, shipped in 5 days, with a training call so you can use it Monday.',
     bullets: [
       'One complete workflow build',
-      '10–15 custom Claude prompts',
+      '10–15 custom automation building blocks',
       '1-hour orientation + training call',
       '7 days post-delivery support',
     ],
@@ -57,43 +57,43 @@ const services: Service[] = [
   {
     slug: 'team-training',
     tierLabel: 'For Teams',
-    name: 'Claude Team Training',
+    name: 'Team Enablement',
     price: 'From $2,500',
     timing: 'Within 2 weeks',
     oneLiner:
-      'Live virtual training that gets your team using AI in their real workflows. Standard for ≤10, Enterprise for larger teams.',
+      'Live virtual training that gets your team running the systems in their real workflows. Standard for ≤10, Enterprise for larger teams.',
     bullets: [
       'Standard: From $2,500 (teams up to 10)',
       'Enterprise: From $5,000 (teams of 10+)',
-      'Custom prompts + recording included',
+      'Custom templates + recording included',
       'Enterprise adds role-specific library + 30-day follow-up',
     ],
-    cta: 'Book a Training',
+    cta: 'Book Enablement',
   },
   {
     slug: 'retainer',
     tierLabel: 'Ongoing',
-    name: 'AI Growth Retainer',
+    name: 'Operating Partner',
     price: '$1,500/mo',
     timing: 'Monthly',
     oneLiner:
-      'A new workflow, prompt updates, a strategy call, and priority support — every month.',
+      'A new build, system tune-ups, a strategy call, and priority support — every month.',
     bullets: [
       '1 new workflow or tool / month',
-      '5–10 new prompts / month',
+      '5–10 system tune-ups / month',
       'Monthly strategy call',
       'Priority async support',
     ],
-    cta: 'Apply for Retainer',
+    cta: 'Apply for Operating Partner',
   },
   {
     slug: 'business-brain',
-    tierLabel: 'Custom AI',
+    tierLabel: 'Knowledge System',
     name: 'Business Brain',
     price: 'From $500 + $149/mo',
     timing: '2-week build',
     oneLiner:
-      'A private AI assistant trained on your SOPs, handbooks, and FAQs. Your team just asks it.',
+      'A private knowledge system trained on your SOPs, handbooks, and FAQs. Your team just asks it.',
     bullets: [
       'Starter: $500 setup + $149/mo',
       'Pro: $1,500 + $349/mo (multi-dept)',
@@ -299,11 +299,11 @@ export default function PricingContent() {
                         '1 workflow build',
                         'Live training session',
                         '1 workflow / month',
-                        'Custom AI agent',
+                        'Private knowledge system',
                       ],
                     },
                     {
-                      label: 'Custom prompts',
+                      label: 'Prompts & automations',
                       vals: [
                         'Roadmap only',
                         '10–15',
@@ -341,7 +341,7 @@ export default function PricingContent() {
                       vals: [
                         'Owners deciding what to build',
                         'Owners with one clear bottleneck',
-                        'Teams ready to adopt AI together',
+                        'Teams ready to adopt the systems together',
                         'Existing clients who want to keep building',
                         'Teams that need 24/7 answers from their own docs',
                       ],
@@ -369,7 +369,7 @@ export default function PricingContent() {
             <div className="mt-12 bg-[#0C0C0C] rounded-2xl p-7 md:p-9 grid md:grid-cols-[1.4fr_1fr] gap-6 md:gap-10 items-center">
               <div>
                 <p className="text-[#FFD84D] text-[10px] font-bold uppercase tracking-[0.16em] mb-3">
-                  // Enterprise Team Training
+                  // Enterprise Team Enablement
                 </p>
                 <h3 className="text-white text-[clamp(22px,3vw,34px)] uppercase font-[family-name:var(--font-anton)] leading-[1.05] mb-3">
                   For teams of 10+ and multi-department rollouts.
@@ -394,7 +394,7 @@ export default function PricingContent() {
                   href="/contact"
                   className="inline-flex items-center justify-center bg-[#FFD84D] hover:bg-white text-[#0C0C0C] font-bold px-7 py-3.5 rounded-xl text-sm transition-all duration-200 hover:scale-[1.02] min-h-[44px] whitespace-nowrap"
                 >
-                  Book Enterprise Training →
+                  Book Enterprise Enablement →
                 </Link>
               </div>
             </div>
@@ -411,23 +411,23 @@ export default function PricingContent() {
               {[
                 {
                   q: 'Do you offer payment plans?',
-                  a: 'Yes. For services over $1,000, we offer a 50% deposit + 50% on delivery split. Recurring services (Retainer, Business Brain) are invoiced monthly.',
+                  a: 'Yes. For services over $1,000, we offer a 50% deposit + 50% on delivery split. Recurring services (Operating Partner, Business Brain) are invoiced monthly.',
                 },
                 {
                   q: "What if I'm not sure which one is right?",
                   a: "Start with the Audit — that's literally what it's for. $397 and 48 hours later, you'll know exactly what to build. We'll also tell you honestly if we're not the right fit.",
                 },
                 {
-                  q: "What's the difference between Standard and Enterprise Team Training?",
-                  a: "Standard ($2,500) is a 3-hour live virtual session for teams up to 10 — perfect for small teams or single-department training. Enterprise (from $5,000) is for teams of 10+ and includes a half-day or split-session format, role-specific prompt library per department, and a 30-day async coaching follow-up. On-site option available for Enterprise (+ travel).",
+                  q: "What's the difference between Standard and Enterprise Team Enablement?",
+                  a: "Standard ($2,500) is a 3-hour live virtual session for teams up to 10 — perfect for small teams or single-department training. Enterprise (from $5,000) is for teams of 10+ and includes a half-day or split-session format, role-specific template library per department, and a 30-day async coaching follow-up. On-site option available for Enterprise (+ travel).",
                 },
                 {
                   q: "What is Business Brain and how is it different from the other services?",
-                  a: "Business Brain is a private AI assistant trained only on your company's docs — handbooks, SOPs, FAQs, vendor info. Your team chats with it instead of digging through folders. The other services build workflows for you; Business Brain builds a knowledge layer your team queries directly. Starts at $500 setup + $149/mo.",
+                  a: "Business Brain is a private knowledge system trained only on your company's docs — handbooks, SOPs, FAQs, vendor info. Your team chats with it instead of digging through folders. The other services build workflows for you; Business Brain builds a knowledge layer your team queries directly. Starts at $500 setup + $149/mo.",
                 },
                 {
                   q: 'Can I move from one service to another?',
-                  a: 'Yes. Most clients start with the Audit, move into Quick Setup, and graduate to the Retainer or Business Brain. Your audit fee gets credited toward Quick Setup if you book within 30 days.',
+                  a: 'Yes. Most clients start with the Audit, move into a Build Sprint, and graduate to the Operating Partner plan or Business Brain. Your audit fee gets credited toward your Build Sprint if you book within 30 days.',
                 },
                 {
                   q: 'What do turnaround times include?',
@@ -450,20 +450,20 @@ export default function PricingContent() {
                   a: "Yes — mutual NDAs are standard for any project where confidentiality matters. We'll sign yours or send ours before scoping.",
                 },
                 {
-                  q: 'What about ongoing support after a Quick Setup or Training?',
-                  a: "Most clients move into either the AI Growth Retainer for ongoing iteration, or Business Brain if their bottleneck is staff knowledge access. We'll talk through fit on your wrap-up call.",
+                  q: 'What about ongoing support after a Build Sprint or Enablement?',
+                  a: "Most clients move into either the Operating Partner plan for ongoing iteration, or Business Brain if their bottleneck is staff knowledge access. We'll talk through fit on your wrap-up call.",
                 },
                 {
                   q: 'How do digital products and starter packs work?',
-                  a: "Buy from the store and you'll get instant access by email. They're self-serve starter packs, templates, courses, and Claude skills — no scheduling or scoping required.",
+                  a: "Buy from the store and you'll get instant access by email. They're self-serve starter packs, templates, courses, and automation kits — no scheduling or scoping required.",
                 },
                 {
                   q: 'Do you only work in certain industries?',
                   a: "We've gone deep in behavioral health, dance studios, real estate, staffing, gov contracting, nonprofits, field services, and creator businesses — but the underlying systems work anywhere there's documentation, follow-up, or content to automate. Business Brain in particular is a strong fit for restaurants, gyms, salons, hotels, retail, and medical/dental offices.",
                 },
                 {
-                  q: 'Is the Retainer available to anyone?',
-                  a: "We give Quick Setup and Team Training clients first access. If we have capacity beyond that, we open it up. Apply via the contact form and we'll let you know either way.",
+                  q: 'Is the Operating Partner plan available to anyone?',
+                  a: "We give Build Sprint and Team Enablement clients first access. If we have capacity beyond that, we open it up. Apply via the contact form and we'll let you know either way.",
                 },
               ].map((faq) => (
                 <div key={faq.q} className="border-b border-[#E2DED8] pb-6">

@@ -2,16 +2,16 @@ import type { Metadata } from 'next'
 import ServicesContent from './ServicesContent'
 
 export const metadata: Metadata = {
-  title: 'AI Services for Small Business | Stackd Studios AI',
+  title: 'Services — Custom Systems & Automation | Stackd Studios',
   description:
-    'Four focused AI services for business owners and founders — from a quick audit to full team training. Built to deliver results, not complexity.',
+    'Four focused services for owner-run businesses and founders — from a Systems Audit to an ongoing Operating Partner. Custom software and automation, built to run themselves.',
   alternates: {
     canonical: 'https://www.stackdstudiosai.com/services',
   },
   openGraph: {
-    title: 'AI Services for Small Business | Stackd Studios AI',
+    title: 'Services — Custom Systems & Automation | Stackd Studios',
     description:
-      'Four focused AI services for business owners and founders — from a quick audit to full team training. Built to deliver results, not complexity.',
+      'Four focused services for owner-run businesses and founders — from a Systems Audit to an ongoing Operating Partner. Custom software and automation, built to run themselves.',
     url: 'https://www.stackdstudiosai.com/services',
   },
 }
@@ -19,40 +19,40 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'AI Services — Stackd Studios AI',
+  name: 'Services — Stackd Studios',
   url: 'https://www.stackdstudiosai.com/services',
   itemListElement: [
     {
       '@type': 'Service',
       position: 1,
-      name: 'AI Clarity Audit',
+      name: 'Systems Audit',
       description:
-        'A 48-hour written roadmap of AI opportunities for your business with a 30-minute walkthrough call.',
-      provider: { '@type': 'Organization', name: 'Stackd Studios AI' },
+        'A 48-hour written roadmap of the systems to build or automate in your business, with a 30-minute walkthrough call.',
+      provider: { '@type': 'Organization', name: 'Stackd Studios' },
     },
     {
       '@type': 'Service',
       position: 2,
-      name: 'AI Quick Setup',
+      name: 'Build Sprint',
       description:
-        'One specific AI workflow built, tested, and handed off in 5 business days with a training call.',
-      provider: { '@type': 'Organization', name: 'Stackd Studios AI' },
+        'One specific workflow built, tested, and handed off in 5 business days with a training call.',
+      provider: { '@type': 'Organization', name: 'Stackd Studios' },
     },
     {
       '@type': 'Service',
       position: 3,
-      name: 'Claude Team Training',
+      name: 'Team Enablement',
       description:
-        'Live virtual Claude training built around your team and workflows. Standard (from $2,500, teams up to 10) or Enterprise (from $5,000, teams of 10+ with role-specific prompt libraries and async coaching follow-up).',
-      provider: { '@type': 'Organization', name: 'Stackd Studios AI' },
+        'Live virtual training built around your team and workflows. Standard (from $2,500, teams up to 10) or Enterprise (from $5,000, teams of 10+ with role-specific template libraries and async coaching follow-up).',
+      provider: { '@type': 'Organization', name: 'Stackd Studios' },
     },
     {
       '@type': 'Service',
       position: 4,
-      name: 'AI Growth Retainer',
+      name: 'Operating Partner',
       description:
-        'Monthly AI support: one new workflow, prompt updates, a strategy call, and priority async support.',
-      provider: { '@type': 'Organization', name: 'Stackd Studios AI' },
+        'Monthly build support: one new workflow, system tune-ups, a strategy call, and priority async support.',
+      provider: { '@type': 'Organization', name: 'Stackd Studios' },
     },
   ],
 }

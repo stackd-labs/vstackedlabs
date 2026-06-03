@@ -30,7 +30,7 @@ export const prompts: AssistantPrompt[] = [
 
 So we built it.
 
-Today I'm announcing **AI Quick Setup** — one specific workflow built, tested, and handed off in 5 business days. No 6-month engagement. No "AI strategy deck." Just the one piece of your business that's eating your week, automated, with a custom prompt library so your team can actually use it.
+Today I'm announcing the **Build Sprint** — one specific workflow built, tested, and handed off in 5 business days. No 6-month engagement. No "AI strategy deck." Just the one piece of your business that's eating your week, automated, with a custom prompt library so your team can actually use it.
 
 Pick a workflow. We build it. You're using it Monday.
 

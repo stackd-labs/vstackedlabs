@@ -46,7 +46,7 @@ export default function FinalCTA() {
               href="/contact"
               className="inline-flex items-center justify-center bg-[#FFD84D] hover:bg-[#E8C030] text-[#0C0C0C] font-bold px-8 py-4 rounded-xl text-base transition-all duration-200 hover:scale-[1.02] min-h-[44px] shadow-lg"
             >
-              Book a Free Call
+              Book a Build Call
             </Link>
             <Link
               href="/services"

@@ -9,11 +9,11 @@ import { useToast } from '@/components/ToastProvider'
 
 const serviceOptions = [
   { value: '', label: 'What is this regarding?' },
-  { value: 'AI Clarity Audit ($397)', label: 'AI Clarity Audit — $397' },
-  { value: 'AI Quick Setup ($997)', label: 'AI Quick Setup — $997' },
-  { value: 'Claude Team Training — Standard ($2,500)', label: 'Claude Team Training — Standard ($2,500)' },
-  { value: 'Claude Team Training — Enterprise ($5,000+)', label: 'Claude Team Training — Enterprise ($5,000+)' },
-  { value: 'AI Growth Retainer ($1,500/mo)', label: 'AI Growth Retainer — $1,500/mo' },
+  { value: 'Systems Audit ($397)', label: 'Systems Audit — $397' },
+  { value: 'Build Sprint ($997)', label: 'Build Sprint — $997' },
+  { value: 'Team Enablement — Standard ($2,500)', label: 'Team Enablement — Standard ($2,500)' },
+  { value: 'Team Enablement — Enterprise ($5,000+)', label: 'Team Enablement — Enterprise ($5,000+)' },
+  { value: 'Operating Partner ($1,500/mo)', label: 'Operating Partner — $1,500/mo' },
   { value: 'Not sure yet', label: "Not sure yet — help me choose" },
   { value: 'Other', label: 'Other' },
 ]

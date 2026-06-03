@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Also ignore nested build output and stale git worktrees so ESLint
+    // doesn't lint generated Next.js chunks (e.g. .worktrees/*/.next/**).
+    "**/.next/**",
+    ".worktrees/**",
   ]),
 ]);
 

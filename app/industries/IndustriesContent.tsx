@@ -12,7 +12,7 @@ const industries = [
     name: 'Behavioral Health & Mental Health',
     tagline: 'AI that speaks clinical.',
     description:
-      'Mental health practices are drowning in documentation, referrals, and billing complexity — while running lean with no dedicated tech staff. Stackd builds AI systems that reduce clinician burnout, automate intake, and protect your Medicaid revenue.',
+      'Mental health practices are drowning in documentation, referrals, and billing complexity — while running lean with no dedicated tech staff. Stackd builds systems that reduce clinician burnout, automate intake, and protect your Medicaid revenue.',
     painPoints: [
       'Clinicians spending 30–40% of time on documentation instead of clients',
       'Referral follow-up falling through the cracks',
@@ -26,14 +26,14 @@ const industries = [
       { title: 'Billing Audit Workflow', desc: 'Flag missing documentation and billing gaps before submission to protect your Medicaid revenue.' },
     ],
     credential: 'Our founder holds three psychology degrees and QMHP supervision credentials — we built our first behavioral health AI system inside a live group practice.',
-    cta: 'Book a Behavioral Health AI Audit',
+    cta: 'Book a Behavioral Health Systems Audit',
   },
   {
     id: 'dance-performing-arts',
     name: 'Dance & Performing Arts Studios',
     tagline: 'Less admin. More art.',
     description:
-      'Studio owners wear every hat — teacher, marketer, scheduler, accountant. AI takes the back-office work off your plate so you can focus on what you actually love.',
+      'Studio owners wear every hat — teacher, marketer, scheduler, accountant. Automation takes the back-office work off your plate so you can focus on what you actually love.',
     painPoints: [
       'Re-enrollment outreach done manually every season',
       'Event coordination eating up instructor time',
@@ -47,14 +47,14 @@ const industries = [
       { title: 'Lapsed Student Recovery', desc: 'Automated reactivation campaigns for students who dropped off — personal enough to feel human.' },
     ],
     credential: 'We own and operate Capital Core Dance Studio in Midlothian, VA — this is built from real studio operator experience.',
-    cta: 'Book a Studio AI Audit',
+    cta: 'Book a Studio Systems Audit',
   },
   {
     id: 'real-estate',
     name: 'Real Estate & Property Capital',
     tagline: 'Deal flow, automated.',
     description:
-      'Whether you\'re a broker, syndicator, capital matchmaker, or investor — the pipeline moves fast and the paperwork never stops. AI keeps you visible, responsive, and ahead of the deal.',
+      'Whether you\'re a broker, syndicator, capital matchmaker, or investor — the pipeline moves fast and the paperwork never stops. Automation keeps you visible, responsive, and ahead of the deal.',
     painPoints: [
       'Lead follow-up lagging when you\'re deep in a deal',
       'Investor outreach that takes hours to personalize',
@@ -68,14 +68,14 @@ const industries = [
       { title: 'Marketing Asset Creation', desc: 'Offering memorandums, pitch decks, and email campaigns generated fast from a deal template.' },
     ],
     credential: null,
-    cta: 'Book a Real Estate AI Audit',
+    cta: 'Book a Real Estate Systems Audit',
   },
   {
     id: 'staffing-family-services',
     name: 'Staffing & Family Services',
     tagline: 'Match faster. Place smarter.',
     description:
-      'Staffing and placement businesses live and die by speed and fit. AI helps you source candidates faster, screen better, and deliver a client experience that earns referrals.',
+      'Staffing and placement businesses live and die by speed and fit. Automation helps you source candidates faster, screen better, and deliver a client experience that earns referrals.',
     painPoints: [
       'Candidate intake and screening done manually',
       'Client onboarding that takes too long',
@@ -89,14 +89,14 @@ const industries = [
       { title: 'Job Brief Generation', desc: 'Turn a quick intake call into a full candidate brief and job posting draft in minutes.' },
     ],
     credential: 'We operate ELC, a nanny and household staffing placement firm — this is built from real placement operations.',
-    cta: 'Book a Staffing AI Audit',
+    cta: 'Book a Staffing Systems Audit',
   },
   {
     id: 'government-public-sector',
     name: 'Government & Public Sector',
     tagline: 'Compliant. Efficient. Modern.',
     description:
-      'Government contractors and public agencies need AI implementation that respects compliance requirements while cutting the administrative overhead that slows everything down.',
+      'Government contractors and public agencies need systems that respect compliance requirements while cutting the administrative overhead that slows everything down.',
     painPoints: [
       'Proposal and procurement documentation taking weeks',
       'Reporting cycles that consume staff hours',
@@ -107,17 +107,17 @@ const industries = [
       { title: 'Proposal & RFP Response Acceleration', desc: 'AI-assisted drafting of proposal sections, capability statements, and past performance writeups.' },
       { title: 'Reporting Automation', desc: 'Structured reporting templates with AI-generated narrative sections from raw data inputs.' },
       { title: 'Subcontractor Outreach System', desc: 'Identify, research, and reach out to teaming partners through SBA SUBNet and targeted outreach workflows.' },
-      { title: 'Internal Knowledge Base', desc: 'Turn your document library into a searchable AI assistant your team can query in plain English.' },
+      { title: 'Internal Knowledge Base', desc: 'Turn your document library into a searchable knowledge system your team can query in plain English.' },
     ],
     credential: null,
-    cta: 'Book a Gov Contracting AI Audit',
+    cta: 'Book a Gov Contracting Systems Audit',
   },
   {
     id: 'nonprofits',
     name: 'Nonprofits & Community Development',
     tagline: 'More mission. Less overhead.',
     description:
-      'Nonprofits operate on tight margins with small teams doing the work of much larger organizations. AI frees up your staff to do the mission-critical work — not the administrative grind.',
+      'Nonprofits operate on tight margins with small teams doing the work of much larger organizations. Automation frees up your staff to do the mission-critical work — not the administrative grind.',
     painPoints: [
       'Grant reporting taking up staff bandwidth every quarter',
       'Donor outreach inconsistent and manual',
@@ -131,14 +131,14 @@ const industries = [
       { title: 'Volunteer Coordination Workflows', desc: 'Scheduling, reminders, and follow-up automated so no volunteer falls through the cracks.' },
     ],
     credential: 'We build and manage operations infrastructure for a mental health nonprofit — including referral pipelines, service line expansion, and reporting systems.',
-    cta: 'Book a Nonprofit AI Audit',
+    cta: 'Book a Nonprofit Systems Audit',
   },
   {
     id: 'small-business',
     name: 'Small Business Operations',
     tagline: 'Run leaner. Grow faster.',
     description:
-      'Small business owners do everything. AI is the team member you can\'t afford to hire — handling follow-up, customer communication, content, and operations while you focus on growth.',
+      'Small business owners do everything. Automation is the team member you can\'t afford to hire — handling follow-up, customer communication, content, and operations while you focus on growth.',
     painPoints: [
       'Follow-up on leads and quotes falling through',
       'Customer communication inconsistent or slow',
@@ -149,17 +149,17 @@ const industries = [
       { title: 'Lead Follow-Up Automation', desc: 'Every lead gets a response, a follow-up, and a nurture sequence — automatically.' },
       { title: 'Client Onboarding System', desc: 'New clients move through intake, agreements, and setup without you managing each step.' },
       { title: 'Content Engine', desc: 'Weekly content for email, social, and your website generated from a single content brief.' },
-      { title: 'Operations SOPs + AI Assistants', desc: 'Document your processes once, then let AI handle the repetitive execution.' },
+      { title: 'Operations SOPs + Automation', desc: 'Document your processes once, then let automation handle the repetitive execution.' },
     ],
     credential: null,
-    cta: 'Book a Small Business AI Audit',
+    cta: 'Book a Small Business Systems Audit',
   },
   {
     id: 'field-services',
     name: 'Field Services & Trades',
     tagline: 'AI for businesses that move.',
     description:
-      'Field service businesses — HVAC, plumbing, property management, inspections, logistics — need operations that run without someone at a desk managing every job. AI keeps the engine running.',
+      'Field service businesses — HVAC, plumbing, property management, inspections, logistics — need operations that run without someone at a desk managing every job. Automation keeps the engine running.',
     painPoints: [
       'Dispatch and scheduling done manually',
       'Job documentation inconsistent across technicians',
@@ -173,7 +173,7 @@ const industries = [
       { title: 'Multi-Job Operations Dashboard', desc: 'Real-time visibility into job status, assignments, and completion across your whole team.' },
     ],
     credential: 'We built FieldOS — a modular multi-tenant SaaS operations platform designed specifically for field service businesses.',
-    cta: 'Book a Field Services AI Audit',
+    cta: 'Book a Field Services Systems Audit',
   },
   {
     id: 'creators-digital-media',
@@ -194,7 +194,7 @@ const industries = [
       { title: 'Brand Outreach System', desc: 'Researched, personalized pitch emails to brand partners — at a volume you could never do manually.' },
     ],
     credential: null,
-    cta: 'Book a Creator AI Audit',
+    cta: 'Book a Creator Systems Audit',
   },
 ]
 
@@ -227,11 +227,11 @@ export default function IndustriesContent() {
             Who We Serve
           </p>
           <h1 className="font-[family-name:var(--font-anton)] text-[clamp(2.8rem,7vw,6rem)] leading-[0.95] tracking-tight text-[#0C0C0C] mb-6 max-w-4xl">
-            AI BUILT FOR YOUR<br />
+            SYSTEMS BUILT FOR YOUR<br />
             <span className="text-[#FFD84D]">INDUSTRY.</span>
           </h1>
           <p className="text-lg text-[#888580] max-w-2xl leading-relaxed font-[family-name:var(--font-instrument-sans)]">
-            Generic AI advice is everywhere. Stackd builds done-for-you AI systems for the specific way your industry actually works — the workflows, the compliance requirements, the client relationships, and the problems that keep you up at night.
+            Generic AI advice is everywhere. Stackd builds done-for-you systems and automation for the specific way your industry actually works — the workflows, the compliance requirements, the client relationships, and the problems that keep you up at night.
           </p>
         </section>
 
@@ -385,14 +385,14 @@ export default function IndustriesContent() {
                 READY TO GET STARTED?
               </h2>
               <p className="text-white/60 text-base max-w-md">
-                Book a free AI audit. We&apos;ll identify the highest-impact automations for your specific business in 30 minutes.
+                Book a free Systems Audit. We&apos;ll identify the highest-impact automations for your specific business in 30 minutes.
               </p>
             </div>
             <Link
               href="/contact"
               className="flex-shrink-0 inline-flex items-center gap-2 bg-[#FFD84D] hover:bg-white text-[#0C0C0C] text-sm font-bold px-8 py-4 rounded-xl transition-all duration-200 whitespace-nowrap"
             >
-              Book Your Free AI Audit
+              Book Your Free Systems Audit
             </Link>
           </div>
         </section>

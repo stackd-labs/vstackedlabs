@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 
-const cycleWords = ['Business Owners.', 'Founders.', 'Operators.', 'Builders.']
+const cycleWords = ['intake', 'booking', 'billing', 'operations']
 
 function TypewriterWord() {
   const [index, setIndex] = useState(0)
@@ -77,7 +77,7 @@ export default function Hero() {
               className="inline-flex items-center gap-2 bg-[#0C0C0C] text-[#FFD84D] text-xs font-semibold uppercase tracking-[0.12em] px-3 py-1.5 rounded-full mb-6"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#FFD84D]" aria-hidden="true" />
-              AI-Powered Build Lab &amp; Venture Studio
+              Solutions · Automation · Venture Studio
             </motion.div>
 
             <motion.h1
@@ -86,13 +86,12 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-[clamp(44px,7vw,84px)] leading-[1.05] tracking-[0.01em] text-[#0C0C0C] mb-6"
             >
-              Operate Smarter.{' '}
+              The{' '}
+              <TypewriterWord />{' '}
               <br className="hidden sm:block" />
-              Move Faster.{' '}
+              system your{' '}
               <br className="hidden sm:block" />
-              Built for{' '}
-              <br className="hidden sm:block" />
-              <TypewriterWord />
+              business runs on.
             </motion.h1>
 
             <motion.p
@@ -101,7 +100,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-[#888580] text-lg leading-relaxed mb-10 max-w-[500px]"
             >
-              Stackd Studios AI is an AI-powered Build Lab &amp; Venture Studio helping business owners and founders design, build, and launch intelligent systems — faster, smarter, and built to last.
+              Stackd Studios builds the custom software and automations that owner-run businesses can&apos;t buy off the shelf — then turns the best of them into products of our own.
             </motion.p>
 
             <motion.div
@@ -114,13 +113,13 @@ export default function Hero() {
                 href="/contact"
                 className="inline-flex items-center gap-2 bg-[#FFD84D] hover:bg-[#E8C030] text-[#0C0C0C] font-semibold px-7 py-3.5 rounded-xl transition-all duration-200 hover:scale-[1.02] min-h-[44px] text-base"
               >
-                Book a Free Call
+                Book a Build Call
               </Link>
               <Link
-                href="/free/toolkit"
+                href="/#our-work"
                 className="inline-flex items-center gap-2 border-2 border-[#0C0C0C] text-[#0C0C0C] hover:bg-[#0C0C0C] hover:text-white font-semibold px-7 py-3.5 rounded-xl transition-all duration-200 hover:scale-[1.02] min-h-[44px] text-base"
               >
-                Get the Free Toolkit
+                See What We&apos;ve Built
               </Link>
             </motion.div>
 
@@ -142,7 +141,7 @@ export default function Hero() {
                 ))}
               </div>
               <p className="text-[#888580] text-sm">
-                Trusted by <span className="text-[#0C0C0C] font-semibold">founders & business owners</span>
+                Trusted by <span className="text-[#0C0C0C] font-semibold">owner-run businesses & founders</span>
               </p>
             </motion.div>
           </div>
@@ -164,46 +163,44 @@ export default function Hero() {
                 <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
                 <span className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
                 <span className="w-3 h-3 rounded-full bg-[#28C840]" />
-                <span className="ml-3 text-[#888580] text-xs font-mono">stackd-agent.ts</span>
+                <span className="ml-3 text-[#888580] text-xs font-mono">stackd.system.ts</span>
               </div>
 
               {/* Code */}
               <div className="font-mono text-sm leading-7">
-                <div className="text-[#888580]">{'// Stackd Studios AI — Build. Test. Launch.'}</div>
+                <div className="text-[#888580]">{'// Stackd Studios — the system your business runs on'}</div>
                 <div className="h-4" />
                 <div>
                   <span className="text-[#FFD84D]">const</span>
-                  <span className="text-white"> studio = </span>
+                  <span className="text-white"> system = </span>
                   <span className="text-[#FFD84D]">new</span>
-                  <span className="text-[#4ADE80]"> StackdStudios</span>
+                  <span className="text-[#4ADE80]"> StackdStudio</span>
                   <span className="text-white">{'({'}</span>
                 </div>
                 <div>
-                  <span className="text-[#93C5FD]">{'  track'}</span>
+                  <span className="text-[#93C5FD]">{'  builds'}</span>
                   <span className="text-white">{': '}</span>
-                  <span className="text-[#FCA5A5]">{'"business-owner | founder"'}</span>
+                  <span className="text-[#FCA5A5]">{'"custom software + automation"'}</span>
                   <span className="text-white">,</span>
                 </div>
                 <div>
-                  <span className="text-[#93C5FD]">{'  powered_by'}</span>
+                  <span className="text-[#93C5FD]">{'  ships'}</span>
                   <span className="text-white">{': ['}</span>
-                  <span className="text-[#FCA5A5]">"AI"</span>
+                  <span className="text-[#FCA5A5]">"your systems"</span>
                   <span className="text-white">, </span>
-                  <span className="text-[#FCA5A5]">"craft"</span>
-                  <span className="text-white">, </span>
-                  <span className="text-[#FCA5A5]">"strategy"</span>
+                  <span className="text-[#FCA5A5]">"our products"</span>
                   <span className="text-white">],</span>
                 </div>
                 <div className="text-white">{'}'});</div>
                 <div className="h-4" />
                 <div>
                   <span className="text-[#FFD84D]">await</span>
-                  <span className="text-white"> studio.</span>
+                  <span className="text-white"> system.</span>
                   <span className="text-[#4ADE80]">build</span>
                   <span className="text-white">(</span>
                 </div>
                 <div>
-                  <span className="text-[#FCA5A5]">{'  "something that lasts."'}</span>
+                  <span className="text-[#FCA5A5]">{'  "something that runs itself."'}</span>
                 </div>
                 <div className="text-white">);</div>
               </div>
@@ -212,7 +209,7 @@ export default function Hero() {
               <div className="mt-6 pt-4 border-t border-white/10">
                 <div className="flex items-center gap-2">
                   <span className="text-[#28C840] text-xs font-mono">✓</span>
-                  <span className="text-[#888580] text-xs font-mono">Studio initialized. Ready to build.</span>
+                  <span className="text-[#888580] text-xs font-mono">System deployed. Running on autopilot.</span>
                 </div>
                 <div className="flex items-center gap-2 mt-1">
                   <span className="text-[#FFD84D] text-xs font-mono">→</span>

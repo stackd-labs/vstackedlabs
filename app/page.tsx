@@ -2,16 +2,16 @@ import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
 
 export const metadata: Metadata = {
-  title: 'AI Build Lab & Venture Studio — Stackd Studios AI',
+  title: 'Operations System Studio — Stackd Studios',
   description:
-    'Stackd Studios AI is an AI-powered build lab and venture studio. We help business owners automate workflows and founders launch products — nationally, remotely, and built to last.',
+    'Stackd Studios is an operations system studio. We build the custom software and automations owner-run businesses run on — and launch products of our own. Solutions, automation, and venture studio in one.',
   alternates: {
     canonical: 'https://www.stackdstudiosai.com',
   },
   openGraph: {
-    title: 'AI Build Lab & Venture Studio — Stackd Studios AI',
+    title: 'Operations System Studio — Stackd Studios',
     description:
-      'AI-powered systems for business owners and founders. Automate workflows, launch products, and build ventures — faster.',
+      'Custom software and automations your business runs on. We build the systems you can’t buy off the shelf — and ship products of our own.',
     url: 'https://www.stackdstudiosai.com',
   },
 }

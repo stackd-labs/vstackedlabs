@@ -281,7 +281,7 @@ export default function AiToolkitFunnelContent() {
                 We&apos;re a build lab. We use these tools every day.
               </h2>
               <p className="text-[#0C0C0C] text-lg md:text-xl leading-relaxed mb-6 font-medium">
-                Stackd Studios AI builds AI-powered operating systems for small
+                Stackd Studios builds custom operating systems for small
                 business owners and founders. We sit inside dozens of small
                 businesses every quarter — picking tools, building automations,
                 and shipping systems that actually run.

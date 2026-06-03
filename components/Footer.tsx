@@ -19,10 +19,10 @@ const footerColumns = [
   {
     heading: 'Services',
     links: [
-      { label: 'AI Clarity Audit — $397', href: '/services#audit' },
-      { label: 'AI Quick Setup — $997', href: '/services#quick-setup' },
-      { label: 'Claude Team Training — From $2,500', href: '/services#team-training' },
-      { label: 'AI Growth Retainer — $1,500/mo', href: '/services#retainer' },
+      { label: 'Systems Audit — $397', href: '/services#audit' },
+      { label: 'Build Sprint — $997', href: '/services#quick-setup' },
+      { label: 'Team Enablement — From $2,500', href: '/services#team-training' },
+      { label: 'Operating Partner — $1,500/mo', href: '/services#retainer' },
     ],
   },
   {
@@ -66,7 +66,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-[#6B7280] text-sm leading-relaxed mb-3">
-              Build. Test. Launch.
+              The system your business runs on.
             </p>
             <p className="text-[#4B4F55] text-xs">
               A Hicks Virtual Solutions company

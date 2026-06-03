@@ -16,7 +16,7 @@ const steps = [
   {
     number: '03',
     title: 'We Build It',
-    description: 'Once you\'re in, we get to work. AI-assisted development means we move faster than traditional agencies without sacrificing craft or quality.',
+    description: 'Once you\'re in, we get to work — building in focused sprints. We move faster than a traditional agency without cutting corners on craft.',
   },
   {
     number: '04',

@@ -564,7 +564,7 @@ export default function ToolkitContent({ firstName }: { firstName?: string }) {
                   maxWidth: 640,
                 }}
               >
-                The Done-For-You AI Quick Setup. We pick the 3 right tools for your business and
+                The Done-For-You Build Sprint. We pick the 3 right tools for your business and
                 build the automations in 5 days.
               </p>
               <Link
@@ -867,7 +867,7 @@ export default function ToolkitContent({ firstName }: { firstName?: string }) {
                 >
                   {[
                     {
-                      title: 'Done-For-You AI Quick Setup',
+                      title: 'Done-For-You Build Sprint',
                       desc: 'We pick 3 tools and ship the automations in 5 days. From $497.',
                       href: '/services',
                     },

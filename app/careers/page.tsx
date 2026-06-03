@@ -4,16 +4,16 @@ import Footer from '@/components/Footer'
 import CareersContent from './CareersContent'
 
 export const metadata: Metadata = {
-  title: 'Careers at Stackd Studios AI — Remote AI Jobs',
+  title: 'Careers at Stackd Studios AI — Remote Jobs',
   description:
-    'Join Stackd Studios AI — a fully remote, AI-native build lab. We hire builders, designers, and operators who move fast and think differently.',
+    'Join Stackd Studios — a fully remote operations system studio. We hire builders, designers, and operators who move fast and think differently.',
   alternates: {
     canonical: 'https://www.stackdstudiosai.com/careers',
   },
   openGraph: {
-    title: 'Careers at Stackd Studios AI — Remote AI Jobs',
+    title: 'Careers at Stackd Studios AI — Remote Jobs',
     description:
-      'Join a fully remote, AI-native build lab. Contract, part-time, and freelance roles available.',
+      'Join a fully remote operations system studio. Contract, part-time, and freelance roles available.',
     url: 'https://www.stackdstudiosai.com/careers',
   },
 }
@@ -67,10 +67,10 @@ const jobs: Job[] = [
     track: 'Strategy',
     summary: "Stackd Studios AI works with founders to validate, model, and launch new ventures. We're looking for a strategist who can run idea architecture sessions, produce business model documentation, and help founders stress-test their concepts before we build.",
     responsibilities: [
-      'Lead AI Clarity Audits with founder and operator clients',
+      'Lead Systems Audits with founder and operator clients',
       'Produce business model documents, roadmaps, and positioning frameworks',
       'Facilitate concept validation — market sizing, competitive analysis, risk mapping',
-      'Collaborate with the team on Quick Setup and retainer scoping',
+      'Collaborate with the team on Build Sprint and Operating Partner scoping',
       "Contribute to Stackd Studios AI's internal venture pipeline and IP",
     ],
     requirements: [
@@ -121,7 +121,7 @@ const jobs: Job[] = [
     type: 'Part-Time',
     location: 'Remote — USA',
     track: 'Growth',
-    summary: "Stackd Studios AI needs a voice. We're building in public, selling AI services to business owners and founders, and launching a digital store. We need someone who can create content that educates, converts, and builds a community around what we're doing.",
+    summary: "Stackd Studios needs a voice. We're building in public, selling custom systems and automation to business owners and founders, and launching a digital store. We need someone who can create content that educates, converts, and builds a community around what we're doing.",
     responsibilities: [
       "Own Stackd Studios AI's content calendar across LinkedIn, X (Twitter), and TikTok",
       'Write educational content about AI tools, workflows, and business building',
@@ -183,7 +183,7 @@ const jobs: Job[] = [
       'Design multi-step Claude workflows for intake, communication, and operations',
       'Document prompt logic in plain language for client handoff',
       'Test and iterate on prompts based on real-world client feedback',
-      'Collaborate with the team on AI system architecture for Quick Setup and Retainer clients',
+      'Collaborate with the team on AI system architecture for Build Sprint and Operating Partner clients',
     ],
     requirements: [
       'Deep experience working with Claude or GPT-4 in production contexts',
@@ -233,7 +233,7 @@ const jobs: Job[] = [
     type: 'Freelance',
     location: 'Remote',
     track: 'Growth',
-    summary: "We're building a network of creators, influencers, and thought leaders who genuinely believe in AI-powered business tools. You'll identify, reach out to, and onboard partners who can amplify Stackd Studios AI's reach — from micro-influencers to podcasters to newsletter writers.",
+    summary: "We're building a network of creators, influencers, and thought leaders who genuinely believe in better business systems and automation. You'll identify, reach out to, and onboard partners who can amplify Stackd Studios AI's reach — from micro-influencers to podcasters to newsletter writers.",
     responsibilities: [
       'Research and identify creators, podcasters, and newsletters aligned with our audience',
       'Craft and send personalized outreach pitches to potential partners',
@@ -300,7 +300,7 @@ export default function CareersPage() {
                   Build the future of work with us.
                 </h1>
                 <p className="text-[#0C0C0C]/70 text-xl leading-relaxed">
-                  Stackd Studios AI is a remote-first, AI-powered Build Lab &amp; Venture Studio. We move fast, we care about craft, and we work on things that actually matter to business owners and founders.
+                  Stackd Studios is a remote-first operations system studio — solutions, automation, and venture work. We move fast, we care about craft, and we work on things that actually matter to business owners and founders.
                 </p>
               </div>
               <div className="flex flex-col gap-5">

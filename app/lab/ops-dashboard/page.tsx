@@ -133,7 +133,7 @@ export default function OpsDashboardDemoPage() {
 
       <WantThisCTA
         headline="Want a dashboard that watches your business?"
-        body="We build custom ops dashboards wired to your real data — usually delivered as part of an AI Quick Setup ($997) or as the centerpiece of a Growth Retainer. Book a Discovery Call and we'll scope it."
+        body="We build custom ops dashboards wired to your real data — usually delivered as part of a Build Sprint ($997) or as the centerpiece of an Operating Partner plan. Book a Discovery Call and we'll scope it."
       />
       </main>
       <Footer />

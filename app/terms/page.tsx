@@ -19,7 +19,7 @@ const sections = [
   {
     title: '2. Services',
     body: [
-      'Stackd Studios AI, operated by Hicks Virtual Solutions LLC, provides AI-powered build and venture studio services including but not limited to: AI system setup and automation, custom software and web application development, venture strategy sessions, founder build sprints, venture launch packages, and digital product sales.',
+      'Stackd Studios AI, operated by Hicks Virtual Solutions LLC, provides operations system studio services including but not limited to: custom system setup and automation, custom software and web application development, venture strategy sessions, founder build sprints, venture launch packages, and digital product sales.',
       'All services are subject to a separate proposal, statement of work, or service agreement which, together with these Terms, governs the relationship between Stackd Studios AI and the client.',
     ],
   },

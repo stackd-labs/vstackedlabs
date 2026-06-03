@@ -43,26 +43,26 @@ const services: ServiceArticle[] = [
     tierLabel: 'Start Here',
     price: '$397',
     timing: '48-hour turnaround',
-    name: 'AI Clarity Audit',
+    name: 'Systems Audit',
     outcomeHeadline: (
       <>
-        Stop guessing what AI can do.
+        Stop guessing where to start.
         <br className="hidden sm:block" /> Get a 48-hour roadmap built around your business.
       </>
     ),
     body: [
-      "Most owners we talk to know AI can help. They just don't know where to start, what's worth their time, or what's hype. Three articles deep on Twitter and they're more confused than when they started.",
-      "The Clarity Audit fixes that in two days. You fill out a structured intake about your operations — how leads come in, where the bottlenecks are, what your team spends too much time on. We come back with 3–5 specific AI opportunities, each one tagged to a real tool, a real workflow, and an honest read on how much it would actually move the needle. Then we walk you through it on a 30-minute call.",
+      "Most owners we talk to know something could be running better. They just don't know where to start, what's worth their time, or what's hype. Three articles deep on Twitter and they're more confused than when they started.",
+      "The Systems Audit fixes that in two days. You fill out a structured intake about your operations — how leads come in, where the bottlenecks are, what your team spends too much time on. We come back with 3–5 specific systems to build or automate, each tagged to a real tool, a real workflow, and an honest read on how much it would actually move the needle. Then we walk you through it on a 30-minute call.",
       "When you're done, you have a written roadmap and a clear answer to 'what should we build first?' No 80-page deck. No upsell pressure. Just clarity.",
     ],
     walkAway: [
       'Async business operations intake form',
-      '3–5 prioritized AI opportunities, each tagged to a tool + workflow',
+      '3–5 prioritized systems to build, each tagged to a tool + workflow',
       'Written roadmap delivered within 48 hours',
       '30-minute walkthrough call',
     ],
     bridge:
-      "If you decide Quick Setup makes sense, your $397 audit fee gets credited toward that build.",
+      "If you decide a Build Sprint makes sense, your $397 audit fee gets credited toward that build.",
     cta: 'Book the Audit',
     theme: 'cream',
   },
@@ -71,7 +71,7 @@ const services: ServiceArticle[] = [
     tierLabel: 'Most Popular',
     price: '$997',
     timing: '5 business days',
-    name: 'AI Quick Setup',
+    name: 'Build Sprint',
     outcomeHeadline: (
       <>
         Pick one workflow. We build it.
@@ -79,18 +79,18 @@ const services: ServiceArticle[] = [
       </>
     ),
     body: [
-      "You don't need an AI strategy. You need one specific thing that's eating your week to stop eating your week. Email triage. CRM follow-up. New-client onboarding. Repurposing one Loom into a month of content. Whatever the thing is — we build it, test it, and hand it off.",
-      "Quick Setup is one workflow, scoped tight, shipped in five business days. We custom-build the prompts (10–15 of them), wire up the automations, and walk you through it on a one-hour orientation call. You'll have it working before the next time the bottleneck would have hit.",
+      "You don't need a grand strategy. You need one specific thing that's eating your week to stop eating your week. Email triage. CRM follow-up. New-client onboarding. Repurposing one Loom into a month of content. Whatever the thing is — we build it, test it, and hand it off.",
+      "A Build Sprint is one workflow, scoped tight, shipped in five business days. We custom-build the logic (10–15 moving parts), wire up the automations, and walk you through it on a one-hour orientation call. You'll have it working before the next time the bottleneck would have hit.",
       "Most clients land here right after their Audit, with the workflow already named. Some come in cold with a clear ask. Either works.",
     ],
     walkAway: [
       'One complete workflow build (your pick — email triage, CRM follow-up, onboarding, repurposing, or similar)',
-      'Custom Claude prompt library (10–15 prompts)',
+      'Custom prompt + automation logic (10–15 building blocks)',
       '1-hour orientation and training call',
       '7 days of post-delivery email support',
     ],
     bridge:
-      "Most Quick Setup clients either book another for a second workflow, or roll into the Growth Retainer to keep the system expanding.",
+      "Most Build Sprint clients either book another for a second workflow, or roll into the Operating Partner plan to keep the system expanding.",
     cta: 'Get Started',
     theme: 'yellow',
   },
@@ -99,16 +99,16 @@ const services: ServiceArticle[] = [
     tierLabel: 'For Teams',
     price: 'From $2,500',
     timing: 'Scheduled within 2 weeks',
-    name: 'Claude Team Training',
+    name: 'Team Enablement',
     outcomeHeadline: (
       <>
         Your team. Trained.
-        <br className="hidden sm:block" /> Actually using AI by Friday.
+        <br className="hidden sm:block" /> Actually running the system by Friday.
       </>
     ),
     body: [
-      "Most teams have someone who's tried Claude. Maybe they're even good at it. But the rest of the team is still copy-pasting between tabs, missing what AI could do for their specific role, or quietly afraid to try.",
-      "Team Training fixes that in one half-day. We run a pre-session intake to learn your team, your tools, and your real workflows — then we run a live session built around them. Not generic AI training. Your CRM, your tone, your content, your problems. Everyone leaves with custom prompt templates they'll use the same week.",
+      "Most teams have someone who's tried the tools. Maybe they're even good at it. But the rest of the team is still copy-pasting between tabs, missing what the system could do for their specific role, or quietly afraid to try.",
+      "Team Enablement fixes that in one half-day. We run a pre-session intake to learn your team, your tools, and your real workflows — then we run a live session built around them. Not generic training. Your CRM, your tone, your content, your problems. Everyone leaves with custom templates they'll use the same week.",
       "This is the offer most companies need most and book the latest. Demand is far ahead of supply right now — most providers charge $10K–$40K for the same scope, which is why we cap the number of sessions per quarter and offer two formats: Standard (from $2,500) for teams up to 10, and Enterprise (from $5,000) for larger teams or full-day deep-dives. Full breakdown lives on the pricing page.",
     ],
     walkAway: [
@@ -118,7 +118,7 @@ const services: ServiceArticle[] = [
       'Full session recording + resource folder delivered after',
     ],
     bridge:
-      "Training clients get first access to the Growth Retainer — which keeps the prompt library and workflows expanding every month.",
+      "Enablement clients get first access to the Operating Partner plan — which keeps the systems and workflows expanding every month.",
     cta: 'See pricing options',
     ctaHref: '/pricing#team-training',
     theme: 'white',
@@ -128,7 +128,7 @@ const services: ServiceArticle[] = [
     tierLabel: 'Ongoing',
     price: '$1,500/mo',
     timing: 'Monthly',
-    name: 'AI Growth Retainer',
+    name: 'Operating Partner',
     outcomeHeadline: (
       <>
         Keep building.
@@ -136,20 +136,20 @@ const services: ServiceArticle[] = [
       </>
     ),
     body: [
-      "AI moves fast. The prompt that worked in February is mid by July. The tool you wired in is now a feature inside something newer. Your team learns one workflow and is hungry for the next.",
-      "The Growth Retainer is the answer to 'what now?' Every month: one new workflow or tool build, a fresh batch of prompts (5–10 of them), a strategy call to figure out what's next, and priority access for anything urgent. It's how the system stays sharp instead of becoming a museum exhibit.",
-      "We give Quick Setup and Team Training clients first access. If you're already in the flow, this keeps it moving.",
+      "Tools move fast. The workflow that worked in February is mid by July. The tool you wired in is now a feature inside something newer. Your team learns one system and is hungry for the next.",
+      "The Operating Partner plan is the answer to 'what now?' Every month: one new workflow or tool build, a round of tune-ups, a strategy call to figure out what's next, and priority access for anything urgent. It's how the system stays sharp instead of becoming a museum exhibit.",
+      "We give Build Sprint and Team Enablement clients first access. If you're already in the flow, this keeps it moving.",
     ],
     walkAway: [
       '1 new workflow or tool build per month',
-      'Prompt library updates (5–10 new prompts)',
+      'System tune-ups (5–10 improvements)',
       'Monthly strategy call',
       'Priority async support',
-      'First access for Quick Setup and Training clients',
+      'First access for Build Sprint and Enablement clients',
     ],
     bridge:
-      "Retainer clients are the ones we go deepest with. Most stay 6+ months.",
-    cta: 'Apply for Retainer',
+      "Operating Partner clients are the ones we go deepest with. Most stay 6+ months.",
+    cta: 'Apply for Operating Partner',
     theme: 'dark',
   },
 ]
@@ -507,7 +507,7 @@ const addOns = [
   },
   {
     name: 'Extra Workflow',
-    description: 'Add a second workflow to any Quick Setup.',
+    description: 'Add a second workflow to any Build Sprint.',
   },
   {
     name: 'Brand Identity Add-On',
@@ -531,8 +531,8 @@ export default function ServicesContent() {
                   Services · Four moves, one path
                 </p>
                 <h1 className="text-[clamp(40px,6vw,76px)] text-[#0C0C0C] leading-[0.98] mb-6 uppercase font-[family-name:var(--font-anton)]">
-                  We build the AI layer
-                  <br className="hidden sm:block" /> your business is missing.
+                  We build the systems
+                  <br className="hidden sm:block" /> your business runs on.
                 </h1>
                 <p className="text-[#0C0C0C]/75 text-base sm:text-xl leading-relaxed max-w-2xl mb-6">
                   Four services. One clear path. No tech overwhelm. Most clients
@@ -660,11 +660,11 @@ export default function ServicesContent() {
                 </h3>
                 <p className="text-white/75 text-base md:text-lg leading-relaxed mb-5 flex-grow">
                   Instant-download digital products built by Stackd Studios — starter
-                  packs, templates, courses, and Claude skills. Self-serve, no scoping
+                  packs, templates, courses, and automation kits. Self-serve, no scoping
                   required.
                 </p>
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {['Starter Packs', 'Templates', 'Courses', 'Claude Skills'].map((tag) => (
+                  {['Starter Packs', 'Templates', 'Courses', 'Automation Kits'].map((tag) => (
                     <span
                       key={tag}
                       className="bg-white/10 border border-white/15 text-white text-xs px-3 py-1 rounded-full"

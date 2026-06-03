@@ -32,8 +32,8 @@ const ROUTE_CHIPS: Array<{ match: RegExp; label: string; chips: string[] }> = [
     match: /^\/pricing/,
     label: 'On pricing',
     chips: [
-      'How much does the AI Quick Setup cost?',
-      "What's included in the AI Clarity Audit?",
+      'How much does a Build Sprint cost?',
+      "What's included in the Systems Audit?",
       'Do you offer a monthly retainer?',
     ],
   },

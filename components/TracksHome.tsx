@@ -15,36 +15,36 @@ interface ServicePreview {
 const previews: ServicePreview[] = [
   {
     tierLabel: 'Start Here',
-    name: 'AI Clarity Audit',
+    name: 'Systems Audit',
     price: '$397',
     timing: '48-hour turnaround',
     pitch:
-      'The fastest way to know exactly what AI can do for your business — and what to build first.',
+      'The fastest way to map where your business is leaking time — and exactly what to build first.',
   },
   {
     tierLabel: 'Most Popular',
-    name: 'AI Quick Setup',
+    name: 'Build Sprint',
     price: '$997',
     timing: '5 business days',
     pitch:
-      'One AI workflow built, tested, and handed off with a training call so you can use it immediately.',
+      'One workflow built, tested, and handed off with a training call — so it’s running by Monday.',
     popular: true,
   },
   {
     tierLabel: 'For Teams',
-    name: 'Claude Team Training',
+    name: 'Team Enablement',
     price: 'From $2,500',
     timing: 'Within 2 weeks',
     pitch:
-      'Your team, trained and using AI — Standard from $2,500 for ≤10, Enterprise from $5,000 for larger teams.',
+      'Your team, trained to actually run the systems — Standard from $2,500 for ≤10, Enterprise from $5,000 for larger teams.',
   },
   {
     tierLabel: 'Ongoing',
-    name: 'AI Growth Retainer',
+    name: 'Operating Partner',
     price: '$1,500/mo',
     timing: 'Monthly',
     pitch:
-      'A new workflow, prompt updates, a strategy call, and priority support — every month.',
+      'A new build every month, plus tune-ups, a strategy call, and priority support — the system keeps growing.',
   },
 ]
 
@@ -74,7 +74,7 @@ export default function TracksHome() {
             Four services. One clear path.
           </h2>
           <p className="text-[#888580] text-lg leading-relaxed">
-            Start with an audit. Build the first workflow. Train your team. Keep going on retainer. No tech overwhelm.
+            Map it. Build the first system. Train your team. Keep it growing with an operating partner. No tech overwhelm.
           </p>
         </motion.div>
 

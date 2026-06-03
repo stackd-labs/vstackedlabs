@@ -437,7 +437,7 @@ export default function CareersContent({ jobs }: { jobs: Job[] }) {
           <div className="grid sm:grid-cols-3 gap-8">
             {[
               { title: 'Small team. Big output.', body: "We don't have layers of management. Everyone here ships. You'll have real ownership over the work you touch." },
-              { title: 'AI-native by default.', body: "We use Claude, automation, and AI tools in our own workflows. We don't just sell AI — we live it." },
+              { title: 'Automation-native by default.', body: "We use Claude, automation, and modern tooling in our own workflows. We build the way we tell clients to — systems first." },
               { title: 'Craft is non-negotiable.', body: "We move fast because we're disciplined — not because we cut corners. Quality is built into the process." },
             ].map((item) => (
               <div key={item.title}>
@@ -473,7 +473,7 @@ export default function CareersContent({ jobs }: { jobs: Job[] }) {
             <p className="text-[#0C0C0C]/60 text-xs font-semibold uppercase tracking-[0.12em] mb-4">Affiliate &amp; Creator Program</p>
             <h2 className="text-[clamp(28px,4vw,52px)] text-[#0C0C0C] leading-[1.1] mb-5">Get paid to spread the word.</h2>
             <p className="text-[#0C0C0C]/70 text-lg leading-relaxed">
-              We&apos;re building a network of creators, coaches, consultants, and community builders who believe in AI-powered business. If your audience includes founders or business owners, you belong here — and you&apos;ll earn commission for every client you send our way.
+              We&apos;re building a network of creators, coaches, consultants, and community builders who believe in better-run businesses. If your audience includes founders or business owners, you belong here — and you&apos;ll earn commission for every client you send our way.
             </p>
           </div>
 

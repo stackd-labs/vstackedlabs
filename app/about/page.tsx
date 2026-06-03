@@ -12,7 +12,7 @@ const values = [
   {
     title: 'Craft over shortcuts',
     description:
-      "AI makes us faster — but it doesn't replace judgment. Every deliverable is reviewed, refined, and held to a standard we'd put our name on.",
+      "Our tools make us faster — but they don't replace judgment. Every deliverable is reviewed, refined, and held to a standard we'd put our name on.",
   },
   {
     title: 'Clarity over complexity',
@@ -27,14 +27,14 @@ const values = [
   {
     title: 'Speed without chaos',
     description:
-      "Two-week sprints. Same-day proposals. AI-assisted builds. We move fast because we've built the process to support it — not because we're cutting corners.",
+      "Two-week sprints. Same-day proposals. Focused builds. We move fast because we've built the process to support it — not because we're cutting corners.",
   },
 ]
 
 const stack = [
   { category: 'Frontend', items: ['Next.js (App Router)', 'React 19', 'Tailwind CSS v4', 'Framer Motion'] },
   { category: 'Backend & Database', items: ['Supabase (Postgres + Auth + RLS)', 'Next.js Server Actions', 'Vercel Edge Functions'] },
-  { category: 'AI & Automation', items: ['Claude API (Anthropic)', 'Claude prompt engineering', 'n8n / Zapier workflows', 'Custom AI agents'] },
+  { category: 'Automation & AI', items: ['n8n / Zapier workflows', 'Custom automations', 'Claude API (Anthropic)', 'Prompt engineering'] },
   { category: 'Payments & Email', items: ['Stripe Checkout', 'Resend (transactional email)', 'Calendly (scheduling)'] },
   { category: 'Deployment', items: ['Vercel (primary)', 'Custom domains', 'CI/CD via GitHub Actions'] },
 ]
@@ -51,10 +51,10 @@ export default function AboutPage() {
             <div className="max-w-3xl pb-20">
               <p className="text-[#0C0C0C]/50 text-xs font-semibold uppercase tracking-[0.12em] mb-6">About</p>
               <h1 className="text-[clamp(40px,6vw,80px)] text-[#0C0C0C] leading-[1.0] mb-8">
-                Build Lab.<br />Venture Studio.<br />Powered by AI.
+                Solutions.<br />Automation.<br />Venture Studio.
               </h1>
               <p className="text-[#0C0C0C]/65 text-xl leading-relaxed max-w-2xl">
-                We help business owners automate what's slowing them down and help founders turn ideas into products — with AI systems built to last.
+                We build the custom software and automations owner-run businesses run on — and turn the best of them into products of our own.
               </p>
             </div>
           </div>
@@ -78,10 +78,10 @@ export default function AboutPage() {
 
               <div className="flex flex-col gap-6 pt-1">
                 <p className="text-[#9CA3AF] text-lg leading-relaxed">
-                  Chanel founded Stackd Studios AI with a clear mission: give business owners and founders access to the same AI-powered infrastructure that big companies take for granted — without the enterprise price tag or the bloat.
+                  Chanel founded Stackd Studios AI with a clear mission: give business owners and founders access to the same custom systems and automation that big companies take for granted — without the enterprise price tag or the bloat.
                 </p>
                 <p className="text-[#9CA3AF] text-lg leading-relaxed">
-                  With a background in product development, systems design, and AI implementation, she leads every project with a bias toward clarity, craft, and results — the same way she runs her own businesses.
+                  With a background in product development, systems design, and automation, she leads every project with a bias toward clarity, craft, and results — the same way she runs her own businesses.
                 </p>
                 <p className="text-[#9CA3AF] text-lg leading-relaxed">
                   Her clinical background — three psychology degrees and QMHP supervision credentials — informs how Stackd builds for behavioral health, education, and family services. Outside Stackd, she built FieldOS, a multi-tenant operations platform for field service businesses.
@@ -131,7 +131,7 @@ export default function AboutPage() {
               <blockquote
                 className="text-[clamp(22px,3vw,36px)] text-[#0C0C0C] leading-[1.3] border-l-[3px] border-[#FFD84D] pl-8"
               >
-                &ldquo;To design, build, and launch intelligent systems and ventures — giving business owners and founders the power to operate smarter, move faster, and build something that lasts, powered by AI, craft, and strategic thinking.&rdquo;
+                &ldquo;To design, build, and launch the systems and ventures businesses run on — giving owners and founders the power to operate smarter, move faster, and build something that lasts.&rdquo;
               </blockquote>
             </motion.div>
           </div>
@@ -239,7 +239,7 @@ export default function AboutPage() {
                     href="/contact"
                     className="inline-flex items-center justify-center bg-[#FFD84D] hover:bg-[#E8C030] text-[#0C0C0C] font-bold px-8 py-4 rounded-xl text-base transition-all duration-200 hover:scale-[1.02] min-h-[44px]"
                   >
-                    Book a Free Call
+                    Book a Build Call
                   </Link>
                   <Link
                     href="/services"

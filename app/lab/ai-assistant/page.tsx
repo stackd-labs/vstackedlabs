@@ -127,7 +127,7 @@ export default function AiAssistantDemoPage() {
 
       <WantThisCTA
         headline="Want a prompt library like this for your team?"
-        body="Every Stackd engagement comes with a custom 10–15 prompt library tuned to your voice and workflows. Quick Setup ($997, 5 business days) or as part of the Growth Retainer. Book a Discovery Call and we'll scope it."
+        body="Every Stackd engagement comes with a custom 10–15 prompt library tuned to your voice and workflows. Build Sprint ($997, 5 business days) or as part of the Operating Partner plan. Book a Discovery Call and we'll scope it."
       />
       </main>
       <Footer />

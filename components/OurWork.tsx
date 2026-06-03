@@ -408,25 +408,25 @@ export function MockupSports() {
 
 const homeProjects = [
   {
-    tags: ['Claude API', 'Next.js', 'Automation'],
+    tags: ['Automation', 'Intake', 'Next.js'],
     title: 'Client Intake Agent',
-    description: 'An AI-powered intake system that qualifies leads, matches them to the right service tier, auto-generates proposals, and books discovery calls — 24/7.',
+    description: 'An intake system that qualifies leads, matches them to the right service tier, drafts proposals, and books discovery calls — running 24/7 without you touching it.',
     url: 'intake.stackd.app',
     imageUrl: '/work/intake-agent.jpg',
     objectPosition: 'center',
   },
   {
-    tags: ['Claude API', 'RAG', 'Next.js'],
+    tags: ['Knowledge Base', 'Search', 'Next.js'],
     title: 'Business Brain App',
-    description: 'An AI-powered knowledge app that answers business questions using your own SOPs, reports, and documents — no more digging through folders.',
+    description: 'A knowledge app that answers staff questions straight from your own SOPs, reports, and documents — no more digging through folders.',
     url: 'brain.stackd.app',
     imageUrl: '/work/business-brain.jpg',
     objectPosition: 'center',
   },
   {
-    tags: ['Claude API', 'Next.js', 'AI Audit'],
+    tags: ['Reporting', 'Automation', 'Next.js'],
     title: 'Client Audit Tool',
-    description: 'An AI-powered client audit platform that surfaces gaps, scores business health, and generates actionable reports — giving owners clarity in minutes.',
+    description: 'An audit platform that surfaces gaps, scores business health, and generates an action plan in minutes — clarity owners can act on the same day.',
     url: 'audit.stackd.app',
     imageUrl: '/work/client-audit-tool.jpg',
     objectPosition: 'center',
@@ -481,8 +481,8 @@ export default function OurWork() {
               id="our-work-heading"
               className="text-[clamp(28px,4.5vw,52px)] text-[#0C0C0C] leading-[1.1]"
             >
-              Real products. Real clients.
-              <br className="hidden sm:block" /> Built with AI from day one.
+              Real systems. Real clients.
+              <br className="hidden sm:block" /> Built to run themselves.
             </h2>
           </div>
         </motion.div>

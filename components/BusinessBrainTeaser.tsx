@@ -20,10 +20,10 @@ export default function BusinessBrainTeaser() {
               New — Business Brain
             </div>
             <h2 id="bb-teaser-heading" className="text-[clamp(32px,4vw,52px)] text-white leading-[1.05] mb-5">
-              A private AI that knows your business inside out.
+              Your company’s knowledge, answered on demand.
             </h2>
             <p className="text-white/60 text-lg leading-relaxed mb-8">
-              We collect your operational docs — handbooks, SOPs, menus, training guides — and build a custom AI your staff can query 24/7. No hallucinations. No generic answers. Just your knowledge, on demand.
+              We turn your operational docs — handbooks, SOPs, menus, training guides — into a private system your staff can query 24/7. No generic answers, no digging through folders. Just your knowledge, instantly.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
