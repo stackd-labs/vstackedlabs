@@ -54,6 +54,14 @@ const jsonLd = {
         'Monthly build support: one new workflow, system tune-ups, a strategy call, and priority async support.',
       provider: { '@type': 'Organization', name: 'Stackd Studios' },
     },
+    {
+      '@type': 'Service',
+      position: 5,
+      name: 'Website Build',
+      description:
+        'Custom website builds from $1,800 to $3,000 — a high-converting landing page or a full site with a private admin portal (auth, database, bookings, payments).',
+      provider: { '@type': 'Organization', name: 'Stackd Studios' },
+    },
   ],
 }
 

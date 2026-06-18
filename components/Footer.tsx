@@ -23,12 +23,15 @@ const footerColumns = [
       { label: 'Build Sprint — $997', href: '/services#quick-setup' },
       { label: 'Team Enablement — From $2,500', href: '/services#team-training' },
       { label: 'Operating Partner — $1,500/mo', href: '/services#retainer' },
+      { label: 'Website Build — $1,800–$3,000', href: '/services#website-build' },
     ],
   },
   {
     heading: 'Build With Us',
     links: [
+      { label: 'Stackd Interactive', href: '/interactive' },
       { label: 'Business Brain', href: '/business-brain' },
+      { label: 'Demo Lab', href: '/lab' },
       { label: 'Industries', href: '/industries' },
       { label: 'Book a Call', href: '/contact' },
     ],

@@ -1,8 +1,10 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function CursorGlow() {
+  const pathname = usePathname()
   const glowRef = useRef<HTMLDivElement>(null)
   const [isTouch, setIsTouch] = useState(true)
 
@@ -33,7 +35,8 @@ export default function CursorGlow() {
     }
   }, [isTouch])
 
-  if (isTouch) return null
+  // No cursor glow on the Interactive page
+  if (isTouch || pathname === '/interactive') return null
 
   return (
     <div

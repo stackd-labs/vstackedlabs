@@ -15,6 +15,8 @@ interface PricingTier {
   bullets: string[]
   cta: string
   emphasized?: boolean
+  /** Badge label shown on the emphasized tier — defaults to "For larger teams". */
+  emphasisLabel?: string
 }
 
 interface ServiceArticle {
@@ -151,6 +153,66 @@ const services: ServiceArticle[] = [
       "Operating Partner clients are the ones we go deepest with. Most stay 6+ months.",
     cta: 'Apply for Operating Partner',
     theme: 'dark',
+  },
+  {
+    slug: 'website-build',
+    tierLabel: 'Websites',
+    price: '$1,800–$3,000',
+    timing: '1–3 weeks',
+    name: 'Website Build',
+    outcomeHeadline: (
+      <>
+        From a landing page
+        <br className="hidden sm:block" /> to a full admin portal.
+      </>
+    ),
+    body: [
+      "Your website is usually the first thing a customer judges you on — and for most businesses, it's either outdated, generic, or doing nothing to bring in work. We build sites that look like you, load fast, and are actually wired to convert.",
+      "We build two kinds of sites. A Landing Page is a focused, high-converting marketing site — one to a handful of pages built to capture leads, sell an offer, or launch something. A Full Admin Portal is a complete site with a private dashboard behind a secure login, where you (or your clients) manage content, users, bookings, or orders — a real piece of software, not just a brochure.",
+      "Everything is built on the same modern, fast stack we use across every Stackd build, so it's quick to ship, easy to extend, and fully yours at handoff. Most projects land between $1,800 and $3,000 depending on whether you need a marketing site or a portal — and we confirm exact scope and price before any work begins.",
+    ],
+    walkAway: [
+      'Custom design in your brand — mobile-first and fast',
+      'Conversion-focused copy and layout, not just decoration',
+      'Lead capture, analytics, and SEO basics wired in',
+      'Launched on your domain, with full handoff and ownership',
+    ],
+    bridge:
+      "Need the site to actually run part of your business — bookings, payments, a client login? That's the Full Admin Portal, and it plugs straight into the workflows and automations we build.",
+    cta: 'Start your website',
+    theme: 'cream',
+    demandNote:
+      "Most sites land between these two. We'll confirm exact scope and price before any work begins.",
+    tiers: [
+      {
+        name: 'Landing Page',
+        price: 'From $1,800',
+        bestFor:
+          'A focused, high-converting marketing site or single landing page — ideal for launches, offers, and lead capture.',
+        bullets: [
+          '1–5 page marketing site (or one long landing page)',
+          'Custom design + conversion-focused copy',
+          'Lead capture / contact form with email notifications',
+          'SEO basics, analytics, mobile-first, fast',
+        ],
+        cta: 'Start a Landing Page',
+      },
+      {
+        name: 'Full Site + Admin Portal',
+        price: 'Up to $3,000',
+        bestFor:
+          'A complete website with a private admin portal — manage content, users, bookings, or orders behind a secure login.',
+        bullets: [
+          'Everything in Landing Page, expanded',
+          'Private admin portal / dashboard behind secure login',
+          'Database + auth to manage content, users, or bookings',
+          'Integrations: payments, email, and scheduling as needed',
+        ],
+        cta: 'Build the Full Portal',
+        emphasized: true,
+        emphasisLabel: 'Most Complete',
+      },
+    ],
   },
 ]
 
@@ -376,7 +438,7 @@ function ArticleSection({ svc, index }: { svc: ServiceArticle; index: number }) 
                                 : 'bg-[#FFD84D] text-[#0C0C0C]'
                             }`}
                           >
-                            For larger teams
+                            {tier.emphasisLabel ?? 'For larger teams'}
                           </span>
                         </div>
                       )}
@@ -528,16 +590,17 @@ export default function ServicesContent() {
             <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end">
               <div className="max-w-3xl">
                 <p className="text-[#0C0C0C]/55 text-xs font-semibold uppercase tracking-[0.14em] mb-5">
-                  Services · Four moves, one path
+                  Services · Systems, websites, one path
                 </p>
                 <h1 className="text-[clamp(40px,6vw,76px)] text-[#0C0C0C] leading-[0.98] mb-6 uppercase font-[family-name:var(--font-anton)]">
                   We build the systems
                   <br className="hidden sm:block" /> your business runs on.
                 </h1>
                 <p className="text-[#0C0C0C]/75 text-base sm:text-xl leading-relaxed max-w-2xl mb-6">
-                  Four services. One clear path. No tech overwhelm. Most clients
-                  start with the Audit, ship the first workflow, train the team,
-                  and stay on retainer.
+                  Custom systems, automations, and websites. One clear path, no
+                  tech overwhelm. Most clients start with the Audit, ship the first
+                  workflow, train the team, and stay on retainer — and we build the
+                  website it all runs on.
                 </p>
                 {/* Inline service jump links */}
                 <div className="flex flex-wrap gap-x-5 gap-y-3 mt-2 pt-6 border-t border-[#0C0C0C]/15">

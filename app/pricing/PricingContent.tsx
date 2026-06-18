@@ -104,6 +104,22 @@ const services: Service[] = [
     ctaHref: '/contact',
     detailsHref: '/business-brain',
   },
+  {
+    slug: 'website-build',
+    tierLabel: 'Websites',
+    name: 'Website Build',
+    price: '$1,800–$3,000',
+    timing: '1–3 weeks',
+    oneLiner:
+      'From a high-converting landing page to a full site with a private admin portal — built on a modern, fast stack and fully yours at handoff.',
+    bullets: [
+      'Landing Page: from $1,800',
+      'Full Site + Admin Portal: up to $3,000',
+      'Custom design, copy, mobile-first + SEO basics',
+      'Portal adds auth, database, bookings/orders',
+    ],
+    cta: 'Start your website',
+  },
 ]
 
 function PricingCard({ svc }: { svc: Service }) {
@@ -201,7 +217,7 @@ export default function PricingContent() {
               Pricing · At a glance
             </p>
             <h1 className="text-[clamp(36px,5vw,60px)] text-[#0C0C0C] leading-[1.0] mb-5">
-              Five ways to work. Real prices.
+              Six ways to work. Real prices.
             </h1>
             <p className="text-[#888580] text-lg leading-relaxed max-w-2xl mx-auto mb-6">
               The price you see is the price we scope to. Want the full editorial
@@ -236,7 +252,7 @@ export default function PricingContent() {
         {/* Pricing grid */}
         <section className="py-16 md:py-20 bg-[#FFD84D]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {services.map((svc) => (
                 <PricingCard key={svc.slug} svc={svc} />
               ))}
@@ -257,7 +273,7 @@ export default function PricingContent() {
             </div>
 
             <div className="overflow-x-auto -mx-4 sm:mx-0">
-              <table className="w-full min-w-[820px] border-collapse">
+              <table className="w-full min-w-[980px] border-collapse">
                 <thead>
                   <tr>
                     <th className="text-left py-3 px-4 text-[#888580] text-xs font-semibold uppercase tracking-[0.12em] border-b-2 border-[#0C0C0C] w-[22%]">
@@ -290,7 +306,7 @@ export default function PricingContent() {
                   {[
                     {
                       label: 'Turnaround',
-                      vals: ['48 hours', '5 days', '~2 weeks', 'Monthly', '2 weeks'],
+                      vals: ['48 hours', '5 days', '~2 weeks', 'Monthly', '2 weeks', '1–3 weeks'],
                     },
                     {
                       label: 'What you get',
@@ -300,6 +316,7 @@ export default function PricingContent() {
                         'Live training session',
                         '1 workflow / month',
                         'Private knowledge system',
+                        'Landing page or full admin portal',
                       ],
                     },
                     {
@@ -310,6 +327,7 @@ export default function PricingContent() {
                         'Templates + library',
                         '5–10 / month',
                         'Trained on your docs',
+                        'Payments / email / scheduling as needed',
                       ],
                     },
                     {
@@ -320,11 +338,12 @@ export default function PricingContent() {
                         '3 hr (Standard) / Half-day (Enterprise)',
                         'Monthly strategy',
                         'Setup + monthly review',
+                        'Kickoff + launch review',
                       ],
                     },
                     {
                       label: 'Team size',
-                      vals: ['—', '—', 'Up to 10 / 10+', '—', 'All staff'],
+                      vals: ['—', '—', 'Up to 10 / 10+', '—', 'All staff', '—'],
                     },
                     {
                       label: 'Post-delivery support',
@@ -334,6 +353,7 @@ export default function PricingContent() {
                         'Recording + folder · Enterprise: 30-day async coaching',
                         'Priority async',
                         'Monthly maintenance + re-training',
+                        '14 days post-launch',
                       ],
                     },
                     {
@@ -344,6 +364,7 @@ export default function PricingContent() {
                         'Teams ready to adopt the systems together',
                         'Existing clients who want to keep building',
                         'Teams that need 24/7 answers from their own docs',
+                        'Businesses that need a real website or client portal',
                       ],
                     },
                   ].map((row) => (
@@ -424,6 +445,14 @@ export default function PricingContent() {
                 {
                   q: "What is Business Brain and how is it different from the other services?",
                   a: "Business Brain is a private knowledge system trained only on your company's docs — handbooks, SOPs, FAQs, vendor info. Your team chats with it instead of digging through folders. The other services build workflows for you; Business Brain builds a knowledge layer your team queries directly. Starts at $500 setup + $149/mo.",
+                },
+                {
+                  q: "What's the difference between a Landing Page and a Full Admin Portal?",
+                  a: "A Landing Page (from $1,800) is a focused marketing site — one to a handful of pages built to convert: capture leads, sell an offer, or launch something. A Full Admin Portal (up to $3,000) is a complete site with a private dashboard behind a secure login, where you or your clients manage content, users, bookings, or orders — a real piece of software with auth, a database, and integrations like payments and scheduling. Most projects land between $1,800 and $3,000; we confirm exact scope and price before any work begins.",
+                },
+                {
+                  q: 'Do you build games and interactive experiences too?',
+                  a: "Yes — that's Stackd Interactive, our AI-assisted game and interactive experience studio. We build Roblox games, browser mini-games, branded/event games, educational games, simulations, and interactive digital products, with a focus on fast prototyping, testing, and launch. Pricing is scoped per project depending on platform and complexity — start with a quick prototype or reach out to talk through an idea. See the Stackd Interactive page for concepts and offers.",
                 },
                 {
                   q: 'Can I move from one service to another?',
