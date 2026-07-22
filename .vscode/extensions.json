@@ -1,0 +1,14 @@
+{
+  // Teammates opening this repo get prompted to install these.
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss",
+    "usernamehw.errorlens",
+    "yoavbls.pretty-ts-errors",
+    "christian-kohler.path-intellisense",
+    "formulahendry.auto-rename-tag",
+    "editorconfig.editorconfig",
+    "Supabase.vscode-supabase-extension"
+  ]
+}
