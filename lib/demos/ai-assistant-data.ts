@@ -1,3 +1,5 @@
+import { type IconName } from '@/components/Icon'
+
 export type AssistantCategory = 'marketing' | 'sales' | 'operations' | 'content'
 
 export type AssistantPrompt = {
@@ -8,11 +10,11 @@ export type AssistantPrompt = {
   response: string
 }
 
-export const categories: Array<{ id: AssistantCategory; name: string; emoji: string }> = [
-  { id: 'marketing', name: 'Marketing', emoji: '📣' },
-  { id: 'sales', name: 'Sales', emoji: '💼' },
-  { id: 'operations', name: 'Operations', emoji: '⚙️' },
-  { id: 'content', name: 'Content', emoji: '✍️' },
+export const categories: Array<{ id: AssistantCategory; name: string; icon: IconName }> = [
+  { id: 'marketing', name: 'Marketing', icon: 'megaphone' },
+  { id: 'sales', name: 'Sales', icon: 'briefcase' },
+  { id: 'operations', name: 'Operations', icon: 'gear' },
+  { id: 'content', name: 'Content', icon: 'pen' },
 ]
 
 export const prompts: AssistantPrompt[] = [
@@ -186,31 +188,31 @@ Thanks again for the trust. More soon.
 
 **Async pre-work (due Friday EOD):**
 Each person posts in #team-async:
-- ✅ One thing I shipped this week
-- 🚧 One thing I'm stuck on (or close to stuck on)
-- 🎯 My one priority next week
+- **Shipped:** one thing I finished this week
+- **Stuck:** one thing I am stuck on (or close to it)
+- **Priority:** my one focus for next week
 
 **Live agenda (25 min total):**
 
-⏱ **0:00–3:00 — Quick wins round-robin**
-Each person reads their ✅ aloud (60 seconds max). No questions yet.
+**0:00–3:00 — Quick wins round-robin**
+Each person reads their Shipped line aloud (60 seconds max). No questions yet.
 
-⏱ **3:00–13:00 — Unblock**
-Each 🚧 gets ~2 min: person names what they need (decision, intro, second pair of eyes, coverage). Group either solves on the spot OR assigns an owner to follow up offline. Time-box hard.
+**3:00–13:00 — Unblock**
+Each Stuck line gets ~2 min: person names what they need (decision, intro, second pair of eyes, coverage). Group either solves on the spot OR assigns an owner to follow up offline. Time-box hard.
 
-⏱ **13:00–20:00 — Single shared focus**
+**13:00–20:00 — Single shared focus**
 Pick the ONE thing that's most load-bearing for the whole team this week. Discuss what would unblock it. Capture the next action + owner in the meeting doc.
 
-⏱ **20:00–24:00 — Heads-ups**
+**20:00–24:00 — Heads-ups**
 PTO, client calls others should know about, anything timezone-y. Quick, no debate.
 
-⏱ **24:00–25:00 — Close**
+**24:00–25:00 — Close**
 Recap the 1-2 follow-ups assigned and who's on the hook. End on time.
 
 **Rules of the road:**
 - No status updates in the meeting (those go in async pre-work).
 - If a topic exceeds its time, it gets a follow-up DM, not extra airtime.
-- Cancel the meeting if no one has a 🚧 worth discussing — async-first means we don't meet to feel productive.`,
+- Cancel the meeting if nobody has a blocker worth discussing — async-first means we don't meet to feel productive.`,
   },
   {
     id: 'o-vendor-eval',

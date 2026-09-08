@@ -1,5 +1,6 @@
 'use client'
 
+import Icon from '@/components/Icon'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import DemoFrame from '@/components/lab/DemoFrame'
@@ -397,7 +398,7 @@ function FeedPanel({ feed }: { feed: FeedEvent[] }) {
         <AnimatePresence initial={false}>
           {feed.map((event) => (
             <motion.div key={event.id} layout initial={{ opacity: 0, y: -12, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.15 } }} transition={{ duration: 0.3, ease: 'easeOut' }} className="flex items-start gap-2.5 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
-              <span className="text-base leading-none mt-0.5" aria-hidden="true">{event.emoji}</span>
+              <Icon name={event.icon} size={16} className="mt-0.5" />
               <div className="min-w-0 flex-1">
                 <p className="text-[12.5px] text-white leading-snug truncate">{event.title}</p>
                 <p className="text-[11px] text-white/45 truncate">

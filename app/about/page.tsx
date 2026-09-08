@@ -10,6 +10,11 @@ import Image from 'next/image'
 
 const values = [
   {
+    title: 'Nobody gets gatekept',
+    description:
+      "If you are building software, that is the job. We do not tell people they are not real developers because they built it with an AI pair. We help them finish it, and we teach them what they are missing.",
+  },
+  {
     title: 'Craft over shortcuts',
     description:
       "Our tools make us faster — but they don't replace judgment. Every deliverable is reviewed, refined, and held to a standard we'd put our name on.",
@@ -51,10 +56,10 @@ export default function AboutPage() {
             <div className="max-w-3xl pb-20">
               <p className="text-[#0C0C0C]/50 text-xs font-semibold uppercase tracking-[0.12em] mb-6">About</p>
               <h1 className="text-[clamp(40px,6vw,80px)] text-[#0C0C0C] leading-[1.0] mb-8">
-                Solutions.<br />Automation.<br />Venture Studio.
+                Learn it.<br />Build it.<br />Fix it.<br />Scale it.
               </h1>
               <p className="text-[#0C0C0C]/65 text-xl leading-relaxed max-w-2xl">
-                We build the custom software and automations owner-run businesses run on — and turn the best of them into products of our own.
+                Stackd is a software-building ecosystem. We help people build software, and companies ship it. Six divisions, one competency, and AI underneath all of it rather than on the label.
               </p>
             </div>
           </div>
@@ -78,7 +83,7 @@ export default function AboutPage() {
 
               <div className="flex flex-col gap-6 pt-1">
                 <p className="text-[#9CA3AF] text-lg leading-relaxed">
-                  Chanel founded Stackd Studios AI with a clear mission: give business owners and founders access to the same custom systems and automation that big companies take for granted — without the enterprise price tag or the bloat.
+                  Chanel founded Stackd Studios AI to give owners and founders access to the same custom systems big companies take for granted, without the enterprise price tag or the bloat. The company grew into something wider: AI is creating millions of new builders at the same moment companies are running out of technical capacity, and Stackd now serves both sides of that.
                 </p>
                 <p className="text-[#9CA3AF] text-lg leading-relaxed">
                   With a background in product development, systems design, and automation, she leads every project with a bias toward clarity, craft, and results — the same way she runs her own businesses.
@@ -131,7 +136,7 @@ export default function AboutPage() {
               <blockquote
                 className="text-[clamp(22px,3vw,36px)] text-[#0C0C0C] leading-[1.3] border-l-[3px] border-[#FFD84D] pl-8"
               >
-                &ldquo;To design, build, and launch the systems and ventures businesses run on — giving owners and founders the power to operate smarter, move faster, and build something that lasts.&rdquo;
+                &ldquo;To help people build software, and companies ship it. We train the builders, keep them unstuck, rescue what breaks, build what does not exist yet, and give companies the capacity they cannot hire fast enough.&rdquo;
               </blockquote>
             </motion.div>
           </div>
@@ -232,20 +237,20 @@ export default function AboutPage() {
               </h2>
               <div className="flex flex-col gap-4 md:items-end">
                 <p className="text-white/50 text-lg md:text-right">
-                  Book a free discovery call and let&apos;s figure out what to build together.
+                  Reply for a 15-minute chat and we will work out which division you belong in.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
                     href="/contact"
                     className="inline-flex items-center justify-center bg-[#FFD84D] hover:bg-[#E8C030] text-[#0C0C0C] font-bold px-8 py-4 rounded-xl text-base transition-all duration-200 hover:scale-[1.02] min-h-[44px]"
                   >
-                    Book a Build Call
+                    Book a 15-Minute Chat
                   </Link>
                   <Link
-                    href="/services"
+                    href="/ecosystem"
                     className="inline-flex items-center justify-center border-2 border-white/30 hover:border-white text-white font-bold px-8 py-4 rounded-xl text-base transition-all duration-200 min-h-[44px]"
                   >
-                    View Services
+                    See the Ecosystem
                   </Link>
                 </div>
               </div>

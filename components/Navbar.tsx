@@ -1,13 +1,14 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import Icon from '@/components/Icon'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useCart } from '@/components/CartContext'
+import { DIVISIONS } from '@/lib/divisions'
 
 const navLinks = [
-  { label: 'Services', href: '/services' },
-  { label: 'Interactive', href: '/interactive' },
+  { label: 'Ecosystem', href: '/ecosystem' },
   { label: 'Business Brain', href: '/business-brain' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'Store', href: '/store' },
@@ -16,6 +17,9 @@ const navLinks = [
 export default function Navbar({ darkHero = false, yellowHero = false }: { darkHero?: boolean; yellowHero?: boolean }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [divisionsOpen, setDivisionsOpen] = useState(false)
+  const divisionsRef = useRef<HTMLLIElement>(null)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const { totalItems } = useCart()
 
   const isDark = darkHero && !scrolled
@@ -52,6 +56,40 @@ export default function Navbar({ darkHero = false, yellowHero = false }: { darkH
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
+  // Close the divisions dropdown on Escape or an outside click.
+  useEffect(() => {
+    if (!divisionsOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setDivisionsOpen(false)
+    }
+    const onClick = (e: MouseEvent) => {
+      if (divisionsRef.current && !divisionsRef.current.contains(e.target as Node)) {
+        setDivisionsOpen(false)
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    document.addEventListener('mousedown', onClick)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.removeEventListener('mousedown', onClick)
+    }
+  }, [divisionsOpen])
+
+  useEffect(() => {
+    return () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current)
+    }
+  }, [])
+
+  const openDivisions = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current)
+    setDivisionsOpen(true)
+  }
+  const scheduleCloseDivisions = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current)
+    closeTimer.current = setTimeout(() => setDivisionsOpen(false), 140)
+  }
+
   return (
     <>
       <header
@@ -87,6 +125,84 @@ export default function Navbar({ darkHero = false, yellowHero = false }: { darkH
 
           {/* Desktop nav */}
           <ul className="hidden md:flex items-center gap-7" role="list">
+            {/* Divisions dropdown */}
+            <li
+              className="relative"
+              ref={divisionsRef}
+              onMouseEnter={openDivisions}
+              onMouseLeave={scheduleCloseDivisions}
+            >
+              <button
+                type="button"
+                onClick={() => setDivisionsOpen((o) => !o)}
+                aria-expanded={divisionsOpen}
+                aria-haspopup="true"
+                className={`text-sm font-medium inline-flex items-center gap-1.5 transition-colors duration-200 ${linkColor}`}
+              >
+                Divisions
+                <svg
+                  width="10"
+                  height="10"
+                  viewBox="0 0 10 10"
+                  fill="none"
+                  aria-hidden="true"
+                  className={`transition-transform duration-200 ${divisionsOpen ? 'rotate-180' : ''}`}
+                >
+                  <path d="M2 3.5L5 6.5l3-3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+
+              {divisionsOpen && (
+                <div
+                  className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-[420px]"
+                  onMouseEnter={openDivisions}
+                  onMouseLeave={scheduleCloseDivisions}
+                >
+                  <div className="bg-white rounded-2xl border border-[#E2DED8] shadow-[0_20px_60px_rgba(0,0,0,0.14)] p-2.5">
+                    <ul role="list" className="flex flex-col">
+                      {DIVISIONS.map((d) => (
+                        <li key={d.slug}>
+                          <Link
+                            href={`/${d.slug}`}
+                            onClick={() => setDivisionsOpen(false)}
+                            className="flex items-start gap-3 rounded-xl px-3 py-2.5 hover:bg-[#F6F4EF] transition-colors"
+                          >
+                            <span className="mt-0.5" style={{ color: d.accent }}>
+                              <Icon name={d.icon} size={20} />
+                            </span>
+                            <span className="flex flex-col">
+                              <span
+                                className="text-[11px] font-bold uppercase tracking-[0.12em]"
+                                style={{ color: d.accent }}
+                              >
+                                {d.eyebrow}
+                              </span>
+                              <span className="text-[#0C0C0C] text-sm font-semibold leading-snug">
+                                {d.promise}
+                              </span>
+                              <span className="text-[#888580] text-xs leading-snug mt-0.5">
+                                {d.oneLiner}
+                              </span>
+                            </span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      href="/ecosystem"
+                      onClick={() => setDivisionsOpen(false)}
+                      className="mt-1.5 flex items-center justify-between gap-2 rounded-xl bg-[#0C0C0C] px-3.5 py-3 text-white text-sm font-semibold hover:bg-[#FFD84D] hover:text-[#0C0C0C] transition-colors"
+                    >
+                      See the whole ecosystem
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                        <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </li>
+
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
@@ -135,7 +251,7 @@ export default function Navbar({ darkHero = false, yellowHero = false }: { darkH
           <Link
             href="/contact"
             className={`hidden md:inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-lg transition-all duration-200 hover:scale-[1.02] ${ctaClass}`}
-            aria-label="Book a free discovery call with Stackd Studios AI"
+            aria-label="Book a free 15-minute chat with Stackd Studios AI"
           >
             Book a Call
           </Link>
@@ -164,8 +280,8 @@ export default function Navbar({ darkHero = false, yellowHero = false }: { darkH
         }`}
         aria-hidden={!menuOpen}
       >
-        {/* Drawer header — text only */}
-        <div className="h-16 flex items-center justify-between px-4 border-b border-[#E2DED8]">
+        {/* Drawer header */}
+        <div className="h-16 flex items-center justify-between px-4 border-b border-[#E2DED8] shrink-0">
           <Link
             href="/"
             onClick={() => setMenuOpen(false)}
@@ -189,21 +305,55 @@ export default function Navbar({ darkHero = false, yellowHero = false }: { darkH
           </button>
         </div>
 
-        <nav className="flex-1 flex flex-col justify-start pt-8 px-8 overflow-y-auto" aria-label="Mobile navigation">
-          <ul className="flex flex-col gap-3" role="list">
-            {navLinks.map((link) => (
-              <li key={link.href}>
+        <nav className="flex-1 flex flex-col justify-start pt-6 px-6 overflow-y-auto" aria-label="Mobile navigation">
+          {/* Divisions */}
+          <p className="text-[#888580] text-[10px] font-bold uppercase tracking-[0.16em] mb-3">
+            Divisions
+          </p>
+          <ul className="flex flex-col gap-1.5 mb-6" role="list">
+            {DIVISIONS.map((d) => (
+              <li key={d.slug}>
                 <Link
-                  href={link.href}
+                  href={`/${d.slug}`}
                   onClick={() => setMenuOpen(false)}
-                  className="text-[#0C0C0C] text-[clamp(22px,6vw,34px)] font-[family-name:var(--font-anton)] hover:text-[#FFD84D] transition-colors block leading-tight py-1"
+                  className="flex items-center gap-3 py-2"
                 >
-                  {link.label}
+                  <span style={{ color: d.accent }}>
+                    <Icon name={d.icon} size={22} />
+                  </span>
+                  <span className="flex flex-col">
+                    <span
+                      className="text-[22px] leading-none font-[family-name:var(--font-anton)] uppercase"
+                      style={{ color: d.accent }}
+                    >
+                      {d.shortName}
+                    </span>
+                    <span className="text-[#888580] text-xs leading-snug mt-1">
+                      {d.promise}
+                    </span>
+                  </span>
                 </Link>
               </li>
             ))}
           </ul>
-          <div className="mt-6 mb-4 flex flex-col gap-3">
+
+          <div className="border-t border-[#E2DED8] pt-5">
+            <ul className="flex flex-col gap-2" role="list">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="text-[#0C0C0C] text-[22px] font-[family-name:var(--font-anton)] hover:text-[#FFD84D] transition-colors block leading-tight py-1"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-6 mb-6 flex flex-col gap-3">
             <Link
               href="/ai-toolkit"
               onClick={() => setMenuOpen(false)}

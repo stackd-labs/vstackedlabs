@@ -4,14 +4,14 @@ import PricingContent from './PricingContent'
 export const metadata: Metadata = {
   title: 'Pricing | Stackd Studios AI',
   description:
-    'Flat, transparent pricing for our services — Systems Audit, Build Sprint, Team Enablement, Operating Partner, and Business Brain. No hidden fees, no surprises.',
+    'Flat, transparent pricing across all six Stackd divisions: builder training, engineering support, software rescue, custom builds, fractional teams, and enterprise capacity. No hidden fees.',
   alternates: {
     canonical: 'https://www.stackdstudiosai.com/pricing',
   },
   openGraph: {
     title: 'Pricing | Stackd Studios AI',
     description:
-      'Flat pricing for the Systems Audit, Build Sprint, Team Enablement, Operating Partner, and Business Brain. The price you see is the price we scope to.',
+      'Real prices for every offer in Learn, Builders, Rescue, Build, Teams, and Enterprise. The price you see is the price we scope to.',
     url: 'https://www.stackdstudiosai.com/pricing',
   },
 }

@@ -6,17 +6,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { submitLead } from './actions'
 import { useToast } from '@/components/ToastProvider'
-
-const serviceOptions = [
-  { value: '', label: 'What is this regarding?' },
-  { value: 'Systems Audit ($397)', label: 'Systems Audit — $397' },
-  { value: 'Build Sprint ($997)', label: 'Build Sprint — $997' },
-  { value: 'Team Enablement — Standard ($2,500)', label: 'Team Enablement — Standard ($2,500)' },
-  { value: 'Team Enablement — Enterprise ($5,000+)', label: 'Team Enablement — Enterprise ($5,000+)' },
-  { value: 'Operating Partner ($1,500/mo)', label: 'Operating Partner — $1,500/mo' },
-  { value: 'Not sure yet', label: "Not sure yet — help me choose" },
-  { value: 'Other', label: 'Other' },
-]
+import { DIVISIONS } from '@/lib/divisions'
 
 export default function ContactContent() {
   const [status, setStatus] = useState<'idle' | 'loading'>('idle')
@@ -88,7 +78,7 @@ export default function ContactContent() {
 
               <ul className="flex flex-col gap-3" role="list">
                 {[
-                  { title: 'No-pitch discovery calls', body: 'Free 20-minute conversation. We listen, you decide.' },
+                  { title: 'No-pitch discovery calls', body: 'Free 15-minute conversation. We listen, you decide.' },
                   { title: 'Replies within 24 hours', body: 'Always. Even on weekends, you usually hear back the same day.' },
                   { title: 'Honest about fit', body: "If we're not the right team for what you're building, we'll tell you that and point you somewhere better." },
                 ].map((item) => (
@@ -182,18 +172,36 @@ export default function ContactContent() {
 
                 <div>
                   <label htmlFor="service" className="block text-sm font-semibold text-[#0C0C0C] mb-2">
-                    Which service are you interested in?
+                    Which division or offer is this about?
                   </label>
                   <select
                     id="service"
                     name="track"
                     className="w-full bg-white border border-[#E2DED8] rounded-xl px-4 py-3 text-[#0C0C0C] transition-all min-h-[44px] text-sm appearance-none"
                   >
-                    {serviceOptions.map((opt) => (
-                      <option key={opt.value} value={opt.value} disabled={opt.value === ''}>
-                        {opt.label}
-                      </option>
+                    <option value="" disabled>
+                      What is this regarding?
+                    </option>
+                    <option value="Not sure yet">
+                      Not sure yet, help me choose
+                    </option>
+                    {DIVISIONS.map((division) => (
+                      <optgroup
+                        key={division.slug}
+                        // optgroup labels are plain text, so no icon here.
+                        label={division.eyebrow}
+                      >
+                        {division.offers.map((offer) => (
+                          <option
+                            key={`${division.slug}-${offer.slug}`}
+                            value={`${division.eyebrow}: ${offer.name} (${offer.price})`}
+                          >
+                            {offer.name} — {offer.price}
+                          </option>
+                        ))}
+                      </optgroup>
                     ))}
+                    <option value="Other">Other</option>
                   </select>
                 </div>
 

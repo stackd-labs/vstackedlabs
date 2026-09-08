@@ -5,13 +5,13 @@ import { motion } from 'framer-motion'
 const steps = [
   {
     number: '01',
-    title: 'Book a Free Call',
-    description: 'Schedule a free 20-minute discovery call. Tell us about your business or idea, your goals, and what you\'ve already tried. No pressure, no pitch.',
+    title: 'Book a Free Chat',
+    description: 'A free 15-minute chat. Tell us where you are, what you have already tried, and what you want. No pressure, no pitch.',
   },
   {
     number: '02',
     title: 'Get a Proposal',
-    description: 'We\'ll identify which track and tier fits best, then send a clear proposal — scoped, priced, and ready for your review. Usually same day.',
+    description: 'We name the division and the offer that actually fits, then send a clear proposal: scoped, priced, and ready for your review. Usually same day.',
   },
   {
     number: '03',

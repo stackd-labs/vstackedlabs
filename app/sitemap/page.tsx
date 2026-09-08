@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { DIVISIONS } from '@/lib/divisions'
 
 export const metadata: Metadata = {
   title: 'Sitemap',
@@ -16,25 +17,30 @@ const groups = [
     heading: 'Main',
     pages: [
       { label: 'Home', href: '/' },
-      { label: 'Services', href: '/services' },
-      { label: 'Industries', href: '/industries' },
+      { label: 'The Ecosystem', href: '/ecosystem' },
+      { label: 'All Services', href: '/services' },
       { label: 'Pricing', href: '/pricing' },
-      { label: 'Store', href: '/store' },
-      { label: 'Free AI Toolkit', href: '/ai-toolkit' },
-    ],
-  },
-  {
-    heading: 'Studio',
-    pages: [
-      { label: 'About', href: '/about' },
-      { label: 'Business Brain', href: '/business-brain' },
-      { label: 'Careers', href: '/careers' },
+      { label: 'Industries', href: '/industries' },
       { label: 'Contact', href: '/contact' },
     ],
   },
   {
-    heading: 'Legal',
+    heading: 'Divisions',
+    pages: DIVISIONS.map((d) => ({
+      label: d.eyebrow,
+      href: `/${d.slug}`,
+    })),
+  },
+  {
+    heading: 'Products & Studio',
     pages: [
+      { label: 'Business Brain', href: '/business-brain' },
+      { label: 'Stackd Interactive', href: '/interactive' },
+      { label: 'Demo Lab', href: '/lab' },
+      { label: 'Store', href: '/store' },
+      { label: 'Free AI Toolkit', href: '/ai-toolkit' },
+      { label: 'About', href: '/about' },
+      { label: 'Careers', href: '/careers' },
       { label: 'Privacy Policy', href: '/privacy' },
       { label: 'Terms of Service', href: '/terms' },
     ],

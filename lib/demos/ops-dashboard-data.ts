@@ -2,12 +2,14 @@
 // Hand-curated names + sources for variety; deterministic shapes so the demo
 // looks the same on every load until events start firing.
 
+import { type IconName } from '@/components/Icon'
+
 export type EventType = 'new_lead' | 'email_opened' | 'call_booked' | 'deal_closed' | 'demo_requested' | 'cart_abandoned'
 
 export type FeedEvent = {
   id: string
   type: EventType
-  emoji: string
+  icon: IconName
   title: string
   meta: string
   amount?: number
@@ -68,21 +70,21 @@ function pickEventType(): EventType {
   return 'new_lead'
 }
 
-function eventTemplate(type: EventType): { emoji: string; title: string; meta: string; amount?: number } {
+function eventTemplate(type: EventType): { icon: IconName; title: string; meta: string; amount?: number } {
   const name = randomName()
   switch (type) {
     case 'new_lead':
-      return { emoji: '👋', title: `New lead: ${name}`, meta: `from ${pick(SOURCES)}` }
+      return { icon: 'user-plus', title: `New lead: ${name}`, meta: `from ${pick(SOURCES)}` }
     case 'email_opened':
-      return { emoji: '📩', title: `${name} opened "Quarterly recap"`, meta: 'Email · 3rd open' }
+      return { icon: 'mail', title: `${name} opened "Quarterly recap"`, meta: 'Email · 3rd open' }
     case 'demo_requested':
-      return { emoji: '🎯', title: `${name} requested a demo`, meta: pick(COMPANIES) }
+      return { icon: 'target', title: `${name} requested a demo`, meta: pick(COMPANIES) }
     case 'call_booked':
-      return { emoji: '📞', title: `${name} booked a discovery call`, meta: `Tomorrow · 2:00 PM` }
+      return { icon: 'phone', title: `${name} booked a discovery call`, meta: `Tomorrow · 2:00 PM` }
     case 'deal_closed': {
       const amount = Math.round((1500 + Math.random() * 12500) / 50) * 50
       return {
-        emoji: '🎉',
+        icon: 'check-circle',
         title: `Deal closed: ${pick(COMPANIES)}`,
         meta: `Owned by ${name}`,
         amount,
@@ -90,7 +92,7 @@ function eventTemplate(type: EventType): { emoji: string; title: string; meta: s
     }
     case 'cart_abandoned':
       return {
-        emoji: '🛒',
+        icon: 'cart',
         title: `${name} left items in cart`,
         meta: `Recovery email queued`,
       }
@@ -103,7 +105,7 @@ export function generateFeedEvent(now: number): FeedEvent {
   return {
     id: `evt-${now}-${Math.floor(Math.random() * 10000)}`,
     type,
-    emoji: tpl.emoji,
+    icon: tpl.icon,
     title: tpl.title,
     meta: tpl.meta,
     amount: tpl.amount,

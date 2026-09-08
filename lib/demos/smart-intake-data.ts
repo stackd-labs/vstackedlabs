@@ -1,3 +1,5 @@
+import { type IconName } from '@/components/Icon'
+
 export type ParsedFields = {
   contactName: string
   intent: string
@@ -9,7 +11,7 @@ export type ParsedFields = {
 export type SamplePrompt = {
   id: string
   chipLabel: string
-  emoji: string
+  icon: IconName
   text: string
   parsed: ParsedFields
 }
@@ -18,7 +20,7 @@ export const samplePrompts: SamplePrompt[] = [
   {
     id: 'relocation',
     chipLabel: 'Senior relocation',
-    emoji: '🏡',
+    icon: 'home',
     text: "Hi, I'm looking for help moving my mom Sarah Patterson to Phoenix next month — she's 78 and recently lost my dad. We need something wheelchair accessible and close to a hospital. Budget is around $4,000/month, and ideally a ground-floor unit with a small patio so she can keep gardening.",
     parsed: {
       contactName: 'Sarah Patterson (mother)',
@@ -32,7 +34,7 @@ export const samplePrompts: SamplePrompt[] = [
   {
     id: 'insurance',
     chipLabel: 'Insurance card lost',
-    emoji: '🪪',
+    icon: 'id-card',
     text: "Help! I lost my insurance card and need a replacement asap. Mike Chen, policy #IC-887234, member since 2019. Can you also confirm my coverage for an upcoming MRI on the 18th? My phone is 555-204-7711.",
     parsed: {
       contactName: 'Mike Chen',
@@ -45,7 +47,7 @@ export const samplePrompts: SamplePrompt[] = [
   {
     id: 'emergency',
     chipLabel: 'Emergency repair',
-    emoji: '🛠️',
+    icon: 'gear',
     text: "Hey — my AC died this morning and it's 95° out. Need a contractor today if possible. I'm in zip 30312, willing to pay rush rate. House is a 1920s bungalow with a 2-ton unit. Call or text 404-555-0182.",
     parsed: {
       contactName: 'Caller @ 404-555-0182',
@@ -58,7 +60,7 @@ export const samplePrompts: SamplePrompt[] = [
   {
     id: 'wedding',
     chipLabel: 'Wedding venue',
-    emoji: '💍',
+    icon: 'heart',
     text: "Hi — my fiancé and I are touring venues for a 150-person wedding the second weekend of October next year. Looking for outdoor ceremony + indoor reception, near Chattanooga, with on-site catering or an open vendor list. Budget around $18k for venue + food. Can we get pricing and a tour?",
     parsed: {
       contactName: 'Engaged couple (you + fiancé)',
@@ -71,7 +73,7 @@ export const samplePrompts: SamplePrompt[] = [
   {
     id: 'therapy',
     chipLabel: 'Therapy intake',
-    emoji: '🧠',
+    icon: 'users',
     text: "Hi, my name is Jordan. I've been dealing with anxiety and burnout for the past 6 months and finally ready to talk to someone. I have BCBS through work and prefer evenings or weekends if possible. Open to virtual or in-person.",
     parsed: {
       contactName: 'Jordan',
@@ -84,7 +86,7 @@ export const samplePrompts: SamplePrompt[] = [
   {
     id: 'real-estate',
     chipLabel: 'Real estate buyer',
-    emoji: '🏘️',
+    icon: 'buildings',
     text: "Hey, my wife and I are looking for our first home. 3-bedroom, 2-bath, ideally in the Decatur or East Atlanta area. Under $475k. We've been pre-approved through Rocket. Want a yard for our dog. Hoping to close before the school year starts in August.",
     parsed: {
       contactName: 'You + wife',
@@ -97,7 +99,7 @@ export const samplePrompts: SamplePrompt[] = [
   {
     id: 'small-biz',
     chipLabel: 'Small biz inquiry',
-    emoji: '🥐',
+    icon: 'briefcase',
     text: "Hi! I run a small bakery in Asheville and we're losing orders because customers can't order online. I want a simple ordering page with pickup-only, square integration if possible, and the ability to limit orders per day. Budget is small — under $2k ideally. When can we talk?",
     parsed: {
       contactName: 'Asheville bakery owner',

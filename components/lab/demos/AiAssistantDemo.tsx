@@ -1,5 +1,6 @@
 'use client'
 
+import Icon from '@/components/Icon'
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import DemoFrame from '@/components/lab/DemoFrame'
@@ -105,7 +106,7 @@ export default function AiAssistantDemo() {
                     : 'bg-white text-[#0C0C0C] hover:bg-[#FFF8DD]'
                 }`}
               >
-                <span aria-hidden="true">{cat.emoji}</span>
+                <Icon name={cat.icon} size={15} strokeWidth={1.9} />
                 {cat.name}
               </button>
             ))}

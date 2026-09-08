@@ -1,5 +1,6 @@
 'use client'
 
+import Icon from '@/components/Icon'
 import { useEffect, useRef, useState } from 'react'
 import DemoFrame from '@/components/lab/DemoFrame'
 import {
@@ -136,7 +137,7 @@ export default function SmartIntakeDemo() {
                   onClick={() => handleSelectSample(s.text)}
                   className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border border-[#E2DED8] bg-[#F6F4EF] text-[#0C0C0C] hover:bg-[#FFD84D] hover:border-[#0C0C0C] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
-                  <span aria-hidden="true">{s.emoji}</span>
+                  <Icon name={s.icon} size={15} strokeWidth={1.9} />
                   {s.chipLabel}
                 </button>
               ))}

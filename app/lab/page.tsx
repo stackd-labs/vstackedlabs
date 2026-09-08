@@ -1,3 +1,4 @@
+import Icon from '@/components/Icon'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -395,10 +396,10 @@ function AssistantPreview() {
             <div className="bg-[#FAF8F2] border-r border-[#E2DED8] p-1 flex flex-col gap-0.5 text-[5px]">
               <div className="text-[#888580] font-bold uppercase mb-0.5">Library</div>
               <div className="grid grid-cols-2 gap-px">
-                <div className="bg-[#0C0C0C] text-white text-center py-0.5 rounded-sm">📣</div>
-                <div className="bg-white border border-[#E2DED8] text-center py-0.5 rounded-sm">💼</div>
-                <div className="bg-white border border-[#E2DED8] text-center py-0.5 rounded-sm">⚙</div>
-                <div className="bg-white border border-[#E2DED8] text-center py-0.5 rounded-sm">✍</div>
+                <div className="bg-[#0C0C0C] text-white flex items-center justify-center py-0.5 rounded-sm"><Icon name="megaphone" size={6} strokeWidth={2.4} /></div>
+                <div className="bg-white border border-[#E2DED8] flex items-center justify-center py-0.5 rounded-sm"><Icon name="briefcase" size={6} strokeWidth={2.4} /></div>
+                <div className="bg-white border border-[#E2DED8] flex items-center justify-center py-0.5 rounded-sm"><Icon name="gear" size={6} strokeWidth={2.4} /></div>
+                <div className="bg-white border border-[#E2DED8] flex items-center justify-center py-0.5 rounded-sm"><Icon name="pen" size={6} strokeWidth={2.4} /></div>
               </div>
               {[1, 2, 3].map((i) => (
                 <div key={i} className="bg-white border border-[#E2DED8] rounded px-0.5 py-0.5 text-[#0C0C0C]">
@@ -459,7 +460,7 @@ function DashboardPreview() {
               <div className="text-white/40 text-[5px] text-center py-0.5">◯</div>
               <div className="text-white/40 text-[5px] text-center py-0.5">◢</div>
               <div className="text-white/40 text-[5px] text-center py-0.5">◤</div>
-              <div className="text-white/40 text-[5px] text-center py-0.5">⚙</div>
+              <div className="text-white/40 flex items-center justify-center py-0.5"><Icon name="gear" size={6} strokeWidth={2.4} /></div>
             </div>
             {/* Main */}
             <div className="flex flex-col">
@@ -496,9 +497,9 @@ function DashboardPreview() {
                 {/* Feed */}
                 <div className="bg-[#0A0A0A] p-1 flex flex-col gap-0.5">
                   <div className="text-[4px] uppercase text-white/45 font-bold">Activity</div>
-                  {['👋', '🎉', '📩'].map((e, i) => (
+                  {(['user-plus', 'check-circle', 'mail'] as const).map((e, i) => (
                     <div key={i} className="bg-white/5 border border-white/10 rounded px-0.5 py-0.5 flex items-center gap-0.5">
-                      <span className="text-[4px]">{e}</span>
+                      <Icon name={e} size={5} strokeWidth={2.6} />
                       <div className="flex-1">
                         <div className="h-0.5 w-full bg-white/40 rounded mb-0.5" />
                         <div className="h-0.5 w-2/3 bg-white/25 rounded" />

@@ -1,36 +1,43 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
 
-const cycleWords = ['intake', 'booking', 'billing', 'operations']
+/** The four verbs, in ecosystem order. Cycles as a highlight, not a typewriter. */
+const verbs = [
+  { word: 'Learn it.', href: '/learn' },
+  { word: 'Build it.', href: '/build' },
+  { word: 'Fix it.', href: '/rescue' },
+  { word: 'Scale it.', href: '/teams' },
+]
 
-function TypewriterWord() {
-  const [index, setIndex] = useState(0)
+function VerbRail() {
+  const [active, setActive] = useState(0)
 
   useEffect(() => {
     const id = setInterval(() => {
-      setIndex((i) => (i + 1) % cycleWords.length)
-    }, 2400)
+      setActive((i) => (i + 1) % verbs.length)
+    }, 1800)
     return () => clearInterval(id)
   }, [])
 
   return (
-    <span className="relative inline-block">
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={index}
-          initial={{ opacity: 0, y: 24, filter: 'blur(6px)' }}
-          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          exit={{ opacity: 0, y: -20, filter: 'blur(4px)' }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
-          className="inline-block text-[#FFD84D]"
+    <div
+      className="flex flex-wrap items-center gap-x-5 gap-y-2"
+      aria-label="Learn it. Build it. Fix it. Scale it."
+    >
+      {verbs.map((v, i) => (
+        <Link
+          key={v.word}
+          href={v.href}
+          className="text-[clamp(18px,2.6vw,30px)] uppercase font-[family-name:var(--font-anton)] leading-none transition-colors duration-500 hover:!text-[#0C0C0C]"
+          style={{ color: i === active ? '#0C0C0C' : '#C9C5BD' }}
         >
-          {cycleWords[index]}
-        </motion.span>
-      </AnimatePresence>
-    </span>
+          {v.word}
+        </Link>
+      ))}
+    </div>
   )
 }
 
@@ -40,10 +47,8 @@ export default function Hero() {
       className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#F6F4EF]"
       aria-label="Hero section"
     >
-      {/* Dot grid */}
       <div className="dot-grid absolute inset-0 opacity-[0.05] pointer-events-none" aria-hidden="true" />
 
-      {/* Orb 1 — navy */}
       <div
         className="orb-1 absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full pointer-events-none"
         style={{
@@ -53,8 +58,6 @@ export default function Hero() {
         }}
         aria-hidden="true"
       />
-
-      {/* Orb 2 — gold */}
       <div
         className="orb-2 absolute bottom-[-5%] left-[-10%] w-[500px] h-[500px] rounded-full pointer-events-none"
         style={{
@@ -65,8 +68,8 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 pb-16">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-28 pb-16">
+        <div className="grid lg:grid-cols-[1.1fr_1fr] gap-14 lg:gap-16 items-center">
 
           {/* Left — copy */}
           <div>
@@ -77,30 +80,45 @@ export default function Hero() {
               className="inline-flex items-center gap-2 bg-[#0C0C0C] text-[#FFD84D] text-xs font-semibold uppercase tracking-[0.12em] px-3 py-1.5 rounded-full mb-6"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#FFD84D]" aria-hidden="true" />
-              Solutions · Automation · Venture Studio
+              A software-building ecosystem
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-[clamp(44px,7vw,84px)] leading-[1.05] tracking-[0.01em] text-[#0C0C0C] mb-6"
+              className="text-[clamp(40px,6.4vw,78px)] leading-[1.03] tracking-[0.01em] text-[#0C0C0C] mb-7"
             >
-              The{' '}
-              <TypewriterWord />{' '}
-              <br className="hidden sm:block" />
-              system your{' '}
-              <br className="hidden sm:block" />
-              business runs on.
+              We help people build software, and companies{' '}
+              <span className="relative inline-block">
+                <span className="relative z-10">ship it</span>
+                <span
+                  className="absolute left-0 right-0 bottom-[0.08em] h-[0.32em] bg-[#FFD84D] -z-0"
+                  aria-hidden="true"
+                />
+              </span>
+              .
             </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.18 }}
+              className="mb-7"
+            >
+              <VerbRail />
+            </motion.div>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-[#888580] text-lg leading-relaxed mb-10 max-w-[500px]"
+              transition={{ duration: 0.6, delay: 0.24 }}
+              className="text-[#888580] text-lg leading-relaxed mb-10 max-w-[520px]"
             >
-              Stackd Studios builds the custom software and automations that owner-run businesses can&apos;t buy off the shelf — then turns the best of them into products of our own.
+              Six divisions, one competency. We train new builders, unstick the
+              ones who are building already, rescue software that broke, build
+              what does not exist yet, and give companies the engineering
+              capacity they cannot hire fast enough.
             </motion.p>
 
             <motion.div
@@ -110,16 +128,16 @@ export default function Hero() {
               className="flex flex-wrap gap-4"
             >
               <Link
-                href="/contact"
+                href="/ecosystem#entry-points"
                 className="inline-flex items-center gap-2 bg-[#FFD84D] hover:bg-[#E8C030] text-[#0C0C0C] font-semibold px-7 py-3.5 rounded-xl transition-all duration-200 hover:scale-[1.02] min-h-[44px] text-base"
               >
-                Book a Build Call
+                Find your entry point
               </Link>
               <Link
-                href="/#our-work"
+                href="/contact"
                 className="inline-flex items-center gap-2 border-2 border-[#0C0C0C] text-[#0C0C0C] hover:bg-[#0C0C0C] hover:text-white font-semibold px-7 py-3.5 rounded-xl transition-all duration-200 hover:scale-[1.02] min-h-[44px] text-base"
               >
-                See What We&apos;ve Built
+                Book a 15-minute chat
               </Link>
             </motion.div>
 
@@ -141,7 +159,10 @@ export default function Hero() {
                 ))}
               </div>
               <p className="text-[#888580] text-sm">
-                Trusted by <span className="text-[#0C0C0C] font-semibold">owner-run businesses & founders</span>
+                Trusted by{' '}
+                <span className="text-[#0C0C0C] font-semibold">
+                  builders, founders, and owner-run businesses
+                </span>
               </p>
             </motion.div>
           </div>
@@ -163,53 +184,64 @@ export default function Hero() {
                 <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
                 <span className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
                 <span className="w-3 h-3 rounded-full bg-[#28C840]" />
-                <span className="ml-3 text-[#888580] text-xs font-mono">stackd.system.ts</span>
+                <span className="ml-3 text-[#888580] text-xs font-mono">stackd.ecosystem.ts</span>
               </div>
 
               {/* Code */}
               <div className="font-mono text-sm leading-7">
-                <div className="text-[#888580]">{'// Stackd Studios — the system your business runs on'}</div>
+                <div className="text-[#888580]">{'// One competency. Six front doors.'}</div>
                 <div className="h-4" />
                 <div>
-                  <span className="text-[#FFD84D]">const</span>
-                  <span className="text-white"> system = </span>
-                  <span className="text-[#FFD84D]">new</span>
-                  <span className="text-[#4ADE80]"> StackdStudio</span>
-                  <span className="text-white">{'({'}</span>
+                  <span className="text-[#FFD84D]">export const</span>
+                  <span className="text-[#4ADE80]"> stackd</span>
+                  <span className="text-white"> = {'{'}</span>
                 </div>
                 <div>
-                  <span className="text-[#93C5FD]">{'  builds'}</span>
+                  <span className="text-[#93C5FD]">{'  learn'}</span>
                   <span className="text-white">{': '}</span>
-                  <span className="text-[#FCA5A5]">{'"custom software + automation"'}</span>
+                  <span className="text-[#FCA5A5]">{'"we train builders"'}</span>
                   <span className="text-white">,</span>
                 </div>
                 <div>
-                  <span className="text-[#93C5FD]">{'  ships'}</span>
-                  <span className="text-white">{': ['}</span>
-                  <span className="text-[#FCA5A5]">"your systems"</span>
-                  <span className="text-white">, </span>
-                  <span className="text-[#FCA5A5]">"our products"</span>
-                  <span className="text-white">],</span>
-                </div>
-                <div className="text-white">{'}'});</div>
-                <div className="h-4" />
-                <div>
-                  <span className="text-[#FFD84D]">await</span>
-                  <span className="text-white"> system.</span>
-                  <span className="text-[#4ADE80]">build</span>
-                  <span className="text-white">(</span>
+                  <span className="text-[#93C5FD]">{'  builders'}</span>
+                  <span className="text-white">{': '}</span>
+                  <span className="text-[#FCA5A5]">{'"support when you\'re stuck"'}</span>
+                  <span className="text-white">,</span>
                 </div>
                 <div>
-                  <span className="text-[#FCA5A5]">{'  "something that runs itself."'}</span>
+                  <span className="text-[#93C5FD]">{'  rescue'}</span>
+                  <span className="text-white">{': '}</span>
+                  <span className="text-[#FCA5A5]">{'"diagnose, fix, ship"'}</span>
+                  <span className="text-white">,</span>
                 </div>
-                <div className="text-white">);</div>
+                <div>
+                  <span className="text-[#93C5FD]">{'  build'}</span>
+                  <span className="text-white">{': '}</span>
+                  <span className="text-[#FCA5A5]">{'"idea to software"'}</span>
+                  <span className="text-white">,</span>
+                </div>
+                <div>
+                  <span className="text-[#93C5FD]">{'  teams'}</span>
+                  <span className="text-white">{': '}</span>
+                  <span className="text-[#FCA5A5]">{'"engineering capacity"'}</span>
+                  <span className="text-white">,</span>
+                </div>
+                <div>
+                  <span className="text-[#93C5FD]">{'  enterprise'}</span>
+                  <span className="text-white">{': '}</span>
+                  <span className="text-[#FCA5A5]">{'"clear the backlog"'}</span>
+                  <span className="text-white">,</span>
+                </div>
+                <div className="text-white">{'};'}</div>
               </div>
 
               {/* Terminal output */}
               <div className="mt-6 pt-4 border-t border-white/10">
                 <div className="flex items-center gap-2">
                   <span className="text-[#28C840] text-xs font-mono">✓</span>
-                  <span className="text-[#888580] text-xs font-mono">System deployed. Running on autopilot.</span>
+                  <span className="text-[#888580] text-xs font-mono">
+                    AI underneath all six. Software on top.
+                  </span>
                 </div>
                 <div className="flex items-center gap-2 mt-1">
                   <span className="text-[#FFD84D] text-xs font-mono">→</span>
@@ -220,7 +252,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Scroll indicator — hidden on short/mobile viewports to avoid overlap */}
+        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

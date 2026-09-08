@@ -6,14 +6,14 @@ import CareersContent from './CareersContent'
 export const metadata: Metadata = {
   title: 'Careers at Stackd Studios AI — Remote Jobs',
   description:
-    'Join Stackd Studios — a fully remote operations system studio. We hire builders, designers, and operators who move fast and think differently.',
+    'Join Stackd Studios, a fully remote software-building ecosystem. We hire builders, designers, and operators who move fast and think differently.',
   alternates: {
     canonical: 'https://www.stackdstudiosai.com/careers',
   },
   openGraph: {
     title: 'Careers at Stackd Studios AI — Remote Jobs',
     description:
-      'Join a fully remote operations system studio. Contract, part-time, and freelance roles available.',
+      'Join a fully remote software-building ecosystem. Contract, part-time, and freelance roles available.',
     url: 'https://www.stackdstudiosai.com/careers',
   },
 }
@@ -300,7 +300,7 @@ export default function CareersPage() {
                   Build the future of work with us.
                 </h1>
                 <p className="text-[#0C0C0C]/70 text-xl leading-relaxed">
-                  Stackd Studios is a remote-first operations system studio — solutions, automation, and venture work. We move fast, we care about craft, and we work on things that actually matter to business owners and founders.
+                  Stackd Studios is a remote-first software-building ecosystem. We train builders, support the ones already building, rescue software that broke, build what does not exist yet, and give companies engineering capacity. We move fast, we care about craft, and we work on things that actually matter.
                 </p>
               </div>
               <div className="flex flex-col gap-5">

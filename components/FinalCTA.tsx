@@ -38,7 +38,7 @@ export default function FinalCTA() {
             <span className="text-[#FFD84D]">real, together.</span>
           </h2>
           <p className="text-white/60 text-xl mb-10 max-w-xl mx-auto">
-            Book a free 20-minute discovery call. No pitch, no pressure — just a conversation about what you&apos;re building.
+            Book a free 15-minute chat. No pitch, no pressure, just a conversation about what you&apos;re building.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">

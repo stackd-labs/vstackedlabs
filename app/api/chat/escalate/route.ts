@@ -32,37 +32,43 @@ export async function POST(request: Request) {
     return Response.json({ error: 'Please enter a message (max 4000 chars).' }, { status: 400 })
   }
 
+  // Try to persist the lead, but don't let a missing/misconfigured DB lose it —
+  // the email below is the real delivery guarantee. Apply docs/chat-supabase-schema.sql
+  // to enable persistence (the chat_leads table).
+  let savedToDb = false
   const supabase = createServerClient()
-  if (!supabase) {
-    return Response.json({ error: 'Server configuration error.' }, { status: 500 })
+  if (supabase) {
+    const { error: insertError } = await supabase.from('chat_leads').insert({
+      name,
+      email,
+      message,
+      page,
+      conversation,
+    })
+    if (insertError) {
+      console.error('[chat/escalate] insert error (will still try email)', insertError)
+    } else {
+      savedToDb = true
+    }
+  } else {
+    console.warn('[chat/escalate] supabase not configured — relying on email delivery')
   }
 
-  const { error: insertError } = await supabase.from('chat_leads').insert({
-    name,
-    email,
-    message,
-    page,
-    conversation,
-  })
+  let emailed = false
+  try {
+    await sendNewChatLeadEmail({ name, email, message, page, conversation })
+    emailed = true
+  } catch (e) {
+    console.error('[chat/escalate] email failed', e)
+  }
 
-  if (insertError) {
-    console.error('[chat/escalate] insert error', insertError)
+  // Only fail if the lead reached neither the database nor the inbox.
+  if (!savedToDb && !emailed) {
     return Response.json({ error: 'Could not save your message. Please try again.' }, { status: 500 })
   }
 
-  try {
-    await sendNewChatLeadEmail({ name, email, message, page, conversation })
-  } catch (e) {
-    console.error('[chat/escalate] email failed', e)
-    // Lead is saved — return success even if email failed.
-    return Response.json({
-      status: 'saved',
-      message: "Got it — we'll be in touch within 24 hours.",
-    })
-  }
-
   return Response.json({
-    status: 'sent',
+    status: savedToDb ? 'sent' : 'emailed',
     message: "Got it — we'll be in touch within 24 hours.",
   })
 }

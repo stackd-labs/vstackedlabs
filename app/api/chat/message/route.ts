@@ -49,21 +49,26 @@ export async function POST(request: Request) {
   const limit = await checkAndIncrementRateLimit(ip)
   if (!limit.ok) {
     if (limit.reason === 'config_error') {
+      // The rate-limit backend is unavailable (e.g. the chat_rate_limits table
+      // hasn't been created, or Supabase is misconfigured). Don't take the
+      // whole chatbot offline over it — fail OPEN and answer anyway. Per-call
+      // cost is bounded (Haiku, 800 max tokens). Apply docs/chat-supabase-schema.sql
+      // to restore real rate limiting.
+      console.warn(
+        '[chat/message] rate limiter unavailable (config_error) — proceeding without limit'
+      )
+    } else {
+      // ip_exceeded or global_exceeded → trigger escalation form on the client.
       return Response.json(
-        { error: 'Chat is temporarily unavailable. Please try again later.' },
-        { status: 503 }
+        {
+          message:
+            "We've reached our daily chat capacity. Drop your details below and we'll follow up directly.",
+          escalate: true,
+          reason: limit.reason,
+        },
+        { status: 200 }
       )
     }
-    // Both ip_exceeded and global_exceeded → trigger escalation form on the client.
-    return Response.json(
-      {
-        message:
-          "We've reached our daily chat capacity. Drop your details below and we'll follow up directly.",
-        escalate: true,
-        reason: limit.reason,
-      },
-      { status: 200 }
-    )
   }
 
   // Inject page context into the latest user message (NOT the system prompt

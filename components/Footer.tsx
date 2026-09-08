@@ -3,37 +3,38 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import FooterToolkitOptIn from './FooterToolkitOptIn'
+import { DIVISIONS } from '@/lib/divisions'
 
 const footerColumns = [
+  {
+    heading: 'Divisions',
+    links: [
+      ...DIVISIONS.map((d) => ({
+        label: d.eyebrow,
+        href: `/${d.slug}`,
+      })),
+      { label: 'The whole ecosystem', href: '/ecosystem' },
+    ],
+  },
   {
     heading: 'Studio',
     links: [
       { label: 'About', href: '/about' },
       { label: 'Pricing', href: '/pricing' },
+      { label: 'All services', href: '/services' },
+      { label: 'Industries', href: '/industries' },
       { label: 'Careers', href: '/careers' },
-      { label: 'Store', href: '/store' },
-      { label: 'Free AI Toolkit', href: '/ai-toolkit' },
       { label: 'Contact', href: '/contact' },
     ],
   },
   {
-    heading: 'Services',
+    heading: 'Products',
     links: [
-      { label: 'Systems Audit — $397', href: '/services#audit' },
-      { label: 'Build Sprint — $997', href: '/services#quick-setup' },
-      { label: 'Team Enablement — From $2,500', href: '/services#team-training' },
-      { label: 'Operating Partner — $1,500/mo', href: '/services#retainer' },
-      { label: 'Website Build — $1,800–$3,000', href: '/services#website-build' },
-    ],
-  },
-  {
-    heading: 'Build With Us',
-    links: [
-      { label: 'Stackd Interactive', href: '/interactive' },
       { label: 'Business Brain', href: '/business-brain' },
+      { label: 'Stackd Interactive', href: '/interactive' },
       { label: 'Demo Lab', href: '/lab' },
-      { label: 'Industries', href: '/industries' },
-      { label: 'Book a Call', href: '/contact' },
+      { label: 'Store', href: '/store' },
+      { label: 'Free AI Toolkit', href: '/ai-toolkit' },
     ],
   },
   {
@@ -69,7 +70,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-[#6B7280] text-sm leading-relaxed mb-3">
-              The system your business runs on.
+              Learn it. Build it. Fix it. Scale it.
             </p>
             <p className="text-[#4B4F55] text-xs">
               A Hicks Virtual Solutions company

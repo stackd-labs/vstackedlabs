@@ -1,17 +1,18 @@
 import type { Metadata } from 'next'
 import ServicesContent from './ServicesContent'
+import { DIVISIONS, allOffers } from '@/lib/divisions'
 
 export const metadata: Metadata = {
-  title: 'Services — Custom Systems & Automation | Stackd Studios',
+  title: 'Services — Every Stackd Offer in One Place',
   description:
-    'Four focused services for owner-run businesses and founders — from a Systems Audit to an ongoing Operating Partner. Custom software and automation, built to run themselves.',
+    'Every service across all six Stackd divisions: builder training, engineering support, software rescue, custom builds, fractional teams, and enterprise capacity. Prices and turnarounds for each.',
   alternates: {
     canonical: 'https://www.stackdstudiosai.com/services',
   },
   openGraph: {
-    title: 'Services — Custom Systems & Automation | Stackd Studios',
+    title: 'Services — Every Stackd Offer in One Place',
     description:
-      'Four focused services for owner-run businesses and founders — from a Systems Audit to an ongoing Operating Partner. Custom software and automation, built to run themselves.',
+      'Six divisions, every offer, with prices and turnarounds. Learn it. Build it. Fix it. Scale it.',
     url: 'https://www.stackdstudiosai.com/services',
   },
 }
@@ -20,48 +21,43 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'Services — Stackd Studios',
+  description:
+    'Every offer across the six Stackd divisions: Learn, Builders, Rescue, Build, Teams, and Enterprise.',
   url: 'https://www.stackdstudiosai.com/services',
+  itemListElement: allOffers().map((offer, i) => ({
+    '@type': 'Service',
+    position: i + 1,
+    name: offer.name,
+    description: offer.pitch,
+    category: offer.division.eyebrow,
+    url: `https://www.stackdstudiosai.com/${offer.division.slug}#${offer.slug}`,
+    audience: { '@type': 'Audience', audienceType: offer.division.customer },
+    provider: { '@type': 'Organization', name: 'Stackd Studios' },
+  })),
+}
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
   itemListElement: [
     {
-      '@type': 'Service',
+      '@type': 'ListItem',
       position: 1,
-      name: 'Systems Audit',
-      description:
-        'A 48-hour written roadmap of the systems to build or automate in your business, with a 30-minute walkthrough call.',
-      provider: { '@type': 'Organization', name: 'Stackd Studios' },
+      name: 'Home',
+      item: 'https://www.stackdstudiosai.com',
     },
     {
-      '@type': 'Service',
+      '@type': 'ListItem',
       position: 2,
-      name: 'Build Sprint',
-      description:
-        'One specific workflow built, tested, and handed off in 5 business days with a training call.',
-      provider: { '@type': 'Organization', name: 'Stackd Studios' },
+      name: 'Services',
+      item: 'https://www.stackdstudiosai.com/services',
     },
-    {
-      '@type': 'Service',
-      position: 3,
-      name: 'Team Enablement',
-      description:
-        'Live virtual training built around your team and workflows. Standard (from $2,500, teams up to 10) or Enterprise (from $5,000, teams of 10+ with role-specific template libraries and async coaching follow-up).',
-      provider: { '@type': 'Organization', name: 'Stackd Studios' },
-    },
-    {
-      '@type': 'Service',
-      position: 4,
-      name: 'Operating Partner',
-      description:
-        'Monthly build support: one new workflow, system tune-ups, a strategy call, and priority async support.',
-      provider: { '@type': 'Organization', name: 'Stackd Studios' },
-    },
-    {
-      '@type': 'Service',
-      position: 5,
-      name: 'Website Build',
-      description:
-        'Custom website builds from $1,800 to $3,000 — a high-converting landing page or a full site with a private admin portal (auth, database, bookings, payments).',
-      provider: { '@type': 'Organization', name: 'Stackd Studios' },
-    },
+    ...DIVISIONS.map((d, i) => ({
+      '@type': 'ListItem',
+      position: 3 + i,
+      name: d.eyebrow,
+      item: `https://www.stackdstudiosai.com/${d.slug}`,
+    })),
   ],
 }
 
@@ -71,6 +67,10 @@ export default function ServicesPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <ServicesContent />
     </>

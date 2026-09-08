@@ -2,16 +2,16 @@ import type { Metadata } from 'next'
 import ContactContent from './ContactContent'
 
 export const metadata: Metadata = {
-  title: 'Book a Free AI Strategy Call',
+  title: 'Book a Free 15-Minute Chat',
   description:
-    "Book a free 30-minute discovery call with Stackd Studios AI. We'll map out what AI can do for your business or product — no pitch, just strategy.",
+    "Book a free 15-minute chat with Stackd Studios AI. Tell us where you are and we'll name the division and the offer that fits, or tell you honestly that we are not the right team.",
   alternates: {
     canonical: 'https://www.stackdstudiosai.com/contact',
   },
   openGraph: {
-    title: 'Book a Free AI Strategy Call — Stackd Studios AI',
+    title: 'Book a Free 15-Minute Chat — Stackd Studios AI',
     description:
-      "Free 30-minute discovery call. We'll map out exactly what AI can do for your business or product right now.",
+      "Free 15-minute chat. We'll work out which of the six divisions you belong in, and what it costs.",
     url: 'https://www.stackdstudiosai.com/contact',
   },
 }

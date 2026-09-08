@@ -1,812 +1,404 @@
 'use client'
 
+import Icon from '@/components/Icon'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
+import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import Link from 'next/link'
+import HowItWorks from '@/components/HowItWorks'
+import TechStack from '@/components/TechStack'
+import FinalCTA from '@/components/FinalCTA'
+import Collapse from '@/components/ecosystem/Collapse'
+import DivisionCollapseHeader from '@/components/ecosystem/DivisionCollapseHeader'
+import { useHashOpen } from '@/components/ecosystem/useHashOpen'
+import OfferTable from '@/components/ecosystem/OfferTable'
+import PriceLadder from '@/components/ecosystem/PriceLadder'
+import Price from '@/components/ecosystem/Price'
+import { DIVISIONS, allOffers, type Division, type DivisionSlug } from '@/lib/divisions'
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
 
-interface PricingTier {
-  name: string
-  price: string
-  bestFor: string
-  bullets: string[]
-  cta: string
-  emphasized?: boolean
-  /** Badge label shown on the emphasized tier — defaults to "For larger teams". */
-  emphasisLabel?: string
+/**
+ * Anchors that were published before the reposition, mapped to the offer they
+ * became. Old links like /services#quick-setup still land on the right offer.
+ */
+const LEGACY_ANCHORS: Record<string, string> = {
+  'quick-setup': 'build-sprint',
+  'team-training': 'team-enablement',
+  retainer: 'operating-partner',
 }
 
-interface ServiceArticle {
-  slug: string
-  tierLabel: string
-  price: string
-  timing: string
-  name: string
-  outcomeHeadline: React.ReactNode
-  body: string[]
-  walkAway: string[]
-  bridge: string
-  cta: string
-  /** Optional CTA target — defaults to /contact. */
-  ctaHref?: string
-  theme: 'cream' | 'yellow' | 'white' | 'dark'
-  /** When set, renders a side-by-side pricing tier block inside the section. */
-  tiers?: PricingTier[]
-  /** Optional callout shown above the tier block — e.g. demand/supply framing. */
-  demandNote?: string
+type View = 'list' | 'table' | 'ladder'
+
+function views(offerCount: number): Array<{ id: View; label: string; hint: string }> {
+  return [
+    { id: 'list', label: 'By division', hint: 'Collapsed sections you open one at a time' },
+    { id: 'table', label: 'One table', hint: `All ${offerCount} offers as sortable, filterable rows` },
+    { id: 'ladder', label: 'Price ladder', hint: 'Every price plotted so you can see the gaps' },
+  ]
 }
 
-const services: ServiceArticle[] = [
-  {
-    slug: 'audit',
-    tierLabel: 'Start Here',
-    price: '$397',
-    timing: '48-hour turnaround',
-    name: 'Systems Audit',
-    outcomeHeadline: (
-      <>
-        Stop guessing where to start.
-        <br className="hidden sm:block" /> Get a 48-hour roadmap built around your business.
-      </>
-    ),
-    body: [
-      "Most owners we talk to know something could be running better. They just don't know where to start, what's worth their time, or what's hype. Three articles deep on Twitter and they're more confused than when they started.",
-      "The Systems Audit fixes that in two days. You fill out a structured intake about your operations — how leads come in, where the bottlenecks are, what your team spends too much time on. We come back with 3–5 specific systems to build or automate, each tagged to a real tool, a real workflow, and an honest read on how much it would actually move the needle. Then we walk you through it on a 30-minute call.",
-      "When you're done, you have a written roadmap and a clear answer to 'what should we build first?' No 80-page deck. No upsell pressure. Just clarity.",
-    ],
-    walkAway: [
-      'Async business operations intake form',
-      '3–5 prioritized systems to build, each tagged to a tool + workflow',
-      'Written roadmap delivered within 48 hours',
-      '30-minute walkthrough call',
-    ],
-    bridge:
-      "If you decide a Build Sprint makes sense, your $397 audit fee gets credited toward that build.",
-    cta: 'Book the Audit',
-    theme: 'cream',
-  },
-  {
-    slug: 'quick-setup',
-    tierLabel: 'Most Popular',
-    price: '$997',
-    timing: '5 business days',
-    name: 'Build Sprint',
-    outcomeHeadline: (
-      <>
-        Pick one workflow. We build it.
-        <br className="hidden sm:block" /> You&apos;re using it Monday.
-      </>
-    ),
-    body: [
-      "You don't need a grand strategy. You need one specific thing that's eating your week to stop eating your week. Email triage. CRM follow-up. New-client onboarding. Repurposing one Loom into a month of content. Whatever the thing is — we build it, test it, and hand it off.",
-      "A Build Sprint is one workflow, scoped tight, shipped in five business days. We custom-build the logic (10–15 moving parts), wire up the automations, and walk you through it on a one-hour orientation call. You'll have it working before the next time the bottleneck would have hit.",
-      "Most clients land here right after their Audit, with the workflow already named. Some come in cold with a clear ask. Either works.",
-    ],
-    walkAway: [
-      'One complete workflow build (your pick — email triage, CRM follow-up, onboarding, repurposing, or similar)',
-      'Custom prompt + automation logic (10–15 building blocks)',
-      '1-hour orientation and training call',
-      '7 days of post-delivery email support',
-    ],
-    bridge:
-      "Most Build Sprint clients either book another for a second workflow, or roll into the Operating Partner plan to keep the system expanding.",
-    cta: 'Get Started',
-    theme: 'yellow',
-  },
-  {
-    slug: 'team-training',
-    tierLabel: 'For Teams',
-    price: 'From $2,500',
-    timing: 'Scheduled within 2 weeks',
-    name: 'Team Enablement',
-    outcomeHeadline: (
-      <>
-        Your team. Trained.
-        <br className="hidden sm:block" /> Actually running the system by Friday.
-      </>
-    ),
-    body: [
-      "Most teams have someone who's tried the tools. Maybe they're even good at it. But the rest of the team is still copy-pasting between tabs, missing what the system could do for their specific role, or quietly afraid to try.",
-      "Team Enablement fixes that in one half-day. We run a pre-session intake to learn your team, your tools, and your real workflows — then we run a live session built around them. Not generic training. Your CRM, your tone, your content, your problems. Everyone leaves with custom templates they'll use the same week.",
-      "This is the offer most companies need most and book the latest. Demand is far ahead of supply right now — most providers charge $10K–$40K for the same scope, which is why we cap the number of sessions per quarter and offer two formats: Standard (from $2,500) for teams up to 10, and Enterprise (from $5,000) for larger teams or full-day deep-dives. Full breakdown lives on the pricing page.",
-    ],
-    walkAway: [
-      'Pre-session intake to customize for your team and workflows',
-      'Live virtual training session — 3 hours (Standard) or half-day (Enterprise)',
-      'Custom workflow templates and prompt library',
-      'Full session recording + resource folder delivered after',
-    ],
-    bridge:
-      "Enablement clients get first access to the Operating Partner plan — which keeps the systems and workflows expanding every month.",
-    cta: 'See pricing options',
-    ctaHref: '/pricing#team-training',
-    theme: 'white',
-  },
-  {
-    slug: 'retainer',
-    tierLabel: 'Ongoing',
-    price: '$1,500/mo',
-    timing: 'Monthly',
-    name: 'Operating Partner',
-    outcomeHeadline: (
-      <>
-        Keep building.
-        <br className="hidden sm:block" /> We don&apos;t let it go stale.
-      </>
-    ),
-    body: [
-      "Tools move fast. The workflow that worked in February is mid by July. The tool you wired in is now a feature inside something newer. Your team learns one system and is hungry for the next.",
-      "The Operating Partner plan is the answer to 'what now?' Every month: one new workflow or tool build, a round of tune-ups, a strategy call to figure out what's next, and priority access for anything urgent. It's how the system stays sharp instead of becoming a museum exhibit.",
-      "We give Build Sprint and Team Enablement clients first access. If you're already in the flow, this keeps it moving.",
-    ],
-    walkAway: [
-      '1 new workflow or tool build per month',
-      'System tune-ups (5–10 improvements)',
-      'Monthly strategy call',
-      'Priority async support',
-      'First access for Build Sprint and Enablement clients',
-    ],
-    bridge:
-      "Operating Partner clients are the ones we go deepest with. Most stay 6+ months.",
-    cta: 'Apply for Operating Partner',
-    theme: 'dark',
-  },
-  {
-    slug: 'website-build',
-    tierLabel: 'Websites',
-    price: '$1,800–$3,000',
-    timing: '1–3 weeks',
-    name: 'Website Build',
-    outcomeHeadline: (
-      <>
-        From a landing page
-        <br className="hidden sm:block" /> to a full admin portal.
-      </>
-    ),
-    body: [
-      "Your website is usually the first thing a customer judges you on — and for most businesses, it's either outdated, generic, or doing nothing to bring in work. We build sites that look like you, load fast, and are actually wired to convert.",
-      "We build two kinds of sites. A Landing Page is a focused, high-converting marketing site — one to a handful of pages built to capture leads, sell an offer, or launch something. A Full Admin Portal is a complete site with a private dashboard behind a secure login, where you (or your clients) manage content, users, bookings, or orders — a real piece of software, not just a brochure.",
-      "Everything is built on the same modern, fast stack we use across every Stackd build, so it's quick to ship, easy to extend, and fully yours at handoff. Most projects land between $1,800 and $3,000 depending on whether you need a marketing site or a portal — and we confirm exact scope and price before any work begins.",
-    ],
-    walkAway: [
-      'Custom design in your brand — mobile-first and fast',
-      'Conversion-focused copy and layout, not just decoration',
-      'Lead capture, analytics, and SEO basics wired in',
-      'Launched on your domain, with full handoff and ownership',
-    ],
-    bridge:
-      "Need the site to actually run part of your business — bookings, payments, a client login? That's the Full Admin Portal, and it plugs straight into the workflows and automations we build.",
-    cta: 'Start your website',
-    theme: 'cream',
-    demandNote:
-      "Most sites land between these two. We'll confirm exact scope and price before any work begins.",
-    tiers: [
-      {
-        name: 'Landing Page',
-        price: 'From $1,800',
-        bestFor:
-          'A focused, high-converting marketing site or single landing page — ideal for launches, offers, and lead capture.',
-        bullets: [
-          '1–5 page marketing site (or one long landing page)',
-          'Custom design + conversion-focused copy',
-          'Lead capture / contact form with email notifications',
-          'SEO basics, analytics, mobile-first, fast',
-        ],
-        cta: 'Start a Landing Page',
-      },
-      {
-        name: 'Full Site + Admin Portal',
-        price: 'Up to $3,000',
-        bestFor:
-          'A complete website with a private admin portal — manage content, users, bookings, or orders behind a secure login.',
-        bullets: [
-          'Everything in Landing Page, expanded',
-          'Private admin portal / dashboard behind secure login',
-          'Database + auth to manage content, users, or bookings',
-          'Integrations: payments, email, and scheduling as needed',
-        ],
-        cta: 'Build the Full Portal',
-        emphasized: true,
-        emphasisLabel: 'Most Complete',
-      },
-    ],
-  },
-]
-
-// ─── Theme tokens per article ────────────────────────────────────────────────
-
-interface ThemeTokens {
-  bg: string
-  textPrimary: string
-  textSecondary: string
-  textMuted: string
-  eyebrow: string
-  rule: string
-  asideBg: string
-  asideBorder: string
-  bridgeBorder: string
-  ctaPrimary: string
-  ctaPrimaryHover: string
-  badge: string
-  badgeText: string
-  badgeShown: boolean
-}
-
-function getTheme(theme: ServiceArticle['theme']): ThemeTokens {
-  switch (theme) {
-    case 'cream':
-      return {
-        bg: 'bg-[#F6F4EF]',
-        textPrimary: 'text-[#0C0C0C]',
-        textSecondary: 'text-[#3F3F3F]',
-        textMuted: 'text-[#888580]',
-        eyebrow: 'text-[#888580]',
-        rule: 'bg-[#0C0C0C]',
-        asideBg: 'bg-white',
-        asideBorder: 'border-[#E2DED8]',
-        bridgeBorder: 'border-[#FFD84D]',
-        ctaPrimary: 'bg-[#0C0C0C] text-white hover:bg-[#FFD84D] hover:text-[#0C0C0C]',
-        ctaPrimaryHover: '',
-        badge: 'bg-[#0C0C0C]',
-        badgeText: 'text-[#FFD84D]',
-        badgeShown: false,
-      }
-    case 'yellow':
-      return {
-        bg: 'bg-[#FFD84D]',
-        textPrimary: 'text-[#0C0C0C]',
-        textSecondary: 'text-[#0C0C0C]/85',
-        textMuted: 'text-[#0C0C0C]/55',
-        eyebrow: 'text-[#0C0C0C]/65',
-        rule: 'bg-[#0C0C0C]',
-        asideBg: 'bg-[#0C0C0C]',
-        asideBorder: 'border-[#0C0C0C]',
-        bridgeBorder: 'border-[#0C0C0C]',
-        ctaPrimary: 'bg-[#0C0C0C] text-[#FFD84D] hover:bg-white hover:text-[#0C0C0C]',
-        ctaPrimaryHover: '',
-        badge: 'bg-[#0C0C0C]',
-        badgeText: 'text-[#FFD84D]',
-        badgeShown: true,
-      }
-    case 'white':
-      return {
-        bg: 'bg-white',
-        textPrimary: 'text-[#0C0C0C]',
-        textSecondary: 'text-[#3F3F3F]',
-        textMuted: 'text-[#888580]',
-        eyebrow: 'text-[#888580]',
-        rule: 'bg-[#0C0C0C]',
-        asideBg: 'bg-[#F6F4EF]',
-        asideBorder: 'border-[#E2DED8]',
-        bridgeBorder: 'border-[#0C0C0C]',
-        ctaPrimary: 'bg-[#0C0C0C] text-white hover:bg-[#FFD84D] hover:text-[#0C0C0C]',
-        ctaPrimaryHover: '',
-        badge: 'bg-[#0C0C0C]',
-        badgeText: 'text-[#FFD84D]',
-        badgeShown: false,
-      }
-    case 'dark':
-      return {
-        bg: 'bg-[#0C0C0C]',
-        textPrimary: 'text-white',
-        textSecondary: 'text-white/80',
-        textMuted: 'text-white/55',
-        eyebrow: 'text-[#FFD84D]',
-        rule: 'bg-[#FFD84D]',
-        asideBg: 'bg-white/[0.04]',
-        asideBorder: 'border-white/10',
-        bridgeBorder: 'border-[#FFD84D]',
-        ctaPrimary: 'bg-[#FFD84D] text-[#0C0C0C] hover:bg-white hover:text-[#0C0C0C]',
-        ctaPrimaryHover: '',
-        badge: 'bg-[#FFD84D]',
-        badgeText: 'text-[#0C0C0C]',
-        badgeShown: false,
-      }
-  }
-}
-
-// ─── Article Section ─────────────────────────────────────────────────────────
-
-function ArticleSection({ svc, index }: { svc: ServiceArticle; index: number }) {
-  const t = getTheme(svc.theme)
-  const isLast = index === services.length - 1
-
+function DivisionOffers({ division }: { division: Division }) {
   return (
-    <section
-      id={svc.slug}
-      className={`${t.bg} ${t.textPrimary} relative scroll-mt-24`}
-      aria-labelledby={`${svc.slug}-heading`}
-    >
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
-        >
-          {/* Article number + eyebrow */}
-          <div className="flex items-center gap-4 mb-8">
-            <span className={`text-[clamp(36px,5vw,56px)] font-[family-name:var(--font-anton)] leading-none ${t.textPrimary} opacity-25`}>
-              0{index + 1}
-            </span>
-            <div className={`flex-1 h-px ${t.rule} opacity-30`} aria-hidden="true" />
-            {t.badgeShown && (
-              <span className={`${t.badge} ${t.badgeText} text-[10px] font-bold uppercase tracking-[0.12em] px-3 py-1.5 rounded-full whitespace-nowrap`}>
-                Most Popular
-              </span>
-            )}
-          </div>
+    <>
+      <p className="text-[#3F3F3F] text-sm leading-relaxed mb-5 max-w-2xl">
+        {division.oneLiner} {division.entryLine}
+      </p>
 
-          <p className={`${t.eyebrow} text-xs font-bold uppercase tracking-[0.16em] mb-5`}>
-            {svc.tierLabel} <span className="opacity-50 mx-1">·</span> {svc.price}{' '}
-            <span className="opacity-50 mx-1">·</span> {svc.timing}
-          </p>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {division.offers.map((offer) => {
+          const legacyIds = Object.entries(LEGACY_ANCHORS)
+            .filter(([, target]) => target === offer.slug)
+            .map(([legacy]) => legacy)
 
-          <h2
-            id={`${svc.slug}-heading`}
-            className={`text-[clamp(34px,5.5vw,68px)] uppercase font-[family-name:var(--font-anton)] leading-[0.96] tracking-[0.005em] mb-3 ${t.textPrimary}`}
-          >
-            {svc.outcomeHeadline}
-          </h2>
-          <p className={`${t.textMuted} text-base md:text-lg`}>{svc.name}</p>
-
-          <div className={`h-[3px] w-16 ${t.rule} my-10`} aria-hidden="true" />
-
-          {/* Body + Aside */}
-          <div className="grid lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] gap-10 lg:gap-14">
-            {/* Article body */}
-            <div className="flex flex-col gap-5">
-              {svc.body.map((para, i) => (
-                <p
-                  key={i}
-                  className={`${t.textSecondary} text-[17px] md:text-[18px] leading-[1.65]`}
-                >
-                  {para}
-                </p>
-              ))}
-            </div>
-
-            {/* Aside — what you walk away with */}
-            <aside
-              className={`${t.asideBg} ${t.asideBorder} border rounded-2xl p-6 md:p-7 self-start`}
+          return (
+            <article
+              key={offer.slug}
+              id={offer.slug}
+              className={`relative bg-white rounded-xl border p-4 flex flex-col gap-2.5 scroll-mt-36 ${
+                offer.popular
+                  ? 'border-[#FFD84D] shadow-[0_0_0_2px_#FFD84D33]'
+                  : 'border-[#E2DED8]'
+              }`}
             >
-              <p
-                className={`${
-                  svc.theme === 'yellow' ? 'text-[#FFD84D]' : svc.theme === 'dark' ? 'text-[#FFD84D]' : 'text-[#888580]'
-                } text-[10px] font-bold uppercase tracking-[0.16em] mb-4`}
-              >
-                Walk away with
-              </p>
-              <ul
-                className={`flex flex-col gap-3 ${
-                  svc.theme === 'yellow' || svc.theme === 'dark' ? 'text-white/90' : 'text-[#0C0C0C]'
-                }`}
-                role="list"
-              >
-                {svc.walkAway.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm leading-relaxed">
-                    <span
-                      className={`w-4 h-px shrink-0 mt-[10px] ${
-                        svc.theme === 'yellow' ? 'bg-[#FFD84D]' : svc.theme === 'dark' ? 'bg-[#FFD84D]' : 'bg-[#0C0C0C]'
-                      }`}
-                      aria-hidden="true"
-                    />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </aside>
-          </div>
+              {/* Anchors published before the reposition */}
+              {legacyIds.map((legacy) => (
+                <span
+                  key={legacy}
+                  id={legacy}
+                  className="absolute -top-24"
+                  aria-hidden="true"
+                />
+              ))}
 
-          {/* Pricing tiers (when present) */}
-          {svc.tiers && svc.tiers.length > 0 && (
-            <div className="mt-14">
-              <div className="flex items-baseline justify-between mb-5 flex-wrap gap-3">
-                <p className={`${t.eyebrow} text-[10px] font-bold uppercase tracking-[0.16em]`}>
-                  Pricing options
-                </p>
-                {svc.demandNote && (
-                  <p className={`${t.textMuted} text-sm italic max-w-md`}>
-                    {svc.demandNote}
-                  </p>
+              <div className="flex items-start justify-between gap-2">
+                <h4 className="text-base text-[#0C0C0C] leading-tight">
+                  {offer.name}
+                </h4>
+                {offer.popular && (
+                  <span className="bg-[#FFD84D] text-[#0C0C0C] text-[9px] font-bold uppercase tracking-[0.1em] px-1.5 py-0.5 rounded-full whitespace-nowrap shrink-0">
+                    Popular
+                  </span>
                 )}
               </div>
 
-              <div className="grid md:grid-cols-2 gap-5">
-                {svc.tiers.map((tier) => {
-                  const isEmphasized = tier.emphasized === true
-                  return (
-                    <div
-                      key={tier.name}
-                      className={`relative rounded-2xl p-6 md:p-7 flex flex-col gap-4 border ${
-                        isEmphasized
-                          ? svc.theme === 'dark'
-                            ? 'bg-[#FFD84D] border-[#FFD84D]'
-                            : 'bg-[#0C0C0C] border-[#0C0C0C]'
-                          : `${t.asideBg} ${t.asideBorder}`
-                      }`}
-                    >
-                      {isEmphasized && (
-                        <div className="absolute -top-3 left-6">
-                          <span
-                            className={`text-[10px] font-bold uppercase tracking-[0.12em] px-3 py-1 rounded-full whitespace-nowrap ${
-                              svc.theme === 'dark'
-                                ? 'bg-[#0C0C0C] text-[#FFD84D]'
-                                : 'bg-[#FFD84D] text-[#0C0C0C]'
-                            }`}
-                          >
-                            {tier.emphasisLabel ?? 'For larger teams'}
-                          </span>
-                        </div>
-                      )}
-
-                      <div className="flex items-baseline justify-between gap-3 flex-wrap">
-                        <h3
-                          className={`text-xl font-semibold ${
-                            isEmphasized
-                              ? svc.theme === 'dark'
-                                ? 'text-[#0C0C0C]'
-                                : 'text-white'
-                              : 'text-[#0C0C0C]'
-                          }`}
-                        >
-                          {tier.name}
-                        </h3>
-                        <span
-                          className={`text-2xl font-bold font-[family-name:var(--font-instrument-sans)] ${
-                            isEmphasized
-                              ? svc.theme === 'dark'
-                                ? 'text-[#0C0C0C]'
-                                : 'text-[#FFD84D]'
-                              : 'text-[#0C0C0C]'
-                          }`}
-                        >
-                          {tier.price}
-                        </span>
-                      </div>
-
-                      <p
-                        className={`text-sm leading-relaxed ${
-                          isEmphasized
-                            ? svc.theme === 'dark'
-                              ? 'text-[#0C0C0C]/75'
-                              : 'text-white/75'
-                            : 'text-[#888580]'
-                        }`}
-                      >
-                        {tier.bestFor}
-                      </p>
-
-                      <ul className="flex flex-col gap-2 flex-1" role="list">
-                        {tier.bullets.map((b) => (
-                          <li
-                            key={b}
-                            className={`flex items-start gap-2.5 text-sm leading-relaxed ${
-                              isEmphasized
-                                ? svc.theme === 'dark'
-                                  ? 'text-[#0C0C0C]'
-                                  : 'text-white/90'
-                                : 'text-[#0C0C0C]'
-                            }`}
-                          >
-                            <span
-                              className={`w-3.5 h-px shrink-0 mt-[10px] ${
-                                isEmphasized
-                                  ? svc.theme === 'dark'
-                                    ? 'bg-[#0C0C0C]'
-                                    : 'bg-[#FFD84D]'
-                                  : 'bg-[#0C0C0C]'
-                              }`}
-                              aria-hidden="true"
-                            />
-                            <span>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-
-                      <Link
-                        href="/contact"
-                        className={`inline-flex items-center justify-center font-bold px-5 py-3 rounded-xl text-sm transition-all duration-200 hover:scale-[1.02] min-h-[44px] mt-2 ${
-                          isEmphasized
-                            ? svc.theme === 'dark'
-                              ? 'bg-[#0C0C0C] text-[#FFD84D] hover:bg-white hover:text-[#0C0C0C]'
-                              : 'bg-[#FFD84D] text-[#0C0C0C] hover:bg-white hover:text-[#0C0C0C]'
-                            : 'bg-[#0C0C0C] text-white hover:bg-[#FFD84D] hover:text-[#0C0C0C]'
-                        }`}
-                      >
-                        {tier.cta} →
-                      </Link>
-                    </div>
-                  )
-                })}
+              <div className="flex items-baseline gap-2 flex-wrap">
+                <Price
+                  value={offer.price}
+                  proposed={offer.proposed}
+                  className="text-lg font-bold text-[#0C0C0C] tabular-nums font-[family-name:var(--font-instrument-sans)]"
+                />
+                <span className="text-[#888580] text-[11px]">
+                  {offer.timing}
+                </span>
               </div>
-            </div>
-          )}
 
-          {/* Bridge */}
-          <p
-            className={`mt-12 pl-5 border-l-[3px] ${t.bridgeBorder} ${t.textSecondary} text-[15px] md:text-base italic leading-relaxed max-w-3xl`}
-          >
-            {svc.bridge}
-          </p>
+              <p className="text-[#3F3F3F] text-xs leading-relaxed flex-1">
+                {offer.pitch}
+              </p>
 
-          {/* CTA */}
-          <div className="mt-10 flex flex-wrap items-center gap-5">
-            <Link
-              href={svc.ctaHref ?? '/contact'}
-              className={`inline-flex items-center justify-center font-bold px-8 py-4 rounded-xl text-base transition-all duration-200 hover:scale-[1.02] min-h-[48px] ${t.ctaPrimary}`}
-            >
-              {svc.cta} →
-            </Link>
-            {!isLast && (
-              <a
-                href={`#${services[index + 1].slug}`}
-                className={`${t.textMuted} text-sm font-medium hover:${t.textPrimary} inline-flex items-center gap-2 transition-colors`}
-                aria-label={`Continue to ${services[index + 1].name}`}
+              <Link
+                href={offer.ctaHref ?? '/contact'}
+                className="inline-flex items-center gap-1.5 text-[#0C0C0C] font-semibold text-xs hover:gap-2.5 transition-all duration-200"
               >
-                Next: {services[index + 1].name}
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                {offer.cta}
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path
+                    d="M2 7h10M7 2l5 5-5 5"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
-              </a>
-            )}
-          </div>
-        </motion.div>
+              </Link>
+            </article>
+          )
+        })}
       </div>
-    </section>
+
+      <Link
+        href={`/${division.slug}`}
+        className="mt-5 inline-flex items-center gap-2 text-[#0C0C0C] font-semibold text-sm hover:gap-3 transition-all duration-200"
+      >
+        Full {division.shortName} page
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path
+            d="M2 7h10M7 2l5 5-5 5"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </Link>
+    </>
   )
 }
 
-// ─── Add-Ons ─────────────────────────────────────────────────────────────────
-
-const addOns = [
-  {
-    name: 'Rush Delivery',
-    description: 'Priority build, delivered in 3 business days.',
-  },
-  {
-    name: 'Extra Workflow',
-    description: 'Add a second workflow to any Build Sprint.',
-  },
-  {
-    name: 'Brand Identity Add-On',
-    description: 'Logo, color palette, and typography system.',
-  },
-]
-
-// ─── Component ────────────────────────────────────────────────────────────────
-
 export default function ServicesContent() {
+  const [view, setView] = useState<View>('list')
+  const [openSlugs, setOpenSlugs] = useState<DivisionSlug[]>([])
+
+  const allOpen = openSlugs.length === DIVISIONS.length
+  const toggleAll = () =>
+    setOpenSlugs(allOpen ? [] : DIVISIONS.map((d) => d.slug))
+  const setOpen = (slug: DivisionSlug, next: boolean) =>
+    setOpenSlugs((prev) =>
+      next
+        ? prev.includes(slug)
+          ? prev
+          : [...prev, slug]
+        : prev.filter((s) => s !== slug),
+    )
+
+  // A deep link like /services#build-sprint has to force the division view
+  // before opening the section, or the target is not on the page at all.
+  useHashOpen((slug) => {
+    setView('list')
+    setOpen(slug, true)
+  }, LEGACY_ANCHORS)
+
+  const offerCount = allOffers().length
+  const VIEWS = views(offerCount)
+
   return (
     <>
-      <Navbar yellowHero />
+      <Navbar />
+
       <main>
-        {/* Hero */}
-        <section className="bg-[#FFD84D] pt-32 pb-20 md:pb-24">
+        {/* ─── Hero ─────────────────────────────────────────────────────── */}
+        <section
+          className="relative bg-[#F6F4EF] pt-32 pb-14 md:pt-40 md:pb-16 overflow-hidden"
+          aria-labelledby="services-heading"
+        >
+          <div className="dot-grid absolute inset-0 opacity-[0.05] pointer-events-none" aria-hidden="true" />
+          <div
+            className="orb-2 absolute bottom-[-40%] left-[-10%] w-[520px] h-[520px] rounded-full pointer-events-none"
+            style={{
+              background: 'radial-gradient(circle, #FFD84D 0%, transparent 70%)',
+              opacity: 0.2,
+              filter: 'blur(80px)',
+            }}
+            aria-hidden="true"
+          />
+
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-[#888580] text-xs font-bold uppercase tracking-[0.14em] mb-5"
+            >
+              Everything We Offer
+            </motion.p>
+
+            <motion.h1
+              id="services-heading"
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.08 }}
+              className="text-[clamp(34px,6vw,68px)] leading-[1.03] text-[#0C0C0C] max-w-3xl mb-5"
+            >
+              {offerCount} offers. Six divisions. Your pick of view.
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.16 }}
+              className="text-[#888580] text-lg leading-relaxed max-w-2xl"
+            >
+              That is a lot to read as a wall of cards, so it is not one. Open
+              only the division you care about, flatten everything into one
+              sortable table, or look at the price ladder.
+            </motion.p>
+          </div>
+        </section>
+
+        {/* ─── View switcher ────────────────────────────────────────────── */}
+        <section className="bg-white border-y border-[#E2DED8] sticky top-16 z-30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end">
-              <div className="max-w-3xl">
-                <p className="text-[#0C0C0C]/55 text-xs font-semibold uppercase tracking-[0.14em] mb-5">
-                  Services · Systems, websites, one path
-                </p>
-                <h1 className="text-[clamp(40px,6vw,76px)] text-[#0C0C0C] leading-[0.98] mb-6 uppercase font-[family-name:var(--font-anton)]">
-                  We build the systems
-                  <br className="hidden sm:block" /> your business runs on.
-                </h1>
-                <p className="text-[#0C0C0C]/75 text-base sm:text-xl leading-relaxed max-w-2xl mb-6">
-                  Custom systems, automations, and websites. One clear path, no
-                  tech overwhelm. Most clients start with the Audit, ship the first
-                  workflow, train the team, and stay on retainer — and we build the
-                  website it all runs on.
-                </p>
-                {/* Inline service jump links */}
-                <div className="flex flex-wrap gap-x-5 gap-y-3 mt-2 pt-6 border-t border-[#0C0C0C]/15">
-                  {services.map((s, i) => (
-                    <a
-                      key={s.slug}
-                      href={`#${s.slug}`}
-                      className="group inline-flex items-baseline gap-2 text-[#0C0C0C] text-sm font-semibold hover:underline underline-offset-4"
-                    >
-                      <span className="text-[#0C0C0C]/40 font-mono text-xs">0{i + 1}</span>
-                      <span>{s.name}</span>
-                      <span className="text-[#0C0C0C]/40 text-xs font-normal">— {s.price}</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              <div
-                className="relative w-[220px] h-[328px] lg:w-[280px] lg:h-[418px] mx-auto lg:mx-0 shrink-0 rounded-3xl overflow-hidden border-2 border-[#0C0C0C]/10 shadow-[0_20px_50px_rgba(12,12,12,0.18)]"
-                aria-hidden="true"
-              >
-                <Image
-                  src="/stacka-laptop.png"
-                  alt=""
-                  fill
-                  sizes="(min-width: 1024px) 280px, 220px"
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Article sections */}
-        {services.map((svc, i) => (
-          <ArticleSection key={svc.slug} svc={svc} index={i} />
-        ))}
-
-        {/* Add-Ons */}
-        <section className="bg-[#F6F4EF] py-20 border-t border-[#E2DED8]">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="mb-4"
+            <div
+              className="flex flex-wrap items-center gap-2 py-3"
+              role="tablist"
+              aria-label="Choose how to browse the offers"
             >
-              <p className="text-[#888580] text-xs font-semibold uppercase tracking-[0.12em] mb-3">
-                Add-Ons
-              </p>
-              <h2 className="text-[clamp(24px,3.5vw,42px)] text-[#0C0C0C] leading-tight mb-2 uppercase font-[family-name:var(--font-anton)]">
-                Extend any service
-              </h2>
-              <p className="text-[#888580] text-base">
-                Available with any of the four services above.
-              </p>
-            </motion.div>
+              {VIEWS.map((v) => {
+                const active = view === v.id
+                return (
+                  <button
+                    key={v.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={active}
+                    title={v.hint}
+                    onClick={() => setView(v.id)}
+                    className={`text-xs font-bold uppercase tracking-[0.1em] px-4 py-2.5 rounded-full border transition-colors min-h-[40px] ${
+                      active
+                        ? 'bg-[#0C0C0C] text-white border-[#0C0C0C]'
+                        : 'bg-white text-[#888580] border-[#E2DED8] hover:text-[#0C0C0C]'
+                    }`}
+                  >
+                    {v.label}
+                  </button>
+                )
+              })}
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-0 mt-8">
-              {addOns.map((addon, i) => (
-                <motion.div
-                  key={addon.name}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: (i % 3) * 0.06 }}
-                  className="flex gap-5 py-7 border-t border-[#0C0C0C]/15 sm:pr-6"
+              {view === 'list' && (
+                <button
+                  type="button"
+                  onClick={toggleAll}
+                  className="ml-auto text-xs font-semibold text-[#0C0C0C] underline decoration-[#FFD84D] decoration-2 underline-offset-4 hover:decoration-[#0C0C0C] transition-colors min-h-[40px] px-1"
                 >
-                  <span
-                    className="w-4 h-px mt-[11px] shrink-0 bg-[#0C0C0C]/40"
-                    aria-hidden="true"
-                  />
-                  <div>
-                    <h3 className="text-[#0C0C0C] font-normal text-base mb-1">
-                      {addon.name}
-                    </h3>
-                    <p className="text-[#888580] text-sm leading-relaxed">
-                      {addon.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
+                  {allOpen ? 'Collapse all' : 'Expand all'}
+                </button>
+              )}
             </div>
           </div>
         </section>
 
-        {/* Other ways to start (Self-Serve + Free Resource) */}
-        <section className="bg-[#F6F4EF] py-20 md:py-24 border-t border-[#E2DED8]">
+        {/* ─── The chosen view ──────────────────────────────────────────── */}
+        <section className="py-12 md:py-16 bg-[#F6F4EF]" aria-live="polite">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="mb-10 max-w-2xl"
-            >
-              <p className="text-[#0C0C0C]/60 text-[10px] font-bold uppercase tracking-[0.15em] mb-3">
-                // Other ways to start
-              </p>
-              <h2 className="text-[clamp(24px,3.5vw,42px)] text-[#0C0C0C] leading-tight uppercase font-[family-name:var(--font-anton)]">
-                Not ready for a custom build?
-              </h2>
-            </motion.div>
+            <p className="text-[#888580] text-sm mb-8 max-w-2xl">
+              {VIEWS.find((v) => v.id === view)?.hint}.
+            </p>
 
-            <div className="grid md:grid-cols-2 gap-5">
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.5 }}
-                className="bg-[#0C0C0C] rounded-2xl p-8 md:p-10 flex flex-col text-white"
-              >
-                <p className="text-[#FFD84D] text-xs font-semibold uppercase tracking-[0.16em] mb-3">
-                  // Self-Serve
-                </p>
-                <h3 className="text-[clamp(26px,3.6vw,40px)] uppercase leading-[1.0] mb-3">
-                  Skip the call. Grab a <span className="text-[#FFD84D]">starter pack.</span>
-                </h3>
-                <p className="text-white/75 text-base md:text-lg leading-relaxed mb-5 flex-grow">
-                  Instant-download digital products built by Stackd Studios — starter
-                  packs, templates, courses, and automation kits. Self-serve, no scoping
-                  required.
-                </p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {['Starter Packs', 'Templates', 'Courses', 'Automation Kits'].map((tag) => (
-                    <span
-                      key={tag}
-                      className="bg-white/10 border border-white/15 text-white text-xs px-3 py-1 rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <Link
-                  href="/store"
-                  className="inline-flex items-center justify-center bg-[#FFD84D] hover:bg-white text-[#0C0C0C] font-bold px-7 py-4 rounded-xl text-base transition-all duration-200 hover:scale-[1.02] min-h-[48px] self-start"
-                >
-                  Browse the Store →
-                </Link>
-              </motion.div>
+            {view === 'list' && (
+              <div className="flex flex-col gap-3">
+                {DIVISIONS.map((division) => (
+                  <Collapse
+                    key={division.slug}
+                    tone="white"
+                    open={openSlugs.includes(division.slug)}
+                    onToggle={(next) => setOpen(division.slug, next)}
+                    header={<DivisionCollapseHeader division={division} />}
+                  >
+                    <DivisionOffers division={division} />
+                  </Collapse>
+                ))}
+              </div>
+            )}
 
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.5, delay: 0.08 }}
-                className="bg-[#0C0C0C] rounded-2xl p-8 md:p-10 flex flex-col text-white"
-              >
-                <p className="text-[#FFD84D] text-xs font-semibold uppercase tracking-[0.16em] mb-3">
-                  // Free Resource
-                </p>
-                <h3 className="text-[clamp(26px,3.6vw,40px)] uppercase leading-[1.0] mb-3">
-                  The AI toolkit for <span className="text-[#FFD84D]">small business.</span>
-                </h3>
-                <p className="text-white/75 text-base md:text-lg leading-relaxed mb-5 flex-grow">
-                  30+ tools curated, ranked, and updated quarterly. Yours free —
-                  permanent access link, no credit card.
-                </p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {['30+ tools', '6 categories', 'Updated quarterly', 'Free'].map((tag) => (
-                    <span
-                      key={tag}
-                      className="bg-white/10 border border-white/15 text-white text-xs px-3 py-1 rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <Link
-                  href="/ai-toolkit"
-                  className="inline-flex items-center justify-center bg-[#FFD84D] hover:bg-white text-[#0C0C0C] font-bold px-7 py-4 rounded-xl text-base transition-all duration-200 hover:scale-[1.02] min-h-[48px] self-start"
-                >
-                  Get the toolkit →
-                </Link>
-              </motion.div>
-            </div>
+            {view === 'table' && <OfferTable />}
+
+            {view === 'ladder' && <PriceLadder />}
           </div>
         </section>
 
-        {/* Bottom CTA */}
-        <section className="py-20 bg-[#0C0C0C]">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+        {/* ─── Secondary sections, collapsed ────────────────────────────── */}
+        <section className="py-12 md:py-16 bg-white border-t border-[#E2DED8]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-3">
+            <Collapse
+              tone="cream"
+              header={
+                <span className="flex flex-col">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#888580]">
+                    The Process
+                  </span>
+                  <span className="text-[#0C0C0C] text-[clamp(16px,2vw,21px)] leading-tight uppercase font-[family-name:var(--font-anton)]">
+                    How an engagement runs
+                  </span>
+                </span>
+              }
             >
-              <h2 className="text-[clamp(28px,4vw,52px)] text-white leading-[1.1] mb-4 uppercase font-[family-name:var(--font-anton)]">
-                Not sure where to start?
-              </h2>
-              <p className="text-white/60 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-                The Audit is always the answer. 48 hours and you&apos;ll know exactly what to build.
-              </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center bg-[#FFD84D] hover:bg-[#E8C030] text-[#0C0C0C] font-bold px-10 py-4 rounded-xl text-base transition-all duration-200 hover:scale-[1.02] min-h-[44px]"
-              >
-                Book the Audit — $397 →
+              <div className="-mx-5 -mb-6">
+                <HowItWorks />
+              </div>
+            </Collapse>
+
+            <Collapse
+              tone="cream"
+              header={
+                <span className="flex flex-col">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#888580]">
+                    Under The Hood
+                  </span>
+                  <span className="text-[#0C0C0C] text-[clamp(16px,2vw,21px)] leading-tight uppercase font-[family-name:var(--font-anton)]">
+                    What we build with
+                  </span>
+                </span>
+              }
+            >
+              <div className="-mx-5 -mb-6">
+                <TechStack />
+              </div>
+            </Collapse>
+
+            <Collapse
+              tone="cream"
+              header={
+                <span className="flex flex-col">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#888580]">
+                    Wrong Door?
+                  </span>
+                  <span className="text-[#0C0C0C] text-[clamp(16px,2vw,21px)] leading-tight uppercase font-[family-name:var(--font-anton)]">
+                    How the six divisions fit together
+                  </span>
+                </span>
+              }
+            >
+              <div className="flex flex-col gap-3">
+                {DIVISIONS.map((d) => (
+                  <Link
+                    key={d.slug}
+                    href={`/${d.slug}`}
+                    className="group flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-5 py-3 border-b border-[#E2DED8] last:border-b-0"
+                  >
+                    <span className="w-8 shrink-0" style={{ color: d.accent }}>
+                      <Icon name={d.icon} size={22} />
+                    </span>
+                    <span className="flex-1 text-[#0C0C0C] text-sm leading-snug">
+                      {d.entryLine}
+                    </span>
+                    <span
+                      className="shrink-0 text-xs font-bold uppercase tracking-[0.1em] inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all"
+                      style={{ color: d.accent }}
+                    >
+                      {d.shortName}
+                      <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                        <path
+                          d="M2 7h10M7 2l5 5-5 5"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
+                  </Link>
+                ))}
+                <Link
+                  href="/ecosystem"
+                  className="mt-2 inline-flex items-center justify-center gap-2 bg-[#0C0C0C] hover:bg-[#FFD84D] text-white hover:text-[#0C0C0C] font-semibold text-sm px-5 py-3 rounded-xl transition-colors min-h-[44px] self-start"
+                >
+                  Read the full ecosystem page
+                </Link>
+              </div>
+            </Collapse>
+          </div>
+        </section>
+
+        <div className="bg-white pb-4">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="text-[#888580] text-sm max-w-2xl">
+              Full inclusion lists and the FAQ live on the{' '}
+              <Link href="/pricing" className="text-[#0C0C0C] font-semibold underline decoration-[#FFD84D] decoration-2 underline-offset-2">
+                pricing page
               </Link>
-            </motion.div>
+              . If none of this is quite it,{' '}
+              <Link href="/contact" className="text-[#0C0C0C] font-semibold underline decoration-[#FFD84D] decoration-2 underline-offset-2">
+                reply for a 15-minute chat
+              </Link>{' '}
+              and we will scope it.
+            </p>
           </div>
-        </section>
+        </div>
+
+        <FinalCTA />
       </main>
+
       <Footer />
     </>
   )
