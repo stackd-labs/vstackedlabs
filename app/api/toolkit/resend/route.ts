@@ -1,3 +1,4 @@
+import { logSpam, overLength, spamReason } from '@/lib/spam-guard'
 import { createServerClient } from '@/lib/supabase-server'
 import { resendAccessEmail } from '@/lib/emails/toolkit-emails'
 
@@ -12,6 +13,12 @@ export async function POST(request: Request) {
     body = await request.json()
   } catch {
     return Response.json({ error: 'Invalid JSON' }, { status: 400 })
+  }
+
+  const spam = spamReason(body as Record<string, unknown>, { email: 'email', minMs: 1500 })
+  if (spam) {
+    logSpam('toolkit-resend', spam)
+    return Response.json({ status: 'sent', message: 'Sent. Check your inbox.' })
   }
 
   const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : ''

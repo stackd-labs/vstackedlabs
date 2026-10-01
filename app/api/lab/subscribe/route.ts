@@ -1,3 +1,4 @@
+import { logSpam, overLength, spamReason } from '@/lib/spam-guard'
 import { randomBytes } from 'crypto'
 import { createServerClient } from '@/lib/supabase-server'
 import { sendLabWelcomeEmail } from '@/lib/emails/lab-emails'
@@ -14,6 +15,12 @@ export async function POST(request: Request) {
     body = await request.json()
   } catch {
     return Response.json({ error: 'Invalid JSON' }, { status: 400 })
+  }
+
+  const spam = spamReason(body as Record<string, unknown>, { email: 'email', names: ['first_name'], minMs: 1500 })
+  if (spam) {
+    logSpam('lab-subscribe', spam)
+    return Response.json({ status: 'created', message: "You're on the list. Check your inbox for a hello." })
   }
 
   const rawEmail = typeof body.email === 'string' ? body.email.trim().toLowerCase() : ''

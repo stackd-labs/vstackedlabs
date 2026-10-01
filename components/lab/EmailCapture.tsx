@@ -1,5 +1,6 @@
 'use client'
 
+import { HoneypotField, useSpamGuard } from '@/components/HoneypotField'
 import { useState } from 'react'
 
 type Status =
@@ -24,6 +25,7 @@ export default function EmailCapture({
 }: EmailCaptureProps) {
   const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
+  const guard = useSpamGuard()
   const [status, setStatus] = useState<Status>({ kind: 'idle' })
 
   const isLoading = status.kind === 'loading'
@@ -51,7 +53,7 @@ export default function EmailCapture({
       const res = await fetch('/api/lab/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: trimmedEmail, first_name: trimmedName, source }),
+        body: JSON.stringify({ email: trimmedEmail, first_name: trimmedName, source , ...guard.fields() }),
       })
       const data = await res.json().catch(() => ({}))
 
@@ -148,7 +150,8 @@ export default function EmailCapture({
               {status.message}
             </p>
           )}
-        </form>
+        <HoneypotField value={guard.hp} onChange={guard.setHp} />
+</form>
       </div>
     </div>
   )

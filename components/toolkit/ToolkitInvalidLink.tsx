@@ -1,5 +1,6 @@
 'use client'
 
+import { HoneypotField, useSpamGuard } from '@/components/HoneypotField'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -14,6 +15,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export default function ToolkitInvalidLink() {
   const [email, setEmail] = useState('')
+  const guard = useSpamGuard()
   const [status, setStatus] = useState<Status>({ kind: 'idle' })
   const [focused, setFocused] = useState(false)
   const isLoading = status.kind === 'loading'
@@ -31,7 +33,7 @@ export default function ToolkitInvalidLink() {
       const res = await fetch('/api/toolkit/resend', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: trimmed }),
+        body: JSON.stringify({ email: trimmed , ...guard.fields() }),
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) {
@@ -222,7 +224,8 @@ export default function ToolkitInvalidLink() {
                 {status.message}
               </p>
             )}
-          </form>
+          <HoneypotField value={guard.hp} onChange={guard.setHp} />
+</form>
         )}
       </div>
     </main>

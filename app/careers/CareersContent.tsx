@@ -4,6 +4,7 @@ import { useState, useTransition, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { submitApplication } from './actions'
 import { submitAffiliateApplication } from './affiliate-actions'
+import { HoneypotField, useSpamGuard } from '@/components/HoneypotField'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -111,6 +112,7 @@ const inputClass = 'w-full bg-white/8 border border-white/15 text-white text-sm 
 
 function ApplyForm({ defaultRole, onSuccess }: { defaultRole: string; onSuccess: () => void }) {
   const formRef = useRef<HTMLFormElement>(null)
+  const guard = useSpamGuard()
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
   const [done, setDone] = useState(false)
@@ -119,6 +121,7 @@ function ApplyForm({ defaultRole, onSuccess }: { defaultRole: string; onSuccess:
     e.preventDefault()
     setError(null)
     const data = new FormData(e.currentTarget)
+    data.set('elapsedMs', String(guard.fields().elapsedMs))
     startTransition(async () => {
       const res = await submitApplication(data)
       if (res.success) {
@@ -208,6 +211,7 @@ function ApplyForm({ defaultRole, onSuccess }: { defaultRole: string; onSuccess:
       >
         {isPending ? 'Sending…' : 'Submit Application'}
       </button>
+    <HoneypotField value={guard.hp} onChange={guard.setHp} />
     </form>
   )
 }
@@ -216,6 +220,7 @@ function ApplyForm({ defaultRole, onSuccess }: { defaultRole: string; onSuccess:
 
 function AffiliateForm({ onSuccess }: { onSuccess: () => void }) {
   const formRef = useRef<HTMLFormElement>(null)
+  const guard = useSpamGuard()
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
   const [done, setDone] = useState(false)
@@ -224,6 +229,7 @@ function AffiliateForm({ onSuccess }: { onSuccess: () => void }) {
     e.preventDefault()
     setError(null)
     const data = new FormData(e.currentTarget)
+    data.set('elapsedMs', String(guard.fields().elapsedMs))
     startTransition(async () => {
       const res = await submitAffiliateApplication(data)
       if (res.success) {
@@ -315,6 +321,7 @@ function AffiliateForm({ onSuccess }: { onSuccess: () => void }) {
       >
         {isPending ? 'Sending…' : 'Submit Application'}
       </button>
+    <HoneypotField value={guard.hp} onChange={guard.setHp} />
     </form>
   )
 }

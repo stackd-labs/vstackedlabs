@@ -1,10 +1,21 @@
 'use server'
 
+import { logSpam, overLength, spamReason } from '@/lib/spam-guard'
+
 import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function submitAffiliateApplication(formData: FormData) {
+  const fields = Object.fromEntries(formData)
+  const tooLong = overLength(fields, { name: 120, email: 200, platforms: 500, audience: 500, links: 2000, why: 5000 })
+  if (tooLong) return { success: false as const, error: `That ${tooLong} is too long.` }
+  const spam = spamReason(fields, { email: 'email', names: ['name'], messages: ['why'] })
+  if (spam) {
+    logSpam('affiliate', spam)
+    return { success: true as const }
+  }
+
   const name = formData.get('name') as string
   const email = formData.get('email') as string
   const platforms = formData.get('platforms') as string

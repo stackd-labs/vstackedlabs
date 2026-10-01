@@ -5,18 +5,21 @@ import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { submitLead } from './actions'
+import { HoneypotField, useSpamGuard } from '@/components/HoneypotField'
 import { useToast } from '@/components/ToastProvider'
 import { DIVISIONS } from '@/lib/divisions'
 
 export default function ContactContent() {
   const [status, setStatus] = useState<'idle' | 'loading'>('idle')
   const formRef = useRef<HTMLFormElement>(null)
+  const guard = useSpamGuard()
   const { toast } = useToast()
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setStatus('loading')
     const formData = new FormData(e.currentTarget)
+    formData.set('elapsedMs', String(guard.fields().elapsedMs))
 
     const result = await submitLead(formData)
 
@@ -230,6 +233,7 @@ export default function ContactContent() {
                 <p className="text-[#888580] text-xs text-center">
                   We respond within 24 hours. Your info is never shared or sold.
                 </p>
+              <HoneypotField value={guard.hp} onChange={guard.setHp} />
               </form>
             </div>
           </div>

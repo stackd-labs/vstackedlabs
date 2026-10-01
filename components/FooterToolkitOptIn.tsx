@@ -1,5 +1,6 @@
 'use client'
 
+import { HoneypotField, useSpamGuard } from '@/components/HoneypotField'
 import { useState } from 'react'
 
 type Status =
@@ -13,6 +14,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 export default function FooterToolkitOptIn() {
   const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
+  const guard = useSpamGuard()
   const [status, setStatus] = useState<Status>({ kind: 'idle' })
 
   const isLoading = status.kind === 'loading'
@@ -39,7 +41,7 @@ export default function FooterToolkitOptIn() {
       const res = await fetch('/api/toolkit/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: trimmedEmail, first_name: trimmedName }),
+        body: JSON.stringify({ email: trimmedEmail, first_name: trimmedName , ...guard.fields() }),
       })
       const data = await res.json().catch(() => ({}))
 
@@ -135,7 +137,8 @@ export default function FooterToolkitOptIn() {
           <p className="text-[#0C0C0C]/70 text-[11px] leading-relaxed m-0">
             One welcome email + quarterly updates. No spam. Unsubscribe anytime.
           </p>
-        </form>
+        <HoneypotField value={guard.hp} onChange={guard.setHp} />
+</form>
       )}
     </div>
   )

@@ -1,5 +1,6 @@
 'use client'
 
+import { HoneypotField, useSpamGuard } from '@/components/HoneypotField'
 import { useState } from 'react'
 import Image from 'next/image'
 import Navbar from '@/components/Navbar'
@@ -17,6 +18,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 export default function ToolkitOptIn() {
   const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
+  const guard = useSpamGuard()
   const [status, setStatus] = useState<Status>({ kind: 'idle' })
 
   const isLoading = status.kind === 'loading'
@@ -44,7 +46,7 @@ export default function ToolkitOptIn() {
       const res = await fetch('/api/toolkit/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: trimmedEmail, first_name: trimmedName }),
+        body: JSON.stringify({ email: trimmedEmail, first_name: trimmedName , ...guard.fields() }),
       })
       const data = await res.json().catch(() => ({}))
 
@@ -199,7 +201,8 @@ export default function ToolkitOptIn() {
                     <p className="text-[#3F3F3F] text-xs text-center mt-1 leading-relaxed">
                       No spam. One welcome email plus quarterly updates. Unsubscribe anytime.
                     </p>
-                  </form>
+                  <HoneypotField value={guard.hp} onChange={guard.setHp} />
+</form>
                 )}
               </div>
             </div>
