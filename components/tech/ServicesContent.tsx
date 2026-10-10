@@ -203,6 +203,27 @@ function JumpBar() {
   )
 }
 
+// Closes out each offer grid so the last row never shows empty cells: it spans whatever is left of the row.
+const MD_SPAN = ['', 'md:col-span-1', 'md:col-span-2']
+const LG_SPAN = ['', 'lg:col-span-1', 'lg:col-span-2', 'lg:col-span-3']
+
+function FillerCard({ count, kind }: { count: number; kind: IntakeKind }) {
+  const total = count + 1
+  const md = 1 + ((2 - (total % 2)) % 2)
+  const lg = 1 + ((3 - (total % 3)) % 3)
+  return (
+    <div className={`${MD_SPAN[md]} ${LG_SPAN[lg]} bg-[var(--t-surface)] p-6 sm:p-7 flex flex-col justify-center gap-4`}>
+      <p className="font-mono-t text-[11px] uppercase tracking-[0.18em] text-[var(--t-dim)]">Not on the list?</p>
+      <p className="text-[var(--t-text)] text-[20px] leading-snug max-w-md font-[family-name:var(--font-anton)]">
+        Tell us what you need and we will scope it with you.
+      </p>
+      <button onClick={() => quote(kind)} className={`${btnGhost} self-start`}>
+        Ask about it
+      </button>
+    </div>
+  )
+}
+
 function OfferCard({ offer, kind, index }: { offer: ServiceOffer; kind: IntakeKind; index: number }) {
   return (
     <motion.article
@@ -276,6 +297,7 @@ function DivisionSections() {
                     {g.offers.map((o, i) => (
                       <OfferCard key={o.slug} offer={o} kind={d.intake} index={i} />
                     ))}
+                    <FillerCard count={g.offers.length} kind={d.intake} />
                   </div>
                 </div>
               ))}

@@ -111,8 +111,8 @@ select:focus {
   --t-line: #1D2129;
   --t-line-hi: #2A303B;
   --t-text: #ECEAE4;
-  --t-muted: #8B919C;
-  --t-dim: #5A606B;
+  --t-muted: #B9BEC7;
+  --t-dim: #E3C35C;
   --t-neon: #FFD84D;
   --t-neon-glow: rgba(255, 216, 77, 0.45);
   --t-cyan: #5EEAD4;
@@ -192,7 +192,7 @@ body:has(.tech-root) { background: #07080A; }
 .t-yellow-band {
   --t-text: #07080A;
   --t-muted: rgba(7, 8, 10, 0.74);
-  --t-dim: rgba(7, 8, 10, 0.55);
+  --t-dim: rgba(7, 8, 10, 0.75);
   --t-line: rgba(7, 8, 10, 0.16);
   --t-line-hi: rgba(7, 8, 10, 0.3);
   --t-surface: rgba(255, 255, 255, 0.28);
@@ -216,8 +216,8 @@ body:has(.tech-root) { background: #07080A; }
 .t-yellow-band .t-dark,
 .t-dark {
   --t-text: #ECEAE4;
-  --t-muted: #8B919C;
-  --t-dim: #5A606B;
+  --t-muted: #B9BEC7;
+  --t-dim: #E3C35C;
   --t-line: #1D2129;
   --t-line-hi: #2A303B;
   --t-surface: #0D0F13;
@@ -235,4 +235,23 @@ body:has(.tech-root) { background: #07080A; }
 
 @media (prefers-reduced-motion: reduce) {
   .t-float, .t-cursor, .t-marquee, .t-flow-x, .t-flow-y, .t-pulse, .t-sweep, .group:hover .t-scan-line { animation: none; }
+}
+
+
+/* Accessibility: visible focus, fixed-header clearance, and motion preferences. */
+.t-cursor { animation-iteration-count: 3; }
+.t-pulse { animation-iteration-count: 2; }
+.t-flow-x, .t-flow-y { animation-iteration-count: 4; }
+.t-float { animation-iteration-count: 1; }
+.t-sweep { animation-duration: 4s; animation-iteration-count: 1; }
+.a11y-skip { position: fixed; top: 8px; left: 8px; z-index: 20000; transform: translateY(-160%); padding: 12px 18px; background: #fff; color: #111; border: 2px solid #111; border-radius: 4px; font-weight: 700; }
+.a11y-skip:focus { transform: translateY(0); }
+:where(a,button,input,textarea,select,summary,[tabindex]):focus-visible { outline: 3px solid #276fe0 !important; outline-offset: 3px; box-shadow: 0 0 0 5px #fff !important; scroll-margin-block: 6rem; }
+main[id="main-content"] { scroll-margin-top: 5rem; }
+html:has([aria-label="Cookies and privacy"]) { scroll-padding-bottom: 26rem; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  .t-marquee { width: auto; flex-wrap: wrap; gap: 1rem; }
+  .t-marquee [aria-hidden="true"] { display: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
