@@ -20,9 +20,9 @@ export function Wordmark() {
   return (
     <PageLink href="/" className="flex items-center gap-2.5" aria-label="Stackd Studios AI home">
       <StackdMark />
-      <span className="font-mono-t text-[14px] sm:text-[15px] font-bold tracking-[0.24em] text-[var(--t-text)] whitespace-nowrap">
-        STACK<span className="neon-text">D</span>
-        <span className="ml-2 font-medium tracking-[0.2em] text-[var(--t-muted)]">STUDIOS <span className="text-[var(--t-neon)]">AI</span></span>
+      <span className="font-mono-t text-[11px] sm:text-[15px] font-bold tracking-[0.12em] sm:tracking-[0.24em] text-[var(--t-text)] whitespace-nowrap">
+        STACK<span className="neon-text">D</span>{' '}
+        <span className="ml-2 font-medium tracking-[0.1em] sm:tracking-[0.2em] text-[var(--t-muted)]">STUDIOS <span className="text-[var(--t-neon)]">AI</span></span>
       </span>
     </PageLink>
   )
@@ -49,11 +49,17 @@ export default function TechNav() {
 
   return (
     <header
+      onKeyDown={(event) => {
+        if (event.key === 'Escape' && open) {
+          setOpen(false)
+          event.currentTarget.querySelector<HTMLButtonElement>('[aria-controls="tech-mobile-menu"]')?.focus()
+        }
+      }}
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled ? 'bg-[#07080A]/80 backdrop-blur-xl border-b border-[var(--t-line)]' : 'bg-transparent border-b border-transparent'
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-6">
+      <nav aria-label="Main navigation" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3 sm:gap-6">
         <Wordmark />
 
         <ul className="hidden lg:flex items-center gap-0.5">

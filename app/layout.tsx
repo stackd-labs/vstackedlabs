@@ -190,6 +190,7 @@ export default function RootLayout({
             }),
           }}
         />
+        <a href="#main-content" className="a11y-skip">Skip to main content</a>
         <ScrollProgress />
         <CursorGlow />
         <CartProvider>
@@ -197,7 +198,9 @@ export default function RootLayout({
             {children}
           </ToastProvider>
         </CartProvider>
+        <CookieNotice />
       </body>
     </html>
   )
 }
+import CookieNotice from './CookieNotice'

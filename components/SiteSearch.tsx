@@ -24,6 +24,7 @@ export default function SiteSearch() {
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
+  const launcherRef = useRef<HTMLButtonElement>(null)
 
   const results = useMemo(() => searchSite(query, 6), [query])
   const search = (q: string) => {
@@ -46,7 +47,16 @@ export default function SiteSearch() {
   }, [])
 
   useEffect(() => {
-    if (open) requestAnimationFrame(() => inputRef.current?.focus())
+    if (!open) return
+    const previous = document.activeElement as HTMLElement | null
+    const frame = requestAnimationFrame(() => inputRef.current?.focus())
+    return () => {
+      cancelAnimationFrame(frame)
+      requestAnimationFrame(() => {
+        if (previous?.isConnected && previous !== document.body) previous.focus({ preventScroll: true })
+        else launcherRef.current?.focus({ preventScroll: true })
+      })
+    }
   }, [open])
 
   const go = useCallback(
@@ -93,6 +103,7 @@ export default function SiteSearch() {
       {/* Launcher */}
       {!open && (
         <button
+          ref={launcherRef}
           onClick={() => setOpen(true)}
           aria-label="Ask Stacka, search the site"
           className="fixed z-[70] right-4 sm:right-6 bottom-[calc(env(safe-area-inset-bottom,0px)+16px)] sm:bottom-6 flex items-center gap-2.5 bg-[var(--t-neon)] text-[#07080A] font-mono-t text-[12.5px] font-bold uppercase tracking-[0.1em] pl-3.5 pr-4 py-3 rounded-full shadow-[0_10px_40px_-6px_rgba(255,216,77,0.55)] hover:shadow-[0_10px_50px_-4px_rgba(255,216,77,0.8)] transition-shadow"
@@ -123,7 +134,7 @@ export default function SiteSearch() {
             </div>
             <button
               onClick={() => setOpen(false)}
-              aria-label="Close search"
+              aria-label="Close search (Esc)"
               className="font-mono-t text-[11px] uppercase tracking-[0.12em] text-[var(--t-muted)] hover:text-[var(--t-text)] border border-[var(--t-line-hi)] rounded-md px-2.5 py-1.5"
             >
               Esc
@@ -149,7 +160,7 @@ export default function SiteSearch() {
                 spellCheck={false}
                 role="combobox"
                 aria-expanded={results.length > 0}
-                aria-controls="site-search-results"
+                aria-controls={results.length ? 'site-search-results' : undefined}
                 aria-activedescendant={results.length ? `ssr-${active}` : undefined}
                 className="flex-1 min-w-0 bg-transparent font-mono-t text-[14px] text-[var(--t-text)] placeholder:text-[var(--t-dim)] caret-[var(--t-neon)] outline-none !shadow-none"
               />
@@ -180,10 +191,14 @@ export default function SiteSearch() {
             )}
 
             {query.trim() && results.length > 0 && (
-              <ul id="site-search-results" role="listbox" className="flex flex-col gap-1">
+              <ul id="site-search-results" role="listbox" aria-label="Search results" className="flex flex-col gap-1">
                 {results.map((r, i) => (
-                  <li key={r.id} id={`ssr-${i}`} role="option" aria-selected={i === active}>
+                  <li key={r.id} role="none">
                     <button
+                      id={`ssr-${i}`}
+                      role="option"
+                      aria-selected={i === active}
+                      tabIndex={-1}
                       onClick={() => go(r)}
                       onMouseEnter={() => setActive(i)}
                       className={`group w-full text-left rounded-xl px-3 py-3 border transition-colors ${

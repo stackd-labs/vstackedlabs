@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, type KeyboardEvent } from 'react'
+import { useRef, useState, type KeyboardEvent } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { DOORS } from './data'
 import { openIntake } from './TerminalForm'
@@ -9,16 +9,17 @@ import type { IntakeKind } from './intake-steps'
 
 export default function CommandPalette() {
   const [active, setActive] = useState(0)
+  const choices = useRef<(HTMLButtonElement | null)[]>([])
   const door = DOORS[active]
 
   function onKey(e: KeyboardEvent<HTMLDivElement>) {
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      setActive((i) => (i + 1) % DOORS.length)
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      setActive((i) => (i - 1 + DOORS.length) % DOORS.length)
-    }
+    const next = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? (active + 1) % DOORS.length
+      : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? (active - 1 + DOORS.length) % DOORS.length
+      : e.key === 'Home' ? 0 : e.key === 'End' ? DOORS.length - 1 : null
+    if (next === null) return
+    e.preventDefault()
+    setActive(next)
+    choices.current[next]?.focus()
   }
 
   return (
@@ -52,16 +53,18 @@ export default function CommandPalette() {
                 <kbd className="border border-[var(--t-line-hi)] rounded px-1.5 py-0.5">&darr;</kbd>
               </span>
             </div>
-            <ul role="listbox" aria-label="What brings you to Stackd" className="p-2">
+            <ul role="radiogroup" aria-label="What brings you to Stackd" className="p-2">
               {DOORS.map((d, i) => {
                 const on = i === active
                 return (
-                  <li key={d.id}>
+                  <li key={d.id} role="none">
                     <button
-                      role="option"
-                      aria-selected={on}
+                      ref={(el) => { choices.current[i] = el }}
+                      type="button"
+                      role="radio"
+                      aria-checked={on}
+                      tabIndex={on ? 0 : -1}
                       onClick={() => setActive(i)}
-                      onMouseEnter={() => setActive(i)}
                       className={`w-full text-left flex items-center gap-4 px-4 py-3.5 rounded-lg transition-colors ${
                         on ? 'bg-[var(--t-raised)]' : 'hover:bg-[var(--t-raised)]/60'
                       }`}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { MotionConfig } from 'framer-motion'
 import SiteSearch from '@/components/SiteSearch'
 import { HashLander } from '@/components/tech/ContactLink'
 
@@ -11,10 +12,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
   }, [])
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       {children}
       <SiteSearch />
       <HashLander />
-    </>
+    </MotionConfig>
   )
 }

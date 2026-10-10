@@ -35,16 +35,20 @@ const COLOR: Record<NonNullable<Line['kind']>, string> = {
 }
 
 function Terminal() {
-  const reduce = useReducedMotion()
-  const [shown, setShown] = useState(reduce ? RUN.length : 0)
+  const prefersReducedMotion = useReducedMotion()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  const reduce = mounted && prefersReducedMotion
+  const [shown, setShown] = useState(0)
+  const [paused, setPaused] = useState(false)
   const bodyRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (reduce) return
+    if (reduce || paused) return
     const delay = shown >= RUN.length ? 3800 : RUN[shown]?.kind === 'cmd' ? 900 : 380
     const id = setTimeout(() => setShown((n) => (n >= RUN.length ? 0 : n + 1)), delay)
     return () => clearTimeout(id)
-  }, [shown, reduce])
+  }, [shown, reduce, paused])
 
   useEffect(() => {
     const el = bodyRef.current
@@ -62,7 +66,10 @@ function Terminal() {
         <span className="font-mono-t text-[11px] tracking-[0.12em] text-[var(--t-dim)] truncate mx-3">stackd@rescue: ~/client-portal</span>
         <span className="font-mono-t text-[10px] uppercase tracking-[0.14em] text-[var(--t-cyan)] flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--t-cyan)] t-pulse" aria-hidden="true" />
-          live
+          <button type="button" onClick={() => setPaused((value) => !value)}
+            aria-pressed={paused} className="px-2 py-1" disabled={Boolean(reduce)}>
+            {reduce || paused ? 'Paused' : 'Pause animation'}
+          </button>
         </span>
       </div>
       <div
@@ -71,7 +78,7 @@ function Terminal() {
         aria-label="Example terminal: a Stackd Rescue scan finds three security and payment issues, patches them, and passes all tests."
         role="img"
       >
-        {RUN.slice(0, shown).map((l, i) => (
+        {RUN.slice(0, reduce ? RUN.length : shown).map((l, i) => (
           <div key={i} className={`whitespace-pre ${COLOR[l.kind ?? 'info']}`}>
             {l.kind === 'cmd' && <span className="text-[var(--t-neon)]">$ </span>}
             {l.t}
@@ -110,7 +117,7 @@ export default function TechHero() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-28 pb-20">
         <div className="grid lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-14 items-center">
-          <div>
+          <div className="min-w-0">
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -173,6 +180,7 @@ export default function TechHero() {
           </div>
 
           <motion.div
+            className="min-w-0"
             initial={{ opacity: 0, y: 24, rotateX: 8 }}
             animate={{ opacity: 1, y: 0, rotateX: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}

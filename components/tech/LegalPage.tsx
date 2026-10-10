@@ -33,7 +33,7 @@ export default function LegalPage({
   return (
     <div className="tech-root min-h-screen">
       <TechNav />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         {/* Hero */}
         <section className="relative overflow-hidden tech-noise border-b border-[var(--t-line)]">
           <div className="tech-grid absolute inset-0 pointer-events-none" aria-hidden="true" />
@@ -92,7 +92,7 @@ export default function LegalPage({
                     return (
                       <section key={s.title} id={slug(s.title)} className="border-t border-[#E7E4DE] py-9 scroll-mt-24">
                         <div className="flex items-baseline gap-4 mb-4">
-                          {num && <span className="font-mono-t text-[12px] font-bold text-[#B8930A]">{num}</span>}
+                          {num && <span className="font-mono-t text-[12px] font-bold text-[#806400]">{num}</span>}
                           <h2 className="text-[clamp(22px,2.4vw,28px)] leading-tight text-[#0C0C0C]">{text}</h2>
                         </div>
                         <div className="flex flex-col gap-3 max-w-[68ch] sm:pl-9">

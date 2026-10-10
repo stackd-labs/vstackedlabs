@@ -134,6 +134,7 @@ export function TechFooter() {
           <span className="flex gap-5">
             <PageLink href="/privacy" className="hover:text-[var(--t-neon)] transition-colors">Privacy</PageLink>
             <PageLink href="/terms" className="hover:text-[var(--t-neon)] transition-colors">Terms</PageLink>
+            <PageLink href="/accessibility" className="hover:text-[var(--t-neon)] transition-colors">Accessibility</PageLink>
           </span>
         </div>
       </div>

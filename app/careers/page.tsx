@@ -18,7 +18,7 @@ export default function CareersPage() {
   return (
     <div className="tech-root min-h-screen">
       <TechNav />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <CareersContent />
       </main>
       <TechFooter />

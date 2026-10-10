@@ -12,7 +12,7 @@ import { CONTACT_KINDS, KIND_CHOICES, KIND_STEP, STEPS, isKind, type IntakeKind,
 export function openIntake(kind?: IntakeKind, prefill: Record<string, string> = {}, anchor = 'contact') {
   window.dispatchEvent(new CustomEvent('stackd:intent', { detail: { kind, prefill } }))
   // Scroll after the form has re-rendered and taken focus; focusing mid-scroll cancels a smooth scroll.
-  setTimeout(() => document.getElementById(anchor)?.scrollIntoView({ behavior: 'smooth' }), 60)
+  setTimeout(() => document.getElementById(anchor)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }), 60)
 }
 
 const ROUTE: Record<IntakeKind, string> = {
@@ -55,6 +55,8 @@ export default function TerminalForm({
   const choiceRef = useRef<HTMLDivElement>(null)
   const bodyRef = useRef<HTMLDivElement>(null)
   const touched = useRef(false)
+  const reviewRef = useRef<HTMLButtonElement>(null)
+  const resetRef = useRef<HTMLButtonElement>(null)
 
   const kindStep: Step = {
     ...KIND_STEP,
@@ -73,7 +75,11 @@ export default function TerminalForm({
   useLayoutEffect(() => {
     const el = bodyRef.current
     if (el) el.scrollTop = el.scrollHeight
-    if (touched.current) focusCurrent()
+    if (touched.current) {
+      if (phase === 'review') reviewRef.current?.focus({ preventScroll: true })
+      else if (phase === 'done') resetRef.current?.focus({ preventScroll: true })
+      else focusCurrent()
+    }
   }, [index, phase, focusCurrent])
 
   const start = useCallback(
@@ -173,7 +179,10 @@ export default function TerminalForm({
     } else if (e.key === 'ArrowUp') {
       e.preventDefault()
       setCursor((c) => (c - 1 + list.length) % list.length)
-    } else if (e.key === 'Enter') {
+    } else if (e.key === 'Home' || e.key === 'End') {
+      e.preventDefault()
+      setCursor(e.key === 'Home' ? 0 : list.length - 1)
+    } else if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
       advance(list[cursor].value)
     } else if (e.key === 'Escape') back()
@@ -240,7 +249,7 @@ export default function TerminalForm({
           {/* Current prompt */}
           {phase === 'asking' && step && (
             <div className="mt-3">
-              <label htmlFor={`intake-${step.key}`} className="block mb-2">
+              <label id={`intake-label-${step.key}`} htmlFor={`intake-${step.key}`} className="block mb-2">
                 <span className="text-[var(--t-neon)]">? </span>
                 <span className="text-[var(--t-text)] font-bold">{step.prompt}</span>
                 {step.optional && <span className="text-[var(--t-dim)]"> (optional, Enter to skip)</span>}
@@ -251,6 +260,7 @@ export default function TerminalForm({
                   ref={choiceRef}
                   id={`intake-${step.key}`}
                   role="listbox"
+                  aria-labelledby={`intake-label-${step.key}`}
                   tabIndex={0}
                   onKeyDown={onChoiceKey}
                   aria-activedescendant={`opt-${step.key}-${cursor}`}
@@ -278,6 +288,8 @@ export default function TerminalForm({
                 <textarea
                   ref={inputRef}
                   id={`intake-${step.key}`}
+                  aria-invalid={Boolean(error)}
+                  aria-describedby={error ? 'intake-error' : undefined}
                   value={draft}
                   onChange={(e) => setDraft(e.target.value)}
                   onKeyDown={onInputKey}
@@ -292,6 +304,8 @@ export default function TerminalForm({
                   <input
                     ref={inputRef}
                     id={`intake-${step.key}`}
+                    aria-invalid={Boolean(error)}
+                    aria-describedby={error ? 'intake-error' : undefined}
                     type={step.type === 'email' ? 'email' : step.type === 'url' ? 'url' : 'text'}
                     autoComplete={step.key === 'name' ? 'name' : step.key === 'email' ? 'email' : 'off'}
                     value={draft}
@@ -331,7 +345,7 @@ export default function TerminalForm({
             </div>
           )}
 
-          <p role="alert" aria-live="assertive" className="mt-3 text-[var(--t-red)] min-h-[1.5em]">
+          <p id="intake-error" role="alert" aria-live="assertive" className="mt-3 text-[var(--t-red)] min-h-[1.5em]">
             {error && `ERR  ${error}`}
           </p>
         </div>
@@ -339,6 +353,7 @@ export default function TerminalForm({
         {/* Controls (also the touch path) */}
         <div className="flex items-center justify-between gap-3 px-4 sm:px-5 py-3 border-t border-[var(--t-line)] bg-[var(--t-surface)]">
           <button
+            ref={resetRef}
             type="button"
             onClick={phase === 'done' ? reset : back}
             disabled={phase === 'sending' || (phase === 'asking' && index === 0)}
@@ -360,6 +375,7 @@ export default function TerminalForm({
           )}
           {(phase === 'review' || phase === 'sending') && (
             <button
+              ref={reviewRef}
               type="button"
               onClick={send}
               disabled={phase === 'sending'}

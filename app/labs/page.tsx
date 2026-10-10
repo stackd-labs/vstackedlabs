@@ -18,7 +18,7 @@ export default function LabsPage() {
   return (
     <div className="tech-root min-h-screen">
       <TechNav />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <LabsContent />
       </main>
       <TechFooter />

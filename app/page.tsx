@@ -24,7 +24,7 @@ export default function HomePage() {
   return (
     <div className="tech-root min-h-screen">
       <TechNav />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <TechHero />
         <StackTicker />
         <CommandPalette />
