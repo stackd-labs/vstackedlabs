@@ -6,7 +6,7 @@ const REMOVED_ROUTES = [
   '/ai-toolkit', '/build', '/builders', '/business-brain', '/cart',
   '/contact', '/ecosystem', '/enterprise', '/free/toolkit', '/industries', '/interactive',
   '/lab', '/lab/:path*', '/learn', '/pricing', '/rescue', '/sitemap', '/store',
-  '/teams', '/preview',
+  '/teams', '/preview', '/admin', '/admin/:path*',
 ]
 
 const nextConfig: NextConfig = {

@@ -35,7 +35,6 @@ and production returns a "please email us" error.
 | `/products/[product_id]` | Paid digital product access links (emailed after purchase) |
 | `/free/toolkit/access` | Toolkit access links (emailed after opt-in) |
 | `/success` | Stripe checkout return page |
-| `/admin` | Leads / orders / products admin |
 | `/privacy` | Legal |
 | `/terms` | Legal |
 | `/api/*` | Chatbot, toolkit + lab sign-ups, Stripe webhook |
@@ -45,6 +44,7 @@ and production returns a "please email us" error.
 
 | Route | What it was | Planned home in the new structure |
 |---|---|---|
+| `/admin` | Empty admin placeholder with a Supabase login (removed 10/10: any collective account could sign in) | Use the Stackd Dash |
 | `/ai-toolkit` | Free AI Toolkit landing page (lead magnet) | `/labs` or its own page |
 | `/build` | Stackd Build division page | `/build` |
 | `/builders` | Builders division (unblock, code review, 1:1, support) | merge into `/rescue` |
