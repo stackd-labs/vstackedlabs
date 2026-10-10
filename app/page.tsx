@@ -1,51 +1,39 @@
 import type { Metadata } from 'next'
-import Navbar from '@/components/Navbar'
-import Hero from '@/components/Hero'
-import Stats from '@/components/Stats'
-import DivisionGrid from '@/components/ecosystem/DivisionGrid'
-import EntryPoints from '@/components/ecosystem/EntryPoints'
-import Flywheel from '@/components/ecosystem/Flywheel'
-import AiStance from '@/components/ecosystem/AiStance'
-import OurWork from '@/components/OurWork'
-import BusinessBrainTeaser from '@/components/BusinessBrainTeaser'
-import Testimonials from '@/components/Testimonials'
-import FinalCTA from '@/components/FinalCTA'
-import Footer from '@/components/Footer'
-import ToolkitBanner from '@/components/ToolkitBanner'
+import TechNav from '@/components/tech/TechNav'
+import TechHero from '@/components/tech/TechHero'
+import StackTicker from '@/components/tech/StackTicker'
+import CommandPalette from '@/components/tech/CommandPalette'
+import DivisionMatrix from '@/components/tech/DivisionMatrix'
+import Diagnostics from '@/components/tech/Diagnostics'
+import Pipeline from '@/components/tech/Pipeline'
+import { TechCTA, TechFooter } from '@/components/tech/TechCTA'
+import { TAGLINE_TEXT } from '@/components/tech/data'
+
+const TITLE = `Stackd Studios AI: ${TAGLINE_TEXT}`
+const DESCRIPTION =
+  'Stackd is a technology ecosystem. We build software for clients, rescue apps that broke, train and verify technical talent, connect people with work, and build products of our own.'
 
 export const metadata: Metadata = {
-  title: 'Stackd Studios — We help people build software, and companies ship it',
-  description:
-    'Stackd is a software-building ecosystem. We train builders, support the ones already building, rescue software that broke, build what does not exist yet, and give companies engineering capacity. Learn it. Build it. Fix it. Scale it.',
-  alternates: {
-    canonical: 'https://www.stackdstudiosai.com',
-  },
-  openGraph: {
-    title: 'Stackd Studios — We help people build software, and companies ship it',
-    description:
-      'Six divisions, one competency: Learn, Builders, Rescue, Build, Teams, Enterprise. Learn it. Build it. Fix it. Scale it.',
-    url: 'https://www.stackdstudiosai.com',
-  },
+  title: { absolute: TITLE },
+  description: DESCRIPTION,
+  alternates: { canonical: 'https://www.stackdstudiosai.com' },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: 'https://www.stackdstudiosai.com' },
 }
 
 export default function HomePage() {
   return (
-    <>
-      <Navbar />
+    <div className="tech-root min-h-screen">
+      <TechNav />
       <main>
-        <Hero />
-        <DivisionGrid />
-        <Stats />
-        <EntryPoints bg="cream" />
-        <ToolkitBanner variant="yellow" />
-        <Flywheel />
-        <AiStance />
-        <OurWork />
-        <BusinessBrainTeaser />
-        <Testimonials />
-        <FinalCTA />
+        <TechHero />
+        <StackTicker />
+        <CommandPalette />
+        <DivisionMatrix />
+        <Diagnostics />
+        <Pipeline />
+        <TechCTA />
       </main>
-      <Footer />
-    </>
+      <TechFooter />
+    </div>
   )
 }

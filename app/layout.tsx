@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
-import { Anton, Instrument_Sans } from 'next/font/google'
+import { Anton, Instrument_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import ScrollProgress from '@/components/ScrollProgress'
 import CursorGlow from '@/components/CursorGlow'
 import ToastProvider from '@/components/ToastProvider'
 import { CartProvider } from '@/components/CartContext'
+import { TAGLINE_TEXT } from '@/components/tech/data'
 
 const anton = Anton({
   weight: '400',
@@ -20,37 +21,46 @@ const instrumentSans = Instrument_Sans({
   variable: '--font-instrument-sans',
 })
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  display: 'swap',
+  variable: '--font-mono',
+})
+
+// Site-wide copy for search engines and link previews. Tagline comes from the homepage constant.
+const SITE_TITLE = `Stackd Studios AI: ${TAGLINE_TEXT}`
+const SITE_SHORT = `A technology ecosystem. ${TAGLINE_TEXT}`
+const SITE_DESCRIPTION =
+  'Stackd Studios AI is a technology ecosystem. We build software for clients, rescue apps that are broken or poorly built, train and verify technical talent, connect people with work, and build products of our own.'
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.stackdstudiosai.com'),
   title: {
-    default: 'Stackd Studios AI — A Software-Building Ecosystem',
+    default: SITE_TITLE,
     template: '%s | Stackd Studios AI',
   },
-  description:
-    'Stackd is a software-building ecosystem. We train builders, support the ones already building, rescue software that broke, build what does not exist yet, and give companies engineering capacity. Learn it. Build it. Fix it. Scale it.',
+  description: SITE_DESCRIPTION,
   keywords: [
-    'software building ecosystem',
-    'learn to build software with AI',
-    'AI-assisted development training',
-    'vibe coding help',
-    'fix my AI-built app',
-    'app rescue service',
-    'MVP rescue',
-    'code review service',
-    'fractional engineering',
-    'embedded engineering team',
-    'engineering capacity',
-    'software backlog',
-    'custom business software',
-    'workflow automation',
-    'client portals and dashboards',
+    'technology ecosystem',
+    'custom software development',
     'MVP development',
-    'Chanel Gray',
-    'Stackd Studios',
-    'Hicks Virtual Solutions',
+    'web and mobile app development',
+    'AI tools and agents',
+    'workflow automation',
+    'fractional technical team',
+    'app rescue service',
+    'fix my AI-built app',
+    'vibe coded app rescue',
+    'broken app repair',
+    'verified technical talent',
+    'remote developer jobs',
+    'learn to build software with AI',
+    'Stackd Studios AI',
+    'Stackd',
   ],
-  authors: [{ name: 'Chanel Gray', url: 'https://www.stackdstudiosai.com/about' }],
-  creator: 'Chanel Gray',
+  authors: [{ name: 'Stackd Studios AI', url: 'https://www.stackdstudiosai.com/about' }],
+  creator: 'Stackd Studios AI',
   publisher: 'Stackd Studios AI',
   alternates: {
     canonical: 'https://www.stackdstudiosai.com',
@@ -63,9 +73,8 @@ export const metadata: Metadata = {
     shortcut: '/favicon.png',
   },
   openGraph: {
-    title: 'Stackd Studios AI — A Software-Building Ecosystem',
-    description:
-      'We help people build software, and companies ship it. Learn it. Build it. Fix it. Scale it.',
+    title: SITE_TITLE,
+    description: SITE_SHORT,
     type: 'website',
     url: 'https://www.stackdstudiosai.com',
     siteName: 'Stackd Studios AI',
@@ -75,15 +84,14 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Stackd Studios AI — A Software-Building Ecosystem',
+        alt: SITE_TITLE,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Stackd Studios AI — A Software-Building Ecosystem',
-    description:
-      'We help people build software, and companies ship it. Learn it. Build it. Fix it. Scale it.',
+    title: SITE_TITLE,
+    description: SITE_SHORT,
     images: ['/og-image.png'],
   },
   robots: {
@@ -106,7 +114,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${anton.variable} ${instrumentSans.variable}`}>
+    <html lang="en" className={`${anton.variable} ${instrumentSans.variable} ${jetbrainsMono.variable}`}>
       <body className="font-[family-name:var(--font-instrument-sans)] bg-[#F6F4EF] text-[#0C0C0C] antialiased">
         <script
           type="application/ld+json"
@@ -127,17 +135,24 @@ export default function RootLayout({
                     height: 512,
                   },
                   email: 'Chanel@stackdstudiosai.com',
-                  founder: {
-                    '@type': 'Person',
-                    name: 'Chanel Gray',
-                    jobTitle: 'Founder & CEO',
-                    worksFor: { '@id': 'https://www.stackdstudiosai.com/#organization' },
-                  },
-                  description: 'Operations system studio building custom software and automations for owner-run businesses — and launching products of its own.',
-                  knowsAbout: ['Custom Software Development', 'Workflow Automation', 'Business Operations Systems', 'Product Development', 'Software Engineering'],
+                  slogan: TAGLINE_TEXT,
+                  description: SITE_DESCRIPTION,
+                  knowsAbout: [
+                    'Custom Software Development',
+                    'MVP Development',
+                    'AI Agents and Automation',
+                    'Application Rescue and Remediation',
+                    'Technical Talent and Staffing',
+                    'Software Development Training',
+                  ],
                   areaServed: 'United States',
-                  serviceType: ['Custom Software', 'Business Automation', 'Venture Studio'],
-                  sameAs: [],
+                  serviceType: ['Software Development', 'App Rescue', 'Technical Talent', 'Training'],
+                  sameAs: [
+                    'https://www.instagram.com/stackdstudiosai',
+                    'https://www.tiktok.com/@stackdstudiosai',
+                    'https://x.com/stackdstudiosai',
+                    'https://discord.gg/5xcnpfbj6v',
+                  ],
                 },
                 {
                   '@type': 'WebSite',
@@ -145,11 +160,6 @@ export default function RootLayout({
                   url: 'https://www.stackdstudiosai.com',
                   name: 'Stackd Studios AI',
                   publisher: { '@id': 'https://www.stackdstudiosai.com/#organization' },
-                  potentialAction: {
-                    '@type': 'SearchAction',
-                    target: 'https://www.stackdstudiosai.com/?q={search_term_string}',
-                    'query-input': 'required name=search_term_string',
-                  },
                 },
                 {
                   '@type': 'ProfessionalService',
@@ -169,10 +179,10 @@ export default function RootLayout({
                     '@type': 'OfferCatalog',
                     name: 'Services',
                     itemListElement: [
-                      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Custom Business Software' } },
-                      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Workflow Automation' } },
-                      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Systems Audit & Strategy' } },
-                      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Venture Studio Partnership' } },
+                      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Stackd Build: custom software, MVPs, AI tools and automations' } },
+                      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Stackd Rescue: fixing broken, abandoned or AI-generated apps' } },
+                      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Stackd Talent: verified technical talent' } },
+                      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Stackd Learn: training for builders' } },
                     ],
                   },
                 },

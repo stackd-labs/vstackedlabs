@@ -1,17 +1,20 @@
 'use client'
 
 import { useEffect } from 'react'
-import GlobalChatbot from '@/components/chatbot/GlobalChatbot'
+import SiteSearch from '@/components/SiteSearch'
+import { HashLander } from '@/components/tech/ContactLink'
 
 export default function Template({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    window.scrollTo(0, 0)
+    // New page: start at the top, unless the address points at a section (HashLander lands there).
+    if (!window.location.hash) window.scrollTo(0, 0)
   }, [])
 
   return (
     <>
       {children}
-      <GlobalChatbot />
+      <SiteSearch />
+      <HashLander />
     </>
   )
 }

@@ -100,3 +100,139 @@ select:focus {
 @media (max-width: 768px) {
   ::-webkit-scrollbar { width: 4px; height: 4px; }
 }
+
+/* ═══ Dark tech system (homepage rebuild, 2026-10) ═══════════════════════
+   One neon (Stackd yellow) carries every highlight. Cyan only marks "passing"
+   or live data. Red appears only inside terminal output. */
+.tech-root {
+  --t-bg: #07080A;
+  --t-surface: #0D0F13;
+  --t-raised: #12151B;
+  --t-line: #1D2129;
+  --t-line-hi: #2A303B;
+  --t-text: #ECEAE4;
+  --t-muted: #8B919C;
+  --t-dim: #5A606B;
+  --t-neon: #FFD84D;
+  --t-neon-glow: rgba(255, 216, 77, 0.45);
+  --t-cyan: #5EEAD4;
+  --t-red: #FF6B6B;
+  background: var(--t-bg);
+  color: var(--t-text);
+}
+body:has(.tech-root) { background: #07080A; }
+
+.font-mono-t { font-family: var(--font-mono), ui-monospace, monospace; }
+
+/* Blueprint grid with a soft fade at the edges */
+.tech-grid {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 85%);
+}
+.tech-grid-fine {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+/* Film grain so flat black does not look like an empty div */
+.tech-noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.neon-text { color: var(--t-neon); text-shadow: 0 0 18px var(--t-neon-glow), 0 0 42px rgba(255,216,77,0.18); }
+.neon-border { border-color: var(--t-neon) !important; box-shadow: 0 0 0 1px var(--t-neon), 0 0 24px rgba(255,216,77,0.25), inset 0 0 24px rgba(255,216,77,0.06); }
+
+@keyframes t-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+.t-cursor { display: inline-block; animation: t-blink 1s steps(1) infinite; }
+
+@keyframes t-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.t-marquee { animation: t-marquee 38s linear infinite; }
+
+@keyframes t-flow { from { background-position: 0 0; } to { background-position: 40px 0; } }
+.t-flow-x {
+  background-image: repeating-linear-gradient(90deg, var(--t-neon) 0 10px, transparent 10px 20px);
+  background-size: 40px 2px;
+  animation: t-flow 0.9s linear infinite;
+}
+@keyframes t-flow-y { from { background-position: 0 0; } to { background-position: 0 40px; } }
+.t-flow-y {
+  background-image: repeating-linear-gradient(180deg, var(--t-neon) 0 10px, transparent 10px 20px);
+  background-size: 2px 40px;
+  animation: t-flow-y 0.9s linear infinite;
+}
+
+@keyframes t-scan { from { transform: translateY(-100%); } to { transform: translateY(420%); } }
+.t-scan-line {
+  position: absolute; left: 0; right: 0; height: 30%;
+  background: linear-gradient(180deg, transparent, rgba(255,216,77,0.10), transparent);
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+.group:hover .t-scan-line { animation: t-scan 1.4s ease-in-out; }
+
+@keyframes t-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.8); } }
+.t-pulse { animation: t-pulse 1.8s ease-in-out infinite; }
+
+@keyframes t-sweep { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.t-sweep { animation: t-sweep 6s linear infinite; }
+
+/* Yellow band: a full Stackd-yellow section inside the dark site. It re-points the tokens so
+   everything inside reads as black-on-yellow (the "neon" becomes black). Anything that must stay
+   a dark window inside the band (code cards, Stacka's cam) gets .t-dark to restore the dark tokens. */
+.t-yellow-band {
+  --t-text: #07080A;
+  --t-muted: rgba(7, 8, 10, 0.74);
+  --t-dim: rgba(7, 8, 10, 0.55);
+  --t-line: rgba(7, 8, 10, 0.16);
+  --t-line-hi: rgba(7, 8, 10, 0.3);
+  --t-surface: rgba(255, 255, 255, 0.28);
+  --t-raised: rgba(7, 8, 10, 0.08);
+  --t-neon: #07080A;
+  --t-neon-glow: transparent;
+  --t-cyan: #0B5D52;
+  background-color: #FFD84D;
+  background-image:
+    linear-gradient(to right, rgba(7, 8, 10, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(7, 8, 10, 0.06) 1px, transparent 1px),
+    radial-gradient(ellipse at 20% 0%, rgba(255, 255, 255, 0.35), transparent 60%);
+  background-size: 56px 56px, 56px 56px, 100% 100%;
+  color: var(--t-text);
+}
+.t-yellow-band .neon-text { text-shadow: none; }
+/* Primary buttons are yellow-on-black elsewhere; in the band they become black with yellow text. */
+.t-yellow-band [class*="bg-[var(--t-neon)]"] { color: #FFD84D; }
+.t-yellow-band .tech-grid,
+.t-yellow-band .tech-grid-fine { opacity: 0.35; filter: invert(1); }
+.t-yellow-band .t-dark,
+.t-dark {
+  --t-text: #ECEAE4;
+  --t-muted: #8B919C;
+  --t-dim: #5A606B;
+  --t-line: #1D2129;
+  --t-line-hi: #2A303B;
+  --t-surface: #0D0F13;
+  --t-raised: #12151B;
+  --t-neon: #FFD84D;
+  --t-neon-glow: rgba(255, 216, 77, 0.45);
+  --t-cyan: #5EEAD4;
+  color: var(--t-text);
+}
+.t-yellow-band .t-dark [class*="bg-[var(--t-neon)]"] { color: #07080A; }
+.t-yellow-band .t-dark .neon-text { text-shadow: 0 0 18px var(--t-neon-glow), 0 0 42px rgba(255, 216, 77, 0.18); }
+
+@keyframes t-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.t-float { animation: t-float 4.5s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .t-float, .t-cursor, .t-marquee, .t-flow-x, .t-flow-y, .t-pulse, .t-sweep, .group:hover .t-scan-line { animation: none; }
+}
