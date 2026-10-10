@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: 'https://www.stackdstudiosai.com' },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: 'https://www.stackdstudiosai.com' },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: 'https://www.stackdstudiosai.com', images: [{ url: '/og-image.png', width: 1200, height: 630 }] },
 }
 
 export default function HomePage() {

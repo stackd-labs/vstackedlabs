@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import { RESCUE_CHECKS } from './data'
-import { openIntake } from './TerminalForm'
 
 const INTAKE = [
   'App URL', 'Repository', 'Stack', 'Hosting', 'Database', 'Auth', 'Payment provider',
@@ -39,11 +38,7 @@ export default function Diagnostics() {
           </ul>
 
           <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault()
-              openIntake('rescue')
-            }}
+            href="https://dash.stackdstudiosai.com/forms/rescue"
             className="inline-block font-mono-t text-sm font-bold uppercase tracking-[0.1em] bg-[var(--t-neon)] text-[#07080A] px-6 py-4 rounded-md hover:shadow-[0_0_32px_rgba(255,216,77,0.6)] transition-shadow"
           >
             Request a rescue

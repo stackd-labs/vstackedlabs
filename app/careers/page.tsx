@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: 'https://www.stackdstudiosai.com/careers' },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: 'https://www.stackdstudiosai.com/careers' },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: 'https://www.stackdstudiosai.com/careers', images: [{ url: '/og-image.png', width: 1200, height: 630 }] },
 }
 
 export default function CareersPage() {
