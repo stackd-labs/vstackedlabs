@@ -8,8 +8,16 @@ export const TAGLINE_TEXT = TAGLINE.join(' ')
 /** The ONE Discord invite. Footer, Community section, search and JSON-LD all read this. */
 export const DISCORD_URL = 'https://discord.gg/3CYtcjavfd'
 
-/** Free "Before You Launch" checklist PDF, served from public/. */
-export const LAUNCH_GUIDE_URL = '/Stackd-Before-You-Launch-Checklist.pdf'
+/**
+ * Free "Before You Launch" checklist. The PDF lives in private/ and is only served by
+ * /api/launch-guide after the signup form (cookie) or from the thank-you email link.
+ */
+export const LAUNCH_GUIDE_DOWNLOAD = '/api/launch-guide'
+export const LAUNCH_GUIDE_ANCHOR = 'launch-guide'
+
+/** Shown next to the signup checkbox and stored with each signup, so we know what they agreed to. */
+export const GUIDE_CONSENT_TEXT =
+  'I agree to share my name and email with Stackd Studios AI. Stackd may send me occasional updates and offers. No spam, and I can unsubscribe any time.'
 
 export const COMMUNITY_ROWS = [
   { name: 'Help desk', note: 'Post a question, get answers from people who’ve hit the same wall.' },

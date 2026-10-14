@@ -13,9 +13,15 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+  // The gated launch guide PDF is read from private/ at request time; ship it with that route.
+  outputFileTracingIncludes: {
+    '/api/launch-guide': ['./private/launch-guide.pdf'],
+  },
   async redirects() {
     return [
       { source: '/work', destination: '/', permanent: false },
+      // The guide used to be a public file; it is gated behind the signup form now.
+      { source: '/Stackd-Before-You-Launch-Checklist.pdf', destination: '/#launch-guide', permanent: false },
       ...REMOVED_ROUTES.map((source) => ({ source, destination: '/', permanent: false })),
     ]
   },

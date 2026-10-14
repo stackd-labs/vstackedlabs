@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import PageLink from './PageLink'
 import ContactLink from './ContactLink'
-import { LAUNCH_GUIDE_URL } from './data'
+import { GuideLink } from './LaunchGuide'
 
 export function StackdMark({ size = 28 }: { size?: number }) {
   // The Stackd mark: a white S over two yellow chevrons, drawn so it stays crisp at nav size.
@@ -78,15 +78,9 @@ export default function TechNav() {
         </ul>
 
         <div className="hidden lg:flex items-center gap-4">
-          <a
-            href={LAUNCH_GUIDE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden xl:inline-block font-mono-t text-[12.5px] font-bold uppercase tracking-[0.1em] text-[var(--t-neon)] border border-[var(--t-neon)] px-4 py-2.5 rounded-md hover:shadow-[0_0_24px_rgba(255,216,77,0.35)] transition-shadow whitespace-nowrap"
-          >
+          <GuideLink className="hidden xl:inline-block font-mono-t text-[12.5px] font-bold uppercase tracking-[0.1em] text-[var(--t-neon)] border border-[var(--t-neon)] px-4 py-2.5 rounded-md hover:shadow-[0_0_24px_rgba(255,216,77,0.35)] transition-shadow whitespace-nowrap">
             Free launch guide
-            <span className="sr-only"> (PDF, opens in a new tab)</span>
-          </a>
+          </GuideLink>
           <ContactLink className="font-mono-t text-[12.5px] font-bold uppercase tracking-[0.1em] bg-[var(--t-neon)] text-[#07080A] px-4 py-2.5 rounded-md hover:shadow-[0_0_24px_rgba(255,216,77,0.55)] transition-shadow whitespace-nowrap">
             Contact us
           </ContactLink>
@@ -124,16 +118,12 @@ export default function TechNav() {
           >
             Contact us
           </ContactLink>
-          <a
-            href={LAUNCH_GUIDE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <GuideLink
             onClick={() => setOpen(false)}
             className="mt-3 block text-center font-mono-t text-sm font-bold uppercase tracking-[0.1em] text-[var(--t-neon)] border border-[var(--t-neon)] px-4 py-3 rounded-md"
           >
             Free launch guide
-            <span className="sr-only"> (PDF, opens in a new tab)</span>
-          </a>
+          </GuideLink>
         </div>
       )}
     </header>

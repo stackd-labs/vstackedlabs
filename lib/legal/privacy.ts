@@ -11,7 +11,7 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
   {
     title: '1. Information We Collect',
     body: [
-      'We collect information you provide directly to us, including when you submit one of our website forms (our contact form, quote requests, career and affiliate applications, and the Labs waitlist), talk with us about a project, purchase a product, or sign up for our newsletter.',
+      'We collect information you provide directly to us, including when you submit one of our website forms (our contact form, quote requests, career and affiliate applications, the Labs waitlist, and the signup for our free launch guide), talk with us about a project, purchase a product, or sign up for our newsletter.',
       'This may include: your name, email address, business name, phone number, and payment information (processed securely by Stripe). Depending on the form, it may also include details about your project (such as app or website links, repository links, your technology stack, known issues, and the access you are willing to provide) or, for applications, professional details (such as your role, skills, portfolio, GitHub and LinkedIn links, availability, and rate expectations), along with any other information you choose to provide.',
       'Our website forms use automated spam screening, such as checking how quickly a form was completed and screening certain fields for links. Submissions identified as spam are discarded and not stored.',
       'The search tool on our website runs entirely in your browser. What you type into it is not sent to us or stored.',
@@ -35,7 +35,8 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     title: '4. Email Communications',
     body: [
       'When you purchase a product or submit a form, we may send you transactional emails related to your order or inquiry. If you opt in to our newsletter, we will send you periodic updates about new products, services, and content.',
-      'You may unsubscribe from marketing emails at any time by clicking the unsubscribe link in any email or by contacting us directly at Chanel@stackdstudiosai.com.',
+      'When you request our free launch guide, we email you a link to the guide. Because you agree to it on the signup form, we may also send you occasional updates and offers from Stackd Studios AI. We keep these infrequent and never sell or share your email.',
+      'You may unsubscribe from marketing emails at any time by clicking the unsubscribe link in any email, replying "unsubscribe," or contacting us directly at Chanel@stackdstudiosai.com.',
     ],
   },
   {
