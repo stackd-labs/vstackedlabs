@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import PageLink from './PageLink'
 import ContactLink from './ContactLink'
+import { LAUNCH_GUIDE_URL } from './data'
 
 export function StackdMark({ size = 28 }: { size?: number }) {
   // The Stackd mark: a white S over two yellow chevrons, drawn so it stays crisp at nav size.
@@ -32,6 +33,7 @@ const LINKS = [
   { label: 'Start here', href: '/#start-here' },
   { label: 'Divisions', href: '/#divisions' },
   { label: 'Rescue', href: '/#rescue' },
+  { label: 'Community', href: '/#community' },
   { label: 'Services', href: '/services' },
   { label: 'Labs', href: '/labs' },
 ]
@@ -76,10 +78,15 @@ export default function TechNav() {
         </ul>
 
         <div className="hidden lg:flex items-center gap-4">
-          <span className="hidden xl:flex items-center gap-2 font-mono-t text-[11px] uppercase tracking-[0.14em] text-[var(--t-dim)] whitespace-nowrap">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--t-cyan)] t-pulse" aria-hidden="true" />
-            All systems go
-          </span>
+          <a
+            href={LAUNCH_GUIDE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden xl:inline-block font-mono-t text-[12.5px] font-bold uppercase tracking-[0.1em] text-[var(--t-neon)] border border-[var(--t-neon)] px-4 py-2.5 rounded-md hover:shadow-[0_0_24px_rgba(255,216,77,0.35)] transition-shadow whitespace-nowrap"
+          >
+            Free launch guide
+            <span className="sr-only"> (PDF, opens in a new tab)</span>
+          </a>
           <ContactLink className="font-mono-t text-[12.5px] font-bold uppercase tracking-[0.1em] bg-[var(--t-neon)] text-[#07080A] px-4 py-2.5 rounded-md hover:shadow-[0_0_24px_rgba(255,216,77,0.55)] transition-shadow whitespace-nowrap">
             Contact us
           </ContactLink>
@@ -117,6 +124,16 @@ export default function TechNav() {
           >
             Contact us
           </ContactLink>
+          <a
+            href={LAUNCH_GUIDE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
+            className="mt-3 block text-center font-mono-t text-sm font-bold uppercase tracking-[0.1em] text-[var(--t-neon)] border border-[var(--t-neon)] px-4 py-3 rounded-md"
+          >
+            Free launch guide
+            <span className="sr-only"> (PDF, opens in a new tab)</span>
+          </a>
         </div>
       )}
     </header>

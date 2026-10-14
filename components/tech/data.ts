@@ -5,6 +5,19 @@
 export const TAGLINE = ['Build it.', 'Fix it.', 'Scale it.'] as const
 export const TAGLINE_TEXT = TAGLINE.join(' ')
 
+/** The ONE Discord invite. Footer, Community section, search and JSON-LD all read this. */
+export const DISCORD_URL = 'https://discord.gg/3CYtcjavfd'
+
+/** Free "Before You Launch" checklist PDF, served from public/. */
+export const LAUNCH_GUIDE_URL = '/Stackd-Before-You-Launch-Checklist.pdf'
+
+export const COMMUNITY_ROWS = [
+  { name: 'Help desk', note: 'Post a question, get answers from people who’ve hit the same wall.' },
+  { name: 'Live sessions', note: 'Weekly build sessions where you can ask questions live.' },
+  { name: 'Show your work', note: 'Share what you’re building and get real feedback.' },
+  { name: 'Resources', note: 'Prompts, templates, and tutorials the community actually uses.' },
+] as const
+
 export type Verb = 'BUILD' | 'FIX' | 'SCALE'
 
 export interface TechDivision {

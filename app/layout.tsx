@@ -5,7 +5,7 @@ import ScrollProgress from '@/components/ScrollProgress'
 import CursorGlow from '@/components/CursorGlow'
 import ToastProvider from '@/components/ToastProvider'
 import { CartProvider } from '@/components/CartContext'
-import { TAGLINE_TEXT } from '@/components/tech/data'
+import { DISCORD_URL, TAGLINE_TEXT } from '@/components/tech/data'
 
 const anton = Anton({
   weight: '400',
@@ -151,7 +151,7 @@ export default function RootLayout({
                     'https://www.instagram.com/stackdstudiosai',
                     'https://www.tiktok.com/@stackdstudiosai',
                     'https://x.com/stackdstudiosai',
-                    'https://discord.gg/5xcnpfbj6v',
+                    DISCORD_URL,
                   ],
                 },
                 {

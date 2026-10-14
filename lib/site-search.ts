@@ -150,10 +150,19 @@ const FAQ: SearchEntry[] = [
   {
     id: 'faq-discord',
     title: 'Is there a community?',
-    where: 'Site footer',
-    snippet: 'Yes, join the Stackd Discord. The link is in the footer of every page.',
-    href: 'https://discord.gg/5xcnpfbj6v',
-    keywords: 'discord community chat server join social instagram tiktok x twitter follow',
+    where: 'Homepage: Community',
+    snippet: 'Yes, join the Stackd Discord: a help desk, weekly live build sessions, feedback on your work, and shared resources. Free to join.',
+    href: '/#community',
+    keywords: 'discord community chat server join help desk live sessions feedback resources prompts templates tutorials social follow',
+    boost: 1,
+  },
+  {
+    id: 'faq-launch-guide',
+    title: 'Free launch guide (PDF)',
+    where: 'Homepage: Free guide',
+    snippet: 'Before You Launch: a free security and readiness checklist for apps built with AI tools like Claude Code, Cursor, Lovable and Bolt.',
+    href: '/#launch-guide',
+    keywords: 'launch guide checklist pdf free download before you launch security readiness vibe code ai built app resource',
     boost: 1,
   },
   {

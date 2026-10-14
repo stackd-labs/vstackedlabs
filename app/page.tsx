@@ -6,6 +6,8 @@ import CommandPalette from '@/components/tech/CommandPalette'
 import DivisionMatrix from '@/components/tech/DivisionMatrix'
 import Diagnostics from '@/components/tech/Diagnostics'
 import Pipeline from '@/components/tech/Pipeline'
+import Community from '@/components/tech/Community'
+import LaunchGuide from '@/components/tech/LaunchGuide'
 import { TechCTA, TechFooter } from '@/components/tech/TechCTA'
 import { TAGLINE_TEXT } from '@/components/tech/data'
 
@@ -31,6 +33,8 @@ export default function HomePage() {
         <DivisionMatrix />
         <Diagnostics />
         <Pipeline />
+        <Community />
+        <LaunchGuide />
         <TechCTA />
       </main>
       <TechFooter />

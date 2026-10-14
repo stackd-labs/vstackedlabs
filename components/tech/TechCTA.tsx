@@ -4,7 +4,7 @@ import { Wordmark } from './TechNav'
 import TerminalForm from './TerminalForm'
 import PageLink from './PageLink'
 import ContactLink, { ContactAnchor } from './ContactLink'
-import { TAGLINE_TEXT } from './data'
+import { DISCORD_URL, LAUNCH_GUIDE_URL, TAGLINE_TEXT } from './data'
 
 const EMAIL = 'Chanel@stackdstudiosai.com'
 const CALENDLY = process.env.NEXT_PUBLIC_CALENDLY_URL
@@ -20,7 +20,7 @@ export function TechCTA() {
       />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1fr_1.15fr] gap-12 lg:gap-16 items-center">
         <div className="relative">
-          <p className="font-mono-t text-[12px] uppercase tracking-[0.2em] text-[var(--t-neon)] mb-4">05 / Contact us</p>
+          <p className="font-mono-t text-[12px] uppercase tracking-[0.2em] text-[var(--t-neon)] mb-4">07 / Contact us</p>
           <h2 className="text-[clamp(52px,7.4vw,108px)] leading-[0.92] text-[var(--t-text)] mb-5">
             Contact <span className="neon-text">us.</span>
           </h2>
@@ -85,7 +85,7 @@ const SOCIAL = [
   { label: 'Instagram', href: 'https://www.instagram.com/stackdstudiosai' },
   { label: 'TikTok', href: 'https://www.tiktok.com/@stackdstudiosai' },
   { label: 'X', href: 'https://x.com/stackdstudiosai' },
-  { label: 'Discord', href: 'https://discord.gg/5xcnpfbj6v' },
+  { label: 'Discord', href: DISCORD_URL },
 ]
 
 export function TechFooter() {
@@ -95,6 +95,15 @@ export function TechFooter() {
         <div className="col-span-2 md:col-span-1">
           <Wordmark />
           <p className="mt-4 text-[var(--t-muted)] max-w-sm">{TAGLINE_TEXT} A technology ecosystem, remote across the United States.</p>
+          <a
+            href={LAUNCH_GUIDE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-block font-mono-t text-[12.5px] font-bold uppercase tracking-[0.1em] text-[var(--t-neon)] border border-[var(--t-neon)] px-4 py-2.5 rounded-md hover:shadow-[0_0_24px_rgba(255,216,77,0.35)] transition-shadow whitespace-nowrap"
+          >
+            Free launch guide
+            <span className="sr-only"> (PDF, opens in a new tab)</span>
+          </a>
         </div>
         <div>
           <p className="font-mono-t text-[11px] uppercase tracking-[0.18em] text-[var(--t-dim)] mb-4">Explore</p>
@@ -102,6 +111,7 @@ export function TechFooter() {
             <li><Link href="/#start-here" className="hover:text-[var(--t-neon)] transition-colors">Start here</Link></li>
             <li><Link href="/#divisions" className="hover:text-[var(--t-neon)] transition-colors">Divisions</Link></li>
             <li><Link href="/#rescue" className="hover:text-[var(--t-neon)] transition-colors">Rescue</Link></li>
+            <li><Link href="/#community" className="hover:text-[var(--t-neon)] transition-colors">Community</Link></li>
             <li><Link href="/#pipeline" className="hover:text-[var(--t-neon)] transition-colors">How it connects</Link></li>
           </ul>
         </div>
